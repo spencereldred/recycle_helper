@@ -1,0 +1,30 @@
+<h4>
+<%= form_for @recycler_redeemer do  |f|  %>
+    <div class="col-lg-offset-4 col-lg-2 form_label">Recycler Id:</div>
+    <div class="col-lg-6"><%= f.text_field :recycler_id, placeholder: "< recycler id >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Redeemer Id:</div>
+    <div class="col-lg-6"><%= f.text_field :redeemer_id, placeholder: "< redeemer id >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Plastic:</div>
+    <div class="col-lg-6"><%= f.text_field :plastic, placeholder: "< plastic >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Glass:</div>
+    <div class="col-lg-6"><%= f.text_field :glass, placeholder: "< glass >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Other:</div>
+    <div class="col-lg-6"><%= f.text_field :other, placeholder: "< other >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Selection Date:</div>
+    <div class="col-lg-6"><%= f.text_field :selection_date, placeholder: "< selection_date >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Completion Date:</div>
+    <div class="col-lg-6"><%= f.text_field :completion_date, placeholder: "< completion_date >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Rating:</div>
+    <div class="col-lg-6"><%= f.text_field :rating, placeholder: "< rating >" %></div>
+
+
+    <div class="col-lg-offset-5 col-lg-3 btn btn-primary"><%= f.button "Save Recycler_Redeemer" %></div>
+<% end %>
+</h4>

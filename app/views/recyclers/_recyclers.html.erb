@@ -1,0 +1,23 @@
+
+  <h4>
+    <div class="col-lg-offset-4 col-lg-2 form_label">First Name:</div>
+    <div class= "col-lg-6">
+      <a href="/recyclers/<%= recycler.id %>"><%= recycler.first_name %>  </a>
+    </div>
+    <div class="col-lg-offset-4 col-lg-2 form_label">Last Name:</div>
+    <div class="col-lg-6"><%= recycler.last_name %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Email:</div>
+    <div class="col-lg-6"><%= recycler.email %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
+    <div class="col-lg-6"><%= recycler.phone %></div>
+
+
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
+    <div class="col-lg-6"><%= link_to "Edit", edit_recycler_path(recycler) %> <!-- /recyclers/:id -->
+
+    <%= link_to "Delete", recycler_path(recycler), :method => :delete, :confirm => "Are you sure?" %></div>
+  </h4>
+</div>

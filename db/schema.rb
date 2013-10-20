@@ -11,30 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131020111922) do
+ActiveRecord::Schema.define(:version => 20131020194424) do
 
-  create_table "collector_recyclers", :force => true do |t|
-    t.integer  "collector_id"
+  create_table "recycler_redeemers", :force => true do |t|
+    t.integer  "redeemer_id"
     t.integer  "recycler_id"
+    t.string   "plastic"
     t.string   "glass"
     t.string   "cans"
-    t.string   "bottles"
     t.string   "other"
     t.datetime "selection_date"
     t.datetime "completion_date"
     t.integer  "rating"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-  end
-
-  create_table "collectors", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "drivers_license_number"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
   end
 
   create_table "recyclers", :force => true do |t|
@@ -49,6 +39,16 @@ ActiveRecord::Schema.define(:version => 20131020111922) do
     t.string   "zipcode"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "redeemers", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "dmv_number"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

@@ -1,0 +1,25 @@
+<div class="col-lg-7 col-lg-offset-5"><h1>All Recyclers</h1></div>
+<h4>
+  <div class="col-lg-offset-2 col-lg-2">First Name</div>
+  <div class="col-lg-2">Last Name</div>
+  <div class="col-lg-2">Email</div>
+  <div class="col-lg-4">Phone</div>
+</h4>
+<h5>
+<% @recyclers.each do |recycler| %>
+    <div class="col-lg-offset-2 col-lg-2">
+      <a href="/recyclers/<%= recycler.id %>"><%= recycler.first_name %>  </a>
+    </div>
+    <div class="col-lg-2"><%= recycler.last_name %></div>
+    <div class="col-lg-2"><%= recycler.email %></div>
+    <div class="col-lg-4"><%= recycler.phone %></div>
+    <% end %>
+</h5>
+</br></br>
+<h4>
+
+<div class="col-lg-offset-5 col-lg-2">
+  <%= link_to "Add New Recycler", new_recycler_path %>
+</div>
+<div class="col-lg-5"></div>
+</h4>

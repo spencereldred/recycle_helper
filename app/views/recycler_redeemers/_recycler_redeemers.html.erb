@@ -1,0 +1,37 @@
+  <h4>
+    <div class="col-lg-offset-4 col-lg-2 form_label">Recycler Id:</div>
+    <div class= "col-lg-6">
+      <a href="/recycler_redeemers/<%= recycler_redeemer.id %>"><%= recycler_redeemer.recycler_id %>  </a>
+    </div>
+    <div class="col-lg-offset-4 col-lg-2 form_label">Redeemer Id:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.redeemer_id %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Plastic:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.plastic %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Glass:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.glass %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Cans:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.cans %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Other:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.other %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Selection Date:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.selection_date %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Completion  Date:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.completion_date %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Rating:</div>
+    <div class="col-lg-6"><%= recycler_redeemer.rating %></div>
+
+
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
+    <div class="col-lg-6"><%= link_to "Edit", edit_recycler_redeemer_path(recycler_redeemer) %> <!-- /recyclers/:id -->
+
+    <%= link_to "Delete", recycler_redeemer_path(recycler_redeemer), :method => :delete, :confirm => "Are you sure?" %></div>
+  </h4>
+</div>

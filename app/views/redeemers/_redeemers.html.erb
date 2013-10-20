@@ -1,0 +1,23 @@
+  <h4>
+    <div class="col-lg-offset-4 col-lg-2 form_label">First Name:</div>
+    <div class= "col-lg-6">
+      <a href="/redeemers/<%= redeemer.id %>"><%= redeemer.first_name %>  </a>
+    </div>
+    <div class="col-lg-offset-4 col-lg-2 form_label">Last Name:</div>
+    <div class="col-lg-6"><%= redeemer.last_name %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Email:</div>
+    <div class="col-lg-6"><%= redeemer.email %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
+    <div class="col-lg-6"><%= redeemer.phone %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">DMV Licence:</div>
+    <div class="col-lg-6"><%= redeemer.dmv_number %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
+    <div class="col-lg-6"><%= link_to "Edit", edit_redeemer_path(redeemer) %> <!-- /redeemers/:id -->
+
+    <%= link_to "Delete", redeemer_path(redeemer), :method => :delete, :confirm => "Are you sure?" %></div>
+  </h4>
+</div>
