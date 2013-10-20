@@ -1,0 +1,2 @@
+class RecyclersController < ApplicationController
+end
