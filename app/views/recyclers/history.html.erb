@@ -1,0 +1,27 @@
+<div class="col-lg-offset-4 col-lg-8"><h3>Recycle History for <%= @recycler.first_name %> <%= @recycler.last_name %></h3></div>
+@recycler: <%= @recycler.inspect %></br></br>
+@redeemers: <%= @redeemers.inspect %></br></br>
+@redeemers_for_recycler: <%= @redeemers_for_recycler.inspect %></br></br>
+<h4>
+    <div class="col-lg-offset-2 col-lg-2">Redeemers</div>
+    <div class="col-lg-1">ID</div>
+    <div class="col-lg-1">Plastic</div>
+    <div class="col-lg-1">Glass</div>
+    <div class="col-lg-1">Cans</div>
+    <div class="col-lg-1">Date</div>
+    <div class="col-lg-3">Rating</div>
+</h4>
+<h5>
+<% @redeemers_for_recycler.each do |redeemer|%>
+   <div class="col-lg-offset-2 col-lg-2"><%= @redeemers[redeemer[:redeemer_id]-1][:last_name] %></div>
+    <div class="col-lg-1"><%= redeemer[:redeemer_id]%> </div>
+    <div class="col-lg-1"><%= redeemer[:plastic]%> </div>
+    <div class="col-lg-1"><%= redeemer[:glass]%> </div>
+    <div class="col-lg-1"><%= redeemer[:cans]%> </div>
+    <div class="col-lg-1"><%= redeemer[:completion_date]%> </div>
+    <div class="col-lg-3"><%= redeemer[:rating]%> </div>
+<%end%>
+</h5>
+<h4>
+<div class="col-lg-offset-5 col-lg-3"><%= link_to "back to all recyclers", recyclers_path %></div>
+</h4>

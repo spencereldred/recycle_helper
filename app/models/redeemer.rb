@@ -1,8 +1,8 @@
 class Redeemer < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :phone, :dmv_number
 
-  has_many :collector_recyclers
-  has_many :redeemers, through: :collector_recyclers
+  has_many :recycler_redeemers
+  has_many :recyclers, through: :recycler_redeemers
 
   validates :first_name, presence: :true
   validates :last_name, presence: :true

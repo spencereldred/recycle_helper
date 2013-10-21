@@ -32,12 +32,21 @@ class RecyclersController < ApplicationController
 
   def show
     @recycler = Recycler.find(params[:id])
+    @redeemers = Redeemer.all
+    @redeemers_for_recycler = RecyclerRedeemer.where( "recycler_id = ?", params[:id] )
+  end
+
+  def history
+    @recycler = Recycler.find(params[:id])
+    @redeemers = Redeemer.all
+    @redeemers_for_recycler = RecyclerRedeemer.where( "recycler_id = ?", params[:id] )
   end
 
   def destroy
     Recycler.delete(params[:id])
     redirect_to recyclers_path
   end
+
 
 
 end
