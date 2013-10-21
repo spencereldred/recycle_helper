@@ -19,6 +19,13 @@
         <div class="navbar-brand col-lg-6">
           <a href="/recycler_redeemers">Recycler_Redeemers</a>
         </div>
+        <div class="navbar-brand col-lg-2">
+            <% if current_user %>
+              <%= link_to "Logout", logout_path %>
+              <% else %>
+              <%= link_to "Login", login_path %>
+            <% end %>
+        </div>
 
     </div>
   </div>

@@ -1,7 +1,7 @@
 class RecyclersController < ApplicationController
-#  attr_accessible :first_name, :last_name, :email, :phone, :addr_line_1, :addr_line_2, :city, :state, :zipcode
+  before_filter :authorize, except: [:index, :show]
 
-    def index
+  def index
     @recyclers = Recycler.all
   end
 

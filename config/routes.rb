@@ -7,7 +7,13 @@ Recycle::Application.routes.draw do
   get 'redeemers/history/:id' => 'redeemers#history', as: :redeemer_history
   resources :redeemers
 
-
   resources :recycler_redeemers
+
+  resources :users
+  resources :sessions
+
+  get '/logout' => "sessions#destroy"
+  get '/login' => "sessions#new"
+
 
 end
