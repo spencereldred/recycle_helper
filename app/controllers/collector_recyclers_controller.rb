@@ -1,2 +1,0 @@
-class CollectorRecyclersController < ApplicationController
-end
