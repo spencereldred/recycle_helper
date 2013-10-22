@@ -1,37 +1,62 @@
   <h4>
-    <div class="col-lg-offset-4 col-lg-2 form_label">Recycler Id:</div>
-    <div class= "col-lg-6">
-      <a href="/recycler_redeemers/<%= recycler_redeemer.id %>"><%= recycler_redeemer.recycler_id %>  </a>
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Recycler:</div>
+        <div class= "col-lg-6">
+          <a href="/recycler_redeemers/<%= recycler_redeemer.id %>">
+            <%= @recycler[recycler_redeemer.recycler_id-1][:first_name] %>
+            <%= @recycler[recycler_redeemer.recycler_id-1][:last_name] %></a>
+        </div>
     </div>
-    <div class="col-lg-offset-4 col-lg-2 form_label">Redeemer Id:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.redeemer_id %></div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Plastic:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.plastic %></div>
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Redeemer:</div>
+        <div class="col-lg-6">
+            <%= @redeemer[recycler_redeemer.redeemer_id-1][:first_name] %>
+            <%= @redeemer[recycler_redeemer.redeemer_id-1][:last_name] %>
+        </div>
+    </div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Glass:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.glass %></div>
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Plastic:</div>
+        <div class="col-lg-6"><%= recycler_redeemer.plastic %></div>
+    </div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Cans:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.cans %></div>
+     <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Glass:</div>
+        <div class="col-lg-6"><%= recycler_redeemer.glass %></div>
+    </div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Other:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.other %></div>
+     <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Cans:</div>
+        <div class="col-lg-6"><%= recycler_redeemer.cans %></div>
+    </div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Selection Date:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.selection_date %></div>
+     <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Other:</div>
+        <div class="col-lg-6"><%= recycler_redeemer.other %></div>
+    </div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Completion  Date:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.completion_date %></div>
+     <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Selection Date:</div>
+        <div class="col-lg-6"><%= if recycler_redeemer.selection_date then recycler_redeemer.selection_date.strftime("%b %d") end %></div>
+     </div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Rating:</div>
-    <div class="col-lg-6"><%= recycler_redeemer.rating %></div>
+     <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Completion  Date:</div>
+        <div class="col-lg-6"><%= if recycler_redeemer.completion_date then recycler_redeemer.completion_date.strftime("%b %d") end  %></div>
+    </div>
+
+     <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Rating:</div>
+        <div class="col-lg-6"><%= recycler_redeemer.rating %></div>
+    </div>
 
 
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
+        <div class="col-lg-6"><%= link_to "Edit", edit_recycler_redeemer_path(recycler_redeemer) %> <!-- /recyclers/:id -->
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
-    <div class="col-lg-6"><%= link_to "Edit", edit_recycler_redeemer_path(recycler_redeemer) %> <!-- /recyclers/:id -->
-
-    <%= link_to "Delete", recycler_redeemer_path(recycler_redeemer), :method => :delete, :confirm => "Are you sure?" %></div>
+        <%= link_to "Delete", recycler_redeemer_path(recycler_redeemer), :method => :delete, :confirm => "Are you sure?" %></div>
+    </div>
   </h4>
 </div>

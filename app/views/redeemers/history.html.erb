@@ -1,23 +1,27 @@
 <div class="col-lg-offset-4 col-lg-8"><h3>Redeemer History for <%= @redeemer.first_name %> <%= @redeemer.last_name %></h3></div>
-@redeemer: <%= @redeemer.inspect %></br></br>
-@recyclers: <%= @recyclers.inspect %></br></br>
-@recyclers_for_redeemer: <%= @recyclers_for_redeemer.inspect %></br></br>
 <h4>
-    <div class="col-lg-offset-2 col-lg-2">Redeemers</div>
-    <div class="col-lg-1">ID</div>
-    <div class="col-lg-1">Plastic</div>
-    <div class="col-lg-1">Glass</div>
-    <div class="col-lg-1">Cans</div>
-    <div class="col-lg-4">Date</div>
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-2">Redeemers</div>
+        <div class="col-lg-1">Plastic</div>
+        <div class="col-lg-1">Glass</div>
+        <div class="col-lg-1">Cans</div>
+        <div class="col-lg-2">Select Date</div>
+        <div class="col-lg-2">Complete Date</div>
+    </div>
 </h4>
 <h5>
 <% @recyclers_for_redeemer.each do |recycler|%>
-   <div class="col-lg-offset-2 col-lg-2"><%= @recyclers[recycler[:recycler_id]-1][:last_name] %></div>
-    <div class="col-lg-1"><%= recycler[:recycler_id]%> </div>
-    <div class="col-lg-1"><%= recycler[:plastic]%> </div>
-    <div class="col-lg-1"><%= recycler[:glass]%> </div>
-    <div class="col-lg-1"><%= recycler[:cans]%> </div>
-    <div class="col-lg-4"><%= recycler[:completion_date]%> </div>
+    <div class="row">
+       <div class="col-lg-offset-2 col-lg-2">
+            <%= @recyclers[recycler[:recycler_id]-1][:first_name] %>
+            <%= @recyclers[recycler[:recycler_id]-1][:last_name] %>
+        </div>
+        <div class="col-lg-1"><%= recycler[:plastic]%> </div>
+        <div class="col-lg-1"><%= recycler[:glass]%> </div>
+        <div class="col-lg-1"><%= recycler[:cans]%> </div>
+        <div class="col-lg-2"><%= if recycler[:selection_date] then recycler[:selection_date].strftime("%b %d, %Y") end %> </div>
+        <div class="col-lg-2"><%= if recycler[:completion_date] then recycler[:completion_date].strftime("%b %d, %Y") end %> </div>
+    </div>
 <%end%>
 </h5>
 <h4>

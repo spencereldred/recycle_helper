@@ -1,18 +1,21 @@
 <div class="col-lg-7 col-lg-offset-5"><h1>All Redeemers</h1></div>
 <h4>
-  <div class="col-lg-offset-2 col-lg-2">First Name</div>
+  <div class="col-lg-offset-1 col-lg-2">First Name</div>
   <div class="col-lg-2">Last Name</div>
   <div class="col-lg-2">Email</div>
-  <div class="col-lg-4">Phone</div>
+  <div class="col-lg-2">Phone</div>
+  <div class="col-lg-3">DMV Number</div>
+
 </h4>
 <h5>
 <% @redeemers.each do |redeemer| %>
-    <div class="col-lg-offset-2 col-lg-2">
+    <div class="col-lg-offset-1 col-lg-2">
       <a href="/redeemers/<%= redeemer.id %>"><%= redeemer.first_name %>  </a>
     </div>
     <div class="col-lg-2"><%= redeemer.last_name %></div>
     <div class="col-lg-2"><%= redeemer.email %></div>
-    <div class="col-lg-4"><%= redeemer.phone %></div>
+    <div class="col-lg-2"><%= redeemer.phone %></div>
+    <div class="col-lg-3"><%= redeemer.dmv_number %></div>
     <% end %>
 </h5>
 </br></br>

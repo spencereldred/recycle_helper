@@ -3,6 +3,8 @@ class RecyclerRedeemersController < ApplicationController
 
   def index
      @recycler_redeemers = RecyclerRedeemer.all
+     @recycler = Recycler.all
+     @redeemer = Redeemer.all
   end
 
   def new
@@ -32,6 +34,8 @@ class RecyclerRedeemersController < ApplicationController
 
   def show
     @recycler_redeemer = RecyclerRedeemer.find(params[:id])
+    @recycler = Recycler.all
+    @redeemer = Redeemer.all
   end
 
   def destroy

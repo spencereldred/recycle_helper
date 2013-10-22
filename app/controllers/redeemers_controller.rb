@@ -32,8 +32,6 @@ class RedeemersController < ApplicationController
 
   def show
     @redeemer = Redeemer.find(params[:id])
-    @recyclers = Recycler.all
-    @recyclers_for_redeemer = RecyclerRedeemer.where( "redeemer_id = ?", params[:id] )
   end
 
   def history
