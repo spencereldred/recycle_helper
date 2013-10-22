@@ -1,6 +1,6 @@
 Recycle::Application.routes.draw do
 
-  root :to => 'recyclers#index'
+  root :to => 'hi5exchanges#index'
   get '/recyclers/history/:id' => 'recyclers#history', as: :recycler_history
   resources :recyclers
 
@@ -8,6 +8,8 @@ Recycle::Application.routes.draw do
   resources :redeemers
 
   resources :recycler_redeemers
+
+  resources :hi5exchanges
 
   resources :users
   resources :sessions
