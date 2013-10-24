@@ -5,19 +5,31 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 </head>
 <body>
   <header>
     <div class="navbar navbar-inverse ">
       <div class="container">
-        <div class="navbar-brand col-lg-offset-2 col-lg-2">
-          <a href="/redeemers">Redeemers</a>
+        <div class="navbar-brand  col-lg-2">
+          <a href="/">Home</a>
+        </div>
+        <div class="navbar-brand  col-lg-2">
+          <a href="/redeemers">Redeemer</a>
         </div>
         <div class="navbar-brand col-lg-2">
-          <a href="/recyclers">Recyclers</a>
+          <a href="/transactions/new">Recycler</a>
         </div>
-        <div class="navbar-brand col-lg-6">
-          <a href="/recycler_redeemers">Transactions</a>
+        <% if current_user %>
+        <% profile = Profile.where(user_id: current_user[:id]) %>
+        <div class="navbar-brand  col-lg-2">
+          <a href="/profiles/<%= profile[0][:id] %>">Profile</a>
+        </div>
+        <% end %>
+        <div class="navbar-brand col-lg-2">
+          <a href="/transactions">Transactions</a>
         </div>
         <div class="navbar-brand col-lg-2">
             <% if current_user %>

@@ -1,27 +1,87 @@
-<div class="col-lg-7 col-lg-offset-5"><h1>All Redeemers</h1></div>
-<h4>
-  <div class="col-lg-offset-1 col-lg-2">First Name</div>
-  <div class="col-lg-2">Last Name</div>
-  <div class="col-lg-2">Email</div>
-  <div class="col-lg-2">Phone</div>
-  <div class="col-lg-3">DMV Number</div>
-
-</h4>
-<h5>
-<% @redeemers.each do |redeemer| %>
-    <div class="col-lg-offset-1 col-lg-2">
-      <a href="/redeemers/<%= redeemer.id %>"><%= redeemer.first_name %>  </a>
-    </div>
-    <div class="col-lg-2"><%= redeemer.last_name %></div>
-    <div class="col-lg-2"><%= redeemer.email %></div>
-    <div class="col-lg-2"><%= redeemer.phone %></div>
-    <div class="col-lg-3"><%= redeemer.dmv_number %></div>
-    <% end %>
-</h5>
-</br></br>
-<h4>
-<div class="col-lg-offset-5 col-lg-3">
-  <%= link_to "Add New Redeemer", new_redeemer_path %>
+<div class="col-lg-7 col-lg-offset-5"><h1>All Available</h1></div>
+<div class="row">
+  <h4>
+    <div class="col-lg-offset-1 col-lg-1">City</div>
+    <div class="col-lg-1">Plastic</div>
+    <div class="col-lg-1">Cans</div>
+    <div class="col-lg-1">Glass</div>
+    <div class="col-lg-1">Other</div>
+    <div class="col-lg-2">Posted</div>
+    <div class="col-lg-2">Selected</div>
+  </h4>
 </div>
-<div class="col-lg-4"></div>
-</h4>
+<div class="row">
+  <h5>
+  <% @available.each do |avail| %>
+    <div class="row">
+      <div class="col-lg-offset-1 col-lg-1">
+        <% recycler = Profile.where(user_id: avail[:recycler_user_id]) %>
+        <%= recycler[0][:city]%>
+      </div>
+      <div class="col-lg-1"><%= avail[:plastic] %></div>
+      <div class="col-lg-1"><%= avail[:cans] %></div>
+      <div class="col-lg-1"><%= avail[:glass] %></div>
+      <div class="col-lg-1"><%= avail[:other] %></div>
+      <div class="col-lg-2"><%= avail[:created_at] %></div>
+      <div class="col-lg-2"><%= avail[:selection_date] %></div>
+    </div>
+      <% end %>
+  </h5>
+</div>
+<div class="col-lg-8 col-lg-offset-4"><h1>Selected  by <%= @redeemer[0][:first_name]%>
+  <%= @redeemer[0][:last_name]%></h1></div>
+<div class="row">
+  <h4>
+    <div class="col-lg-offset-1 col-lg-2">Address</div>
+    <div class="col-lg-1">City</div>
+    <div class="col-lg-1">Plastic</div>
+    <div class="col-lg-1">Cans</div>
+    <div class="col-lg-1">Glass</div>
+    <div class="col-lg-1">Other</div>
+    <div class="col-lg-2">Posted</div>
+    <div class="col-lg-2">Selected</div>
+  </h4>
+</div>
+<div class="row">
+  <h5>
+  <% @selected.each do |select| %>
+    <div class="row">
+      <div class="col-lg-offset-1 col-lg-2">
+        <% recycler = Profile.where(user_id: select[:recycler_user_id]) %>
+        <%= recycler[0][:addr_line_1]%>
+          <script>
+
+    $(function(){
+          codeAddress("<%= recycler[0][:addr_line_1]%>")
+    })
+
+  </script>
+      </div>
+      <div class="col-lg-1">
+        <%= recycler[0][:city]%>
+      </div>
+      <div class="col-lg-1"><%= select[:plastic] %></div>
+      <div class="col-lg-1"><%= select[:cans] %></div>
+      <div class="col-lg-1"><%= select[:glass] %></div>
+      <div class="col-lg-1"><%= select[:other] %></div>
+      <div class="col-lg-2"><%= select[:created_at] %></div>
+      <div class="col-lg-2"><%= select[:selection_date] %></div>
+    </div>
+      <% end %>
+  </h5>
+</div>
+
+    <!-- <div id="panel">
+      <input id="address" type="textbox" value="SF">
+      <input type="button" value="Geocode" onclick="codeAddress()">
+    </div> -->
+    <div id="map-canvas"></div>
+  </br>
+    <div>
+      Enter address: <input id="addr" type="text" style="width: 300px;"> <button>Enter</button>
+    </div></br>
+    <div>Output1: <span id="output1"></span></div></br>
+    <div>Output2: <span id="output2"></span></div>
+
+
+

@@ -3,16 +3,16 @@
         <div class="col-lg-offset-4 col-lg-2 form_label">Recycler:</div>
         <div class= "col-lg-6">
           <a href="/recycler_redeemers/<%= recycler_redeemer.id %>">
-            <%= @recycler[recycler_redeemer.recycler_id-1][:first_name] %>
-            <%= @recycler[recycler_redeemer.recycler_id-1][:last_name] %></a>
+            <%= recycler_redeemer.recycler[:first_name] %>
+            <%= recycler_redeemer.recycler[:last_name] %></a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-offset-4 col-lg-2 form_label">Redeemer:</div>
         <div class="col-lg-6">
-            <%= @redeemer[recycler_redeemer.redeemer_id-1][:first_name] %>
-            <%= @redeemer[recycler_redeemer.redeemer_id-1][:last_name] %>
+            <%= if recycler_redeemer.redeemer then recycler_redeemer.redeemer[:first_name] end %>
+            <%= if recycler_redeemer.redeemer then recycler_redeemer.redeemer[:last_name] end %>
         </div>
     </div>
 

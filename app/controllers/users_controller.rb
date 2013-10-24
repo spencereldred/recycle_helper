@@ -8,13 +8,14 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @function = params[:function]
   end
 
   def create
     @user = User.create(params[:user])
     if @user.errors.empty?
       sign_in(@user)
-      redirect_to user_path(@user.id)
+      redirect_to new_profile_path(user: @user.id, function: @user.function)
     else
       flash[:errors] = ["Error!"]
       render :new

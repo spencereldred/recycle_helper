@@ -1,8 +1,14 @@
 class RedeemersController < ApplicationController
-  before_filter :authorize, except: [:index, :show]
+  before_filter :authorize
+  #before_filter :authorize_admin
 
   def index
-    @redeemers = Redeemer.all
+    @user = current_user
+    @available = Transaction.where(selection_date: nil)
+    @selected = Transaction.where("redeemer_user_id = #{@user[:id]}  AND completion_date IS NULL")
+    @recyclers = Profile.where(function: 'recycler')
+    #@redeemers = Profile.all
+    @redeemer = Profile.where("user_id = #{@user[:id]}")
   end
 
   def new
@@ -36,7 +42,6 @@ class RedeemersController < ApplicationController
 
   def history
     @redeemer = Redeemer.find(params[:id])
-    @recyclers = Recycler.all
     @recyclers_for_redeemer = RecyclerRedeemer.where( "redeemer_id = ?", params[:id] )
   end
 

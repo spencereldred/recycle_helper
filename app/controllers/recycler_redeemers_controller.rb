@@ -1,5 +1,6 @@
 class RecyclerRedeemersController < ApplicationController
-  before_filter :authorize, except: [:index, :show]
+  before_filter :authorize
+  before_filter :authorize_admin
 
   def index
      @recycler_redeemers = RecyclerRedeemer.all

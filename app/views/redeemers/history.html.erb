@@ -10,17 +10,17 @@
     </div>
 </h4>
 <h5>
-<% @recyclers_for_redeemer.each do |recycler|%>
+<% @recyclers_for_redeemer.each do |recycler_redeemer|%>
     <div class="row">
        <div class="col-lg-offset-2 col-lg-2">
-            <%= @recyclers[recycler[:recycler_id]-1][:first_name] %>
-            <%= @recyclers[recycler[:recycler_id]-1][:last_name] %>
+            <%= recycler_redeemer.recycler[:first_name] %>
+            <%= recycler_redeemer.recycler[:last_name] %>
         </div>
-        <div class="col-lg-1"><%= recycler[:plastic]%> </div>
-        <div class="col-lg-1"><%= recycler[:glass]%> </div>
-        <div class="col-lg-1"><%= recycler[:cans]%> </div>
-        <div class="col-lg-2"><%= if recycler[:selection_date] then recycler[:selection_date].strftime("%b %d, %Y") end %> </div>
-        <div class="col-lg-2"><%= if recycler[:completion_date] then recycler[:completion_date].strftime("%b %d, %Y") end %> </div>
+        <div class="col-lg-1"><%= recycler_redeemer[:plastic]%> </div>
+        <div class="col-lg-1"><%= recycler_redeemer[:glass]%> </div>
+        <div class="col-lg-1"><%= recycler_redeemer[:cans]%> </div>
+        <div class="col-lg-2"><%= if recycler_redeemer[:selection_date] then recycler_redeemer[:selection_date].strftime("%b %d, %Y") end %> </div>
+        <div class="col-lg-2"><%= if recycler_redeemer[:completion_date] then recycler_redeemer[:completion_date].strftime("%b %d, %Y") end %> </div>
     </div>
 <%end%>
 </h5>

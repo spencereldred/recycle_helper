@@ -1,8 +1,10 @@
 class RecyclersController < ApplicationController
-  before_filter :authorize, except: [:index, :show]
+  before_filter :authorize
+  #before_filter :authorize_admin
 
   def index
-    @recyclers = Recycler.all
+    @user = current_user
+
   end
 
   def new
@@ -36,7 +38,6 @@ class RecyclersController < ApplicationController
 
   def history
     @recycler = Recycler.find(params[:id])
-    @redeemers = Redeemer.all
     @redeemers_for_recycler = RecyclerRedeemer.where( "recycler_id = ?", params[:id] )
   end
 

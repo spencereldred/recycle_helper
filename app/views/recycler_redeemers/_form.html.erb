@@ -21,13 +21,13 @@
     <div class="col-lg-6"><%= f.select( :other, other_options ) %></div>
 
     <div class="col-lg-offset-4 col-lg-2 form_label">Selection Date:</div>
-    <div class="col-lg-6"><%= f.date_select :selection_date %></div>
+    <div class="col-lg-6"><%= f.text_field :selection_date %></div>
 
     <div class="col-lg-offset-4 col-lg-2 form_label">Completion Date:</div>
-    <div class="col-lg-6"><%= f.date_select :completion_date %></div>
+    <div class="col-lg-6"><%= f.text_field :completion_date %></div>
 
     <div class="col-lg-offset-4 col-lg-2 form_label">Rating:</div>
-    <div class="col-lg-6"><%= f.select( :rating, ['5','4','3','2','1','0']) %></div>
+    <div class="col-lg-6"><%= f.text_field :rating %></div>
 
 
     <div class="col-lg-offset-5 col-lg-3 btn btn-primary"><%= f.button "Save Recycler_Redeemer" %></div>
