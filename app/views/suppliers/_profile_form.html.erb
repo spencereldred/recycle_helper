@@ -1,0 +1,35 @@
+<h4>
+<%= form_for @recycler, :url => suppliers_create_profile_path(@recycler) do  |f|  %>
+    <div class="col-lg-offset-4 col-lg-2 form_label">First Name:</div>
+    <div class="col-lg-6"><%= f.text_field :first_name, placeholder: "< first name >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Last Name:</div>
+    <div class="col-lg-6"><%= f.text_field :last_name, placeholder: "< last name >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Email:</div>
+    <div class="col-lg-6"><%= f.text_field :email,  placeholder: "< email >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
+    <div class="col-lg-6"><%= f.text_field :phone, placeholder: "< phone >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Address Line 1:</div>
+    <div class="col-lg-6"><%= f.text_field :addr_line_1, placeholder: "< addr_line_1 >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Address Line 2:</div>
+    <div class="col-lg-6"><%= f.text_field :addr_line_2, placeholder: "< addr_line_2 >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">City:</div>
+    <div class="col-lg-6"><%= f.text_field :city, placeholder: "< city >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">State:</div>
+    <div class="col-lg-6"><%= f.text_field :state, placeholder: "< state >" %></div>
+
+    <div class="col-lg-offset-4 col-lg-2 form_label">Zipcode:</div>
+    <div class="col-lg-6"><%= f.text_field :zipcode, placeholder: "< zipcode >" %></div>
+
+    <!-- <div class="col-lg-6"><%# f.hidden_field :user_id, value: @user.id %></div> -->
+
+    <div class="col-lg-offset-5 col-lg-2 btn btn-primary"><%= f.button "Save Recycler" %></div>
+<% end %>
+</h4>
+

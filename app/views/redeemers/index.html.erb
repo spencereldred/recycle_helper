@@ -12,24 +12,32 @@
 </div>
 <div class="row">
   <h5>
-  <% @available.each do |avail| %>
-    <div class="row">
-      <div class="col-lg-offset-1 col-lg-1">
-        <% recycler = Profile.where(user_id: avail[:recycler_user_id]) %>
-        <%= recycler[0][:city]%>
+    <%# form_for Redeemer.update do |f| %>
+    <% @available.each do |avail| %>
+      <div class="row">
+        <div class="col-lg-offset-1 col-lg-1">
+          <% recycler = Profile.where(user_id: avail[:recycler_user_id]) %>
+          <%= recycler[0][:city]%>
+        </div>
+        <div class="col-lg-1"><%= avail[:plastic] %></div>
+        <div class="col-lg-1"><%= avail[:cans] %></div>
+        <div class="col-lg-1"><%= avail[:glass] %></div>
+        <div class="col-lg-1"><%= avail[:other] %></div>
+        <div class="col-lg-2"><%= avail[:created_at] %></div>
+        <div class="col-lg-2"><%= avail[:selection_date] %></div>
+        <div class="col-lg-2">
+          <form action="/my/new/thingy/id=" method="post">
+            <input type="submit" value="Select"/>
+          </form>
       </div>
-      <div class="col-lg-1"><%= avail[:plastic] %></div>
-      <div class="col-lg-1"><%= avail[:cans] %></div>
-      <div class="col-lg-1"><%= avail[:glass] %></div>
-      <div class="col-lg-1"><%= avail[:other] %></div>
-      <div class="col-lg-2"><%= avail[:created_at] %></div>
-      <div class="col-lg-2"><%= avail[:selection_date] %></div>
-    </div>
-      <% end %>
+        <% end %>
+        <%# f.submit %>
+    <%# end %>
   </h5>
 </div>
 <div class="col-lg-8 col-lg-offset-4"><h1>Selected  by <%= @redeemer[0][:first_name]%>
   <%= @redeemer[0][:last_name]%></h1></div>
+  <% if true %>
 <div class="row">
   <h4>
     <div class="col-lg-offset-1 col-lg-2">Address</div>
@@ -42,6 +50,7 @@
     <div class="col-lg-2">Selected</div>
   </h4>
 </div>
+<% end %>
 <div class="row">
   <h5>
   <% @selected.each do |select| %>
@@ -52,7 +61,7 @@
           <script>
 
     $(function(){
-          codeAddress("<%= recycler[0][:addr_line_1]%>")
+          codeAddress("<%= recycler[0][:addr_line_1]%>, <%= recycler[0][:city]%> <%= recycler[0][:state]%>")
     })
 
   </script>

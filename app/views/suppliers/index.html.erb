@@ -1,0 +1,7 @@
+<h1>Recyclers Index (supplier)</h1>
+User: <%= @user.inspect %></br>
+Recycler: <%= if @recycler then @recycler.inspect end %>
+</br>
+
+<a href="/suppliers/<%= if @recycler then @recycler.id else 1 end%>">
+  <%= if @recycler then @recycler.first_name else "First" end %>  </a>

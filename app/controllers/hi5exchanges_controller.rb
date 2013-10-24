@@ -3,7 +3,4 @@ class Hi5exchangesController < ApplicationController
 
   end
 
-  def definition
-
-  end
 end

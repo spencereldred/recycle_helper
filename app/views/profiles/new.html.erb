@@ -1,0 +1,8 @@
+<div class="row">
+    <% if current_user[:function] == "recycler" %>
+        <div class="col-lg-offset-4 col-lg-5"><h1>New Recycer Profile</h1></div>
+     <% else %>
+        <div class="col-lg-offset-4 col-lg-5"><h1>New Redeemer Profile</h1></div>
+     <% end %>
+ </div>
+<%= render "form"  %>

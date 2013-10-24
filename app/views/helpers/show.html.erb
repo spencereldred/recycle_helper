@@ -1,0 +1,40 @@
+<h1>Show new Redeemer (helper)</h1>
+<%= @user.inspect %>
+<div class="col-lg-7 col-lg-offset-5"><h1>Redeemer</h1></div>
+<%# render "redeemers" , redeemer: @redeemer %>
+<h4>
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">First Name:</div>
+        <div class= "col-lg-6">
+          <a href="/redeemers/<%= @redeemer.id %>"><%= @redeemer.first_name %>  </a>
+        </div>
+        <div class="col-lg-offset-4 col-lg-2 form_label">Last Name:</div>
+        <div class="col-lg-6"><%= @redeemer.last_name %></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Email:</div>
+        <div class="col-lg-6"><%= @redeemer.email %></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
+        <div class="col-lg-6"><%= @redeemer.phone %></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">DMV Licence:</div>
+        <div class="col-lg-6"><%= @redeemer.dmv_number %></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
+        <div class="col-lg-6"><%= link_to "Edit", edit_helper_path(@redeemer) %> <!-- /redeemers/:id -->
+
+        <%= link_to "Delete", helper_path(@redeemer), :method => :delete, :confirm => "Are you sure?" %></div>
+    </div>
+  </h4>
+</div>
+<h4>
+<div class="col-lg-offset-5 col-lg-3"><%= link_to "History of Transactions", redeemer_history_path %></div>
+</h4>
