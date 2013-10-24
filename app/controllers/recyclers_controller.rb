@@ -2,50 +2,42 @@ class RecyclersController < ApplicationController
   before_filter :authorize
   before_filter :authorize_recycler
 
-  # def index
-  #   @user = current_user
+  def new
+    @user = current_user
+    @recyclers = Profile.where(user_id: @user[:id])
+    @transaction = Transaction.new
+    @all_trans = Transaction.where("recycler_user_id = #{@user[:id]} AND completion_date IS NULL")
+  end
 
-  # end
+  def create
+    transaction = Transaction.create(params[:transaction])
+    if transaction.errors.empty?
+      redirect_to recycler_path(transaction)
+    else
+      flash[:errors] = transaction.errors.full_messages
+      @transaction = Transaction.new
+      render :new
+    end
+  end
 
-  # def new
-  #   @recycler = Recycler.new
-  # end
+  def edit
+    @user = current_user
+    @transaction = Transaction.find(params[:id])
+  end
 
-  # def create
-  #   recycler = Recycler.create(params[:recycler])
-  #   if recycler.errors.empty?
-  #     redirect_to recycler_path(recycler)
-  #   else
-  #     flash[:errors] = recycler.errors.full_messages
-  #     @recycler = Recycler.new
-  #     render :new
-  #   end
-  # end
+  def update
+    transaction = Transaction.find(params[:id])
+    transaction.update_attributes(params[:transaction])
+    redirect_to recycler_path(transaction)
+  end
 
-  # def edit
-  #   @recycler = Recycler.find(params[:id])
-  # end
+  def show
+    @transaction = Transaction.find(params[:id])
+  end
 
-  # def update
-  #   recycler = Recycler.find(params[:id])
-  #   recycler.update_attributes(params[:recycler])
-  #   redirect_to recycler_path(recycler)
-  # end
-
-  # def show
-  #   @recycler = Recycler.find(params[:id])
-  # end
-
-  # def history
-  #   @recycler = Recycler.find(params[:id])
-  #   @redeemers_for_recycler = RecyclerRedeemer.where( "recycler_id = ?", params[:id] )
-  # end
-
-  # def destroy
-  #   Recycler.delete(params[:id])
-  #   redirect_to recyclers_path
-  # end
-
-
+  def destroy
+    User.delete(params[:user_id])
+    redirect_to new_recycler_path
+  end
 
 end

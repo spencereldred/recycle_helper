@@ -1,12 +1,21 @@
-<h1>Program Descriptions</h1>
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-7"><h1>Program Description</h1></div>
+</div>
 
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-7"><h2><%= link_to "Create New Recycler Account", new_user_path( function: 'recycler' ) %></h2></div>
+</div>
 
-Create an account as a Recycler or a Redeeemr.</br>
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-7"><h2><%= link_to "Create New Redeemer Account", new_user_path( function: 'redeemer' ) %></h2></div>
+</div>
 
-<%= link_to "Create New Recycler Account", new_user_path( function: 'recycler' ) %></br>
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-7"><h3>If you already have an account, go to <%= link_to "Login", login_path %>.</h3></div>
+</div>
 
-<%= link_to "Create New Redeemer Account", new_user_path( function: 'redeemer' ) %></br>
-
-
-</br>
-If you already have an account, go to <%= link_to "Login", login_path %>.
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-7">
+      <img src="/assets/recycle_dude.gif" alt="recycle dude">
+  </div>
+</div>

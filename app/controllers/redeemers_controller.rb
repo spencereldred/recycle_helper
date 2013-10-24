@@ -30,11 +30,16 @@ class RedeemersController < ApplicationController
   #   @redeemer = Redeemer.find(params[:id])
   # end
 
-  # def update
-  #   redeemer = Redeemer.find(params[:id])
-  #   redeemer.update_attributes(params[:redeemer])
-  #   redirect_to redeemer_path(redeemer)
-  # end
+  def update
+    # binding.pry
+    transaction = Transaction.find(params[:id])
+    if transaction.selection_date == nil
+      transaction.update_attributes(selection_date: Time.now, redeemer_user_id: current_user.id)
+    else
+      transaction.update_attributes(selection_date: nil, redeemer_user_id: nil)
+    end
+    redirect_to redeemers_path
+  end
 
   # def show
   #   @redeemer = Redeemer.find(params[:id])

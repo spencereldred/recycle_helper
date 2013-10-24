@@ -1,62 +1,36 @@
-<div class="col-lg-7 col-lg-offset-5"><h1>Transaction</h1></div>
+<div class="col-sm-7 col-sm-offset-4"><h1>Transaction for <%= @recyclers[0][:first_name] %> <%= @recyclers[0][:last_name] %></h1></div>
 <h4>
     <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Recycler:</div>
-        <div class= "col-lg-6"><%= @transaction.recycler_user_id %></div>
+        <div class="col-sm-offset-4 col-sm-2 form_label">Recycler:</div>
+        <div class= "col-sm-6"><%= @transaction.recycler_user_id %></div>
     </div>
 
     <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Redeemer:</div>
-        <div class="col-lg-6">
-            <%= if @transaction.redeemer_user_id then @transaction.redeemer_user_id end %>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Plastic:</div>
-        <div class="col-lg-6"><%= @transaction.plastic %></div>
+        <div class="col-sm-offset-4 col-sm-2 form_label">Plastic:</div>
+        <div class="col-sm-6"><%= @transaction.plastic %></div>
     </div>
 
      <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Glass:</div>
-        <div class="col-lg-6"><%= @transaction.glass %></div>
+        <div class="col-sm-offset-4 col-sm-2 form_label">Glass:</div>
+        <div class="col-sm-6"><%= @transaction.glass %></div>
     </div>
 
      <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Cans:</div>
-        <div class="col-lg-6"><%= @transaction.cans %></div>
+        <div class="col-sm-offset-4 col-sm-2 form_label">Cans:</div>
+        <div class="col-sm-6"><%= @transaction.cans %></div>
     </div>
 
      <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Other:</div>
-        <div class="col-lg-6"><%= @transaction.other %></div>
-    </div>
-
-     <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Selection Date:</div>
-        <div class="col-lg-6"><%= if @transaction.selection_date then @transaction.selection_date.strftime("%b %d") end %></div>
-     </div>
-
-     <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Completion  Date:</div>
-        <div class="col-lg-6"><%= if @transaction.completion_date then @transaction.completion_date.strftime("%b %d") end  %></div>
-    </div>
-
-     <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Rating:</div>
-        <div class="col-lg-6"><%= if @transaction.rating then @transaction.rating end %></div>
+        <div class="col-sm-offset-4 col-sm-2 form_label">Other:</div>
+        <div class="col-sm-6"><%= @transaction.other %></div>
     </div>
 
 
     <div class="row">
-        <div class="col-lg-offset-4 col-lg-2 form_label">Edit / Delete:</div>
-        <div class="col-lg-6"><%= link_to "Edit", edit_transaction_path(@transaction) %> <!-- /recyclers/:id -->
+        <div class="col-sm-offset-4 col-sm-2 form_label">Edit / Delete:</div>
+        <div class="col-sm-6"><%= link_to "Edit", edit_transaction_path(@transaction) %> <!-- /recyclers/:id -->
 
         <%= link_to "Delete", transaction_path(@transaction), :method => :delete, :confirm => "Are you sure?" %></div>
     </div>
   </h4>
 </div>
-
-<h4>
-<div class="col-lg-offset-5 col-lg-4"><%= link_to "back to all transactions", transactions_path %></div>
-</h4>

@@ -1,26 +1,71 @@
-<div class="col-lg-8 col-lg-offset-4">
+<div class="row">
+  <div class="col-sm-offset-4 col-sm-7">
+      <img src="/assets/recycle_drop_off.jpg" alt="recycle drop off">
+  </div>
+</div>
+<div class="col-sm-8 col-sm-offset-4">
   <h1>New Transaction for <%= @recyclers[0][:first_name] %> <%= @recyclers[0][:last_name] %></h1>
 </div>
 <h4>
 <%= form_for @transaction do  |f|  %>
-<% bag_options = ['0 bags', '1 bag', '2 bags', '3 bags', '4 bags', '5 bags', '6 bags', '7 bags', '8 bags', '9 bags', '10 or more']%>
+<% bag_options = ['0 bags', '1 bag', '2 bags', '3 bags', '4 bags', '5 bags',
+                              '6 bags', '7 bags', '8 bags', '9 bags', '> 10']%>
 <% other_options = [ 'none', 'cardboard', 'glass', 'aluminum', 'plastic']%>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Plastic:</div>
-    <div class="col-lg-6"><%= f.select( :plastic, bag_options ) %></div>
+    <div class="col-sm-offset-4 col-sm-2 form_label">Plastic:</div>
+    <div class="col-sm-6"><%= f.select( :plastic, bag_options ) %></div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Glass:</div>
-    <div class="col-lg-6"><%= f.select( :glass, bag_options ) %></div>
+    <div class="col-sm-offset-4 col-sm-2 form_label">Glass:</div>
+    <div class="col-sm-6"><%= f.select( :glass, bag_options ) %></div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Cans:</div>
-    <div class="col-lg-6"><%= f.select( :cans, bag_options ) %></div>
+    <div class="col-sm-offset-4 col-sm-2 form_label">Cans:</div>
+    <div class="col-sm-6"><%= f.select( :cans, bag_options ) %></div>
 
-    <div class="col-lg-offset-4 col-lg-2 form_label">Other:</div>
-    <div class="col-lg-6"><%= f.select( :other, other_options ) %></div>
+    <div class="col-sm-offset-4 col-sm-2 form_label">Other:</div>
+    <div class="col-sm-6"><%= f.select( :other, other_options ) %></div>
 
-    <div class="col-lg-6"><%= f.hidden_field :recycler_user_id, value: @user[:id] %></div>
+    <div class="col-sm-6"><%= f.hidden_field :recycler_user_id, value: @user[:id] %></div>
 
-    <div class="col-lg-offset-5 col-lg-3 btn btn-primary"><%= f.button "Save Transaction" %></div>
+    <div class="col-sm-offset-5 col-sm-3 btn btn-primary"><%= f.button "Save Transaction" %></div>
 <% end %>
 </h4>
-
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-8">
+      <h1>Outstanding Transactions for <%= @recyclers[0][:first_name] %> <%= @recyclers[0][:last_name] %></h1>
+    </div>
+</div>
+<div class="row">
+  <h4>
+    <div class="col-sm-offset-1 col-sm-1">Complete</div>
+    <div class="col-sm-2">Address</div>
+    <div class="col-sm-1">Plastic</div>
+    <div class="col-sm-1">Cans</div>
+    <div class="col-sm-1">Glass</div>
+    <div class="col-sm-1">Other</div>
+    <div class="col-sm-2">Selected</div>
+    <div class="col-sm-2">Completed</div>
+  </h4>
+</div>
+<div class="row">
+  <h5>
+  <% @all_trans.each do |trans| %>
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-1">
+          <form action="/transactions/<%= trans[:id] %>" method="post">
+            <input name="_method" type="hidden" value="put" />
+            <input type="submit" value="Completed"/>
+          </form>
+      </div>
+      <div class="col-sm-2">
+        <% recycler = Profile.where(user_id: trans[:recycler_user_id]) %>
+        <%= recycler[0][:addr_line_1]%>
+      </div>
+      <div class="col-sm-1"><%= trans[:plastic] %></div>
+      <div class="col-sm-1"><%= trans[:cans] %></div>
+      <div class="col-sm-1"><%= trans[:glass] %></div>
+      <div class="col-sm-1"><%= trans[:other] %></div>
+      <div class="col-sm-2"><%= if trans[:selection_date] then trans[:selection_date].strftime("%b %d, %Y") end %></div>
+      <div class="col-sm-2"><%= if trans[:completion_date] then trans[:completion_date].strftime("%b %d, %Y") end %></div>
+    </div>
+      <% end %>
+  </h5>

@@ -38,7 +38,10 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
-    User.delete(params[:user_id])
-    redirect_to profiles_path
+    user = current_user
+    profile = Profile.find(params[:id])
+    User.delete(user[:id])
+    Profile.delete(profile[:id])
+    redirect_to root_path
   end
 end

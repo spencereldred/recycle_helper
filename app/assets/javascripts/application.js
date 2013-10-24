@@ -44,7 +44,7 @@ $(function(){
                   position: results[0].geometry.location
               });
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+               alert('Geocode was not successful for the following reason: ' + status);
             }
           });
         }
@@ -52,12 +52,10 @@ $(function(){
 
        $(function(){
 
-        $('button').on('click', function(){
+        $('#draw_map').on('click', function(){
              val = $('#addr').val();
-             $('#output1').html("your text here");
-             $('#output2').html(val);
-
-             // document.getElementById('address').value = val;
+             // $('#output1').html("your text here");
+             // $('#output2').html(val);
              codeAddress(val);
 
         });

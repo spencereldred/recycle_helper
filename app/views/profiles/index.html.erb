@@ -3,33 +3,33 @@
 <% profile = Profile.where(user_id: @user[:id]) %>
 <%= profile.inspect %></br>
 <%= profile[0][:id] %></br>
-<div class="col-lg-7 col-lg-offset-5"><h1>All User Profiles</h1></div>
+<div class="col-sm-7 col-sm-offset-5"><h1>All User Profiles</h1></div>
 <div class="row">
   <h4>
-    <div class="col-lg-offset-1 col-lg-1">Function</div>
-    <div class=" col-lg-1">First</div>
-    <div class="col-lg-1">Last</div>
-    <div class="col-lg-2">Email</div>
-    <div class="col-lg-2">Phone</div>
-    <div class="col-lg-2">Street</div>
-    <div class="col-lg-1">City</div>
-    <div class="col-lg-1">DMV</div>
+    <div class="col-sm-offset-1 col-sm-1">Function</div>
+    <div class=" col-sm-1">First</div>
+    <div class="col-sm-1">Last</div>
+    <div class="col-sm-2">Email</div>
+    <div class="col-sm-2">Phone</div>
+    <div class="col-sm-2">Street</div>
+    <div class="col-sm-1">City</div>
+    <div class="col-sm-1">DMV</div>
   </h4>
 </div>
 <div class="row">
   <h5>
   <% @profiles.each do |profile| %>
   <div class="row">
-      <div class="col-lg-offset-1 col-lg-1"><%= profile.function %></div>
-      <div class=" col-lg-1">
+      <div class="col-sm-offset-1 col-sm-1"><%= profile.function %></div>
+      <div class=" col-sm-1">
         <a href="/profiles/<%= profile.id %>"><%= profile.first_name %>  </a>
       </div>
-      <div class="col-lg-1"><%= profile.last_name %></div>
-      <div class="col-lg-2"><%= profile.email %></div>
-      <div class="col-lg-2"><%= profile.phone %></div>
-      <div class="col-lg-2"><%= profile.addr_line_1  %></div>
-      <div class="col-lg-1"><%= profile.city  %></div>
-      <div class="col-lg-1"><%= profile.dmv_number %></div>
+      <div class="col-sm-1"><%= profile.last_name %></div>
+      <div class="col-sm-2"><%= profile.email %></div>
+      <div class="col-sm-2"><%= profile.phone %></div>
+      <div class="col-sm-2"><%= profile.addr_line_1  %></div>
+      <div class="col-sm-1"><%= profile.city  %></div>
+      <div class="col-sm-1"><%= profile.dmv_number %></div>
     </div>
       <% end %>
   </h5>
@@ -37,7 +37,7 @@
 </br></br>
 <h4>
 
-<!-- <div class="col-lg-offset-5 col-lg-2"> -->
+<!-- <div class="col-sm-offset-5 col-sm-2"> -->
   <%# link_to "Add New Profile", new_profile_path %>
 <!-- </div> -->
 </h4>
