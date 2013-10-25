@@ -17,6 +17,7 @@ var map;
 $(function(){
         var geocoder;
         function initialize() {
+          window.mapWasInitialized = true;
           geocoder = new google.maps.Geocoder();
           var latlng = new google.maps.LatLng(20.798, -156.333);
           var mapOptions = {
@@ -28,6 +29,7 @@ $(function(){
         }
 
         window.codeAddress = function(address) {
+          if(!window.mapWasInitialized) { initialize() };
           geocoder = new google.maps.Geocoder();
           var latlng = new google.maps.LatLng(20.798, -156.333);
           var mapOptions = {
