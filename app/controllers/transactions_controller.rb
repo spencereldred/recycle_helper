@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
   def create
     transaction = Transaction.create(params[:transaction])
     if transaction.errors.empty?
-      redirect_to transaction_path(transaction)
+      redirect_to new_transaction_path
     else
       flash[:errors] = transaction.errors.full_messages
       @transaction = Transaction.new

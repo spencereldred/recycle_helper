@@ -1,6 +1,0 @@
-<h1>Redeemers Index (helper)</h1>
-User: <%= @user.inspect %></br>
-Redeemer: <%= if @redeemer then @redeemer.inspect end %>
-</br>
-<a href="/helpers/<%= if @redeemer then  @redeemer.id else 1 end %>"><%= if @redeemer then @redeemer.first_name else "First" end %> </a>
-<%# @redeemer.inspect %>
