@@ -1,8 +1,8 @@
 class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
-      t.string         :recycler_user_id
-      t.string         :redeemer_user_id
+      t.integer       :recycler_user_id
+      t.integer       :redeemer_user_id
       t.string         :plastic
       t.string         :glass
       t.string         :cans

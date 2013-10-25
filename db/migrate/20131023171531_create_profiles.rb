@@ -1,6 +1,8 @@
 class CreateProfiles < ActiveRecord::Migration
   def change
     create_table :profiles do |t|
+      t.integer :user_id
+      t.string   :function
       t.string   :first_name
       t.string   :last_name
       t.string   :email
@@ -11,7 +13,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.string   :state
       t.string   :zipcode
       t.string   :dmv_number
-      t.string   :user_id
 
       t.timestamps
     end

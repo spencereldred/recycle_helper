@@ -29,9 +29,7 @@ group :development, :test do
   gem 'pry-rails'
 end
 
-group :production do
-  gem 'pg'
-end
+gem 'pg'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
