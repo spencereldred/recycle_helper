@@ -27,13 +27,13 @@
 
             <% if current_user[:function] == "redeemer" || current_user[:function] == "admin" %>
             <div class="navbar-brand  col-sm-2">
-              <a href="/redeemers">Redeemer</a>
+              <a href="/redeemers">Select</a>
             </div>
             <% end %>
 
             <% if current_user[:function] == "recycler" || current_user[:function] == "admin" %>
             <div class="navbar-brand col-sm-2">
-              <a href="/transactions/new">Recycler</a>
+              <a href="/transactions/new">Recycle</a>
             </div>
             <% end %>
 

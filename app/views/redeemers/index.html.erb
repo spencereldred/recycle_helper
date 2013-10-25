@@ -40,7 +40,7 @@
 <div class="row">
   <h4>
     <div class="col-sm-offset-1 col-sm-1">Unselect</div>
-    <div class="col-sm-2">Address</div>
+    <div class="col-sm-3">Address</div>
     <div class="col-sm-1">St. / Zip</div>
     <div class="col-sm-1">Plastic</div>
     <div class="col-sm-1">Cans</div>
@@ -59,7 +59,7 @@
             <input type="submit" value="Unselect"/>
           </form>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <% recycler = Profile.where(user_id: select[:recycler_user_id]) %>
         <%= recycler[0][:addr_line_1]%>, <%= recycler[0][:city]%>
           <script>
@@ -89,9 +89,9 @@
     </div> -->
     <div id="map-canvas"></div>
   </br>
-    <div class="col-sm-offset-4 col-sm-8">
+    <!-- <div class="col-sm-offset-4 col-sm-8">
       Enter address: <input id="addr" type="text" style="width: 300px;"> <button id="draw_map">Enter</button>
-    </div>
+    </div> -->
     <!-- <div>Output1: <span id="output1"></span></div></br> -->
     <!-- <div>Output2: <span id="output2"></span></div> -->
 
