@@ -13,6 +13,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(params[:user])
+
+    if @user.save
+        # binding.pry
+        Hi5Mailer.welcome_user(@user).deliver
+      end
+
     if @user.errors.empty?
       sign_in(@user)
       redirect_to new_profile_path(user: @user.id, function: @user.function)
