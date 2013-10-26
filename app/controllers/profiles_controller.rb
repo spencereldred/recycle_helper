@@ -42,6 +42,7 @@ class ProfilesController < ApplicationController
     profile = Profile.find(params[:id])
     User.delete(user[:id])
     Profile.delete(profile[:id])
+    sign_out
     redirect_to root_path
   end
 end
