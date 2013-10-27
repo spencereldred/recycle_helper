@@ -3,12 +3,11 @@
 </div>
 <%= form_for @user do |f| %>
   <div class="row">
-    <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :username %></div>
-    <div class="col-sm-2"><%= f.text_field :username %></div>
+    <div class="col-sm-offset-4 col-sm-4 "><h2>Login Information</h2></div>
   </div>
   <div class="row">
-    <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :email %></div>
-    <div class="col-sm-2"><%= f.text_field :email %></div>
+    <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :username %></div>
+    <div class="col-sm-2"><%= f.text_field :username %></div>
   </div>
   <div class="row">
     <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :password %></div>
@@ -18,6 +17,48 @@
     <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :password_confirmation %></div>
     <div class="col-sm-2"><%= f.password_field :password_confirmation %></div>
   </div>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4 "><h2>Profile Information</h2></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">First Name:</div>
+    <div class="col-lg-6"><%= f.text_field :first_name, placeholder: "< first name >" %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">Last Name:</div>
+    <div class="col-lg-6"><%= f.text_field :last_name, placeholder: "< last name >" %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">Email:</div>
+    <div class="col-lg-6"><%= f.text_field :email, placeholder: "< email >" %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
+    <div class="col-lg-6"><%= f.text_field :phone, placeholder: "< phone >" %></div>
+  </div>
+  <% if @function == "recycler" %>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">Address:</div>
+    <div class="col-lg-6"><%= f.text_field :address, placeholder: "< address >" %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">City:</div>
+    <div class="col-lg-6"><%= f.text_field :city, placeholder: "< city >" %></div>
+  </div>
+<div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">State:</div>
+    <div class="col-lg-6"><%= f.text_field :state, placeholder: "< state >" %></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">Zipcode:</div>
+    <div class="col-lg-6"><%= f.text_field :zipcode, placeholder: "< zipcode >" %></div>
+  </div>
+  <% else %>
+  <div class="row">
+    <div class="col-lg-offset-4 col-lg-2 form_label">dmv_number:</div>
+    <div class="col-lg-6"><%= f.text_field :dmv_number , placeholder: "< dmv number >" %></div>
+  </div>
+  <% end %>
   <div class="row">
     <div class="col-sm-2"><%= f.hidden_field :function, :value => @function %></div>
   </div>

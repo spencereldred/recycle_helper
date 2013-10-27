@@ -11,24 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023190055) do
-
-  create_table "profiles", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "function"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "addr_line_1"
-    t.string   "addr_line_2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zipcode"
-    t.string   "dmv_number"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
+ActiveRecord::Schema.define(:version => 20131027130856) do
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
@@ -52,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20131023190055) do
     t.string   "remember_token"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "phone"
+    t.string   "dmv_number"
   end
 
 end

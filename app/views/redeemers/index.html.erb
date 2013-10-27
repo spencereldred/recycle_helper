@@ -1,5 +1,3 @@
-<%# current_user.inspect %></br>
-<%# @available.inspect %>
 <div class="col-sm-offset-5 col-sm-7"><h1>All Available</h1></div>
 <div class="row">
   <h4>
@@ -23,7 +21,7 @@
           </form>
         </div>
         <div class=" col-sm-2">
-          <% recycler = Profile.where(user_id: avail[:recycler_user_id]) %>
+          <% recycler = User.where(id: avail[:recycler_user_id]) %>
           <%= recycler[0][:city]%>, <%= recycler[0][:state]%> <%= recycler[0][:zipcode]%>
         </div>
         <div class="col-sm-1"><%= avail[:plastic] %></div>
@@ -35,8 +33,8 @@
         <% end %>
   </h5>
 </div>
-<div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= @redeemer[0][:first_name]%>
-  <%= @redeemer[0][:last_name]%></h1></div>
+<div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= @user[:first_name]%>
+  <%= @user[:last_name]%></h1></div>
 <div class="row">
   <h4>
     <div class="col-sm-offset-1 col-sm-1">Unselect</div>
@@ -60,12 +58,12 @@
           </form>
       </div>
       <div class="col-sm-3">
-        <% recycler = Profile.where(user_id: select[:recycler_user_id]) %>
-        <%= recycler[0][:addr_line_1]%>, <%= recycler[0][:city]%>
+        <% recycler = User.where(id: select[:recycler_user_id]) %>
+        <%= recycler[0][:address]%>, <%= recycler[0][:city]%>
           <script>
 
     $(function(){
-          codeAddress("<%= recycler[0][:addr_line_1]%>, <%= recycler[0][:city]%> <%= recycler[0][:state]%>")
+          codeAddress("<%= recycler[0][:address]%>, <%= recycler[0][:city]%> <%= recycler[0][:state]%>")
     })
 
   </script>
@@ -94,6 +92,5 @@
     </div> -->
     <!-- <div>Output1: <span id="output1"></span></div></br> -->
     <!-- <div>Output2: <span id="output2"></span></div> -->
-
 
 

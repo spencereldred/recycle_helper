@@ -6,50 +6,42 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-     <style>
-       #wrap {
-        min-height: 100%;
-        height: auto !important;
-       }
-     </style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
 </head>
 <body>
   <div id="wrap">
   <header>
     <div class="navbar navbar-inverse ">
       <div class="container">
-         <% if !current_user %>
+         <% if !@user %>
           <div class="navbar-brand  col-sm-2">
             <a href="/">Home</a>
           </div>
         <% end %>
 
-          <% if current_user %>
+          <% if @user %>
 
-            <% if current_user[:function] == "redeemer" || current_user[:function] == "admin" %>
+            <% if @user[:function] == "redeemer" || @user[:function] == "admin" %>
             <div class="navbar-brand  col-sm-2">
               <a href="/redeemers">Select</a>
             </div>
             <% end %>
 
-            <% if current_user[:function] == "recycler" || current_user[:function] == "admin" %>
+            <% if @user[:function] == "recycler" || @user[:function] == "admin" %>
             <div class="navbar-brand col-sm-2">
               <a href="/transactions/new">Recycle</a>
             </div>
             <% end %>
 
-            <% profile = Profile.where(user_id: current_user[:id]) %>
-            <% if profile != [] %>
             <div class="navbar-brand  col-sm-2" >
-              <a href="/profiles/<%= profile[0][:id] %>">Profile</a>
+              <a href="/users/<%= @user[:id] %>">Profile</a>
             </div>
-            <% end %>
 
           <% end %>
         <div class="navbar-brand col-sm-2" id="login" >
-            <% if current_user %>
+            <% if @user %>
               <%= link_to "Logout", logout_path %>
               <% else %>
               <%= link_to "Login", login_path %>
@@ -72,31 +64,7 @@
     </div>
   </div>
 </div>
-<footer>
-  <div class="container">
-    <div class="row">
-  <div class="col-sm-12 ">
-    Spencer Eldred<br/>
-    eldredspencer@gmail.com<br/>
-    808.280.3758 <br>
-</div>
-  <div class="col-xs-12 col-sm-12">
-    <ul>
-        <li class="footer-img"><a href="https://github.com/spencereldred" title="Spencer's Github" ><img class="icon" src="/assets/github-logo.png" alt="Github" title="Github"></a>
-        </li>
-        <li class="footer-img"><a href="https://www.facebook.com/spencer.eldred.3" title="Spencer's Facebook" ><img class="icon" src="/assets/facebook.png" alt="Facebook" title="Facebook"></a>
-        </li>
-        <li class="footer-img"><a href="https://twitter.com/SpencerEldred" title="Spencer's Twitter" ><img class="icon" src="/assets/twitter.jpeg"
-            alt="Twitter" title="Twitter"></a>
-        </li>
-        <li class="footer-img"><a href="https://www.linkedin.com/" title="Spencer's Linked In" ><img class="icon" src="/assets/linked_in_icon.jpg"
-            alt="Linked In" title="Linked In"></a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-</footer>
+  <%= render  :partial => "layouts/footer" %>
 </body>
 </html>
 

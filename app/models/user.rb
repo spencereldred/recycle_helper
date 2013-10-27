@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_one :profile, dependent: :destroy
-  attr_accessible :username, :email, :function, :password, :password_confirmation
+  attr_accessible :username, :email, :function, :password, :password_confirmation,
+                          :first_name, :last_name, :address, :city, :state, :zipcode, :dmv_number, :phone
 
   before_save :create_remember_token
 

@@ -4,10 +4,9 @@ Recycle::Application.routes.draw do
 
   get '/hi5exchanges/descriptions' =>'hi5exchanges#descriptions'
 
-  resources :profiles
-
   get "/transactions/new", to: "transactions#new", as: "new_transaction"
   post "/transactions", to: "transactions#create"
+  put "/transactions/:id", to: "transactions#update"
   # resources :transactions
 
   get '/redeemers' => 'redeemers#index'

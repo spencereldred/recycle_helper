@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="col-sm-8 col-sm-offset-4">
-  <h1>New Transaction for <%= @recyclers[0][:first_name] %> <%= @recyclers[0][:last_name] %></h1>
+  <h1>New Transaction for <%= @user[:first_name] %> <%= @user[:last_name] %></h1>
 </div>
 <h4>
 <%= form_for @transaction do  |f|  %>
@@ -31,7 +31,7 @@
 </h4>
 <div class="row">
     <div class="col-sm-offset-3 col-sm-8">
-      <h1>Outstanding Transactions for <%= @recyclers[0][:first_name] %> <%= @recyclers[0][:last_name] %></h1>
+      <h1>Outstanding Transactions for <%= @user[:first_name] %> <%= @user[:last_name] %></h1>
     </div>
 </div>
 <div class="row">
@@ -56,8 +56,7 @@
           </form>
       </div>
       <div class="col-sm-2">
-        <% recycler = Profile.where(user_id: trans[:recycler_user_id]) %>
-        <%= recycler[0][:addr_line_1]%>
+        <%= @user[:address]%>
       </div>
       <div class="col-sm-1"><%= trans[:plastic] %></div>
       <div class="col-sm-1"><%= trans[:cans] %></div>
