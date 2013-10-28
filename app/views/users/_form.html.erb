@@ -1,53 +1,67 @@
-<h4>
-<%= form_for @user do  |f|  %>
+<%= form_for @user do |f| %>
+<% if !@user[:id] %>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4 "><h2>Login Information</h2></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :username %></div>
+    <div class="col-sm-2"><%= f.text_field :username, required: true %></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :password %></div>
+    <div class="col-sm-2"><%= f.password_field :password, required: true %></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :password_confirmation %></div>
+    <div class="col-sm-2"><%= f.password_field :password_confirmation, required: true %></div>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4 "><h2>Profile Information</h2></div>
+  </div>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">First Name:</div>
-    <div class="col-lg-6"><%= f.text_field :first_name, placeholder: "< first name >" %></div>
+    <div class="col-lg-6"><%= f.text_field :first_name, placeholder: "< first name >", required: true %></div>
   </div>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">Last Name:</div>
-    <div class="col-lg-6"><%= f.text_field :last_name, placeholder: "< last name >" %></div>
+    <div class="col-lg-6"><%= f.text_field :last_name, placeholder: "< last name >", required: true %></div>
   </div>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">Email:</div>
-    <div class="col-lg-6"><%= f.text_field :email, placeholder: "< email >" %></div>
+    <div class="col-lg-6"><%= f.email_field :email, placeholder: "< email >", required: true %></div>
   </div>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
-    <div class="col-lg-6"><%= f.text_field :phone, placeholder: "< phone >" %></div>
+    <div class="col-lg-6"><%= f.telephone_field :phone, placeholder: "< phone >", required: true %></div>
   </div>
-  <% if @user[:function] == "recycler" %>
+  <% if @function == "recycler" %>
   <div class="row">
-    <div class="col-lg-offset-4 col-lg-2 form_label">Address Line 1:</div>
-    <div class="col-lg-6"><%= f.text_field :addr_line_1, placeholder: "< addr_line_1 >" %></div>
-  </div>
-  <div class="row">
-    <div class="col-lg-offset-4 col-lg-2 form_label">Address Line 2:</div>
-    <div class="col-lg-6"><%= f.text_field :addr_line_2, placeholder: "< addr_line_2 >" %></div>
+    <div class="col-lg-offset-4 col-lg-2 form_label">Address:</div>
+    <div class="col-lg-6"><%= f.text_field :address, placeholder: "< address >", required: true %></div>
   </div>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">City:</div>
-    <div class="col-lg-6"><%= f.text_field :city, placeholder: "< city >" %></div>
+    <div class="col-lg-6"><%= f.text_field :city, placeholder: "< city >", required: true %></div>
   </div>
 <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">State:</div>
-    <div class="col-lg-6"><%= f.text_field :state, placeholder: "< state >" %></div>
+    <div class="col-lg-6"><%= f.text_field :state, placeholder: "< state >", required: true %></div>
   </div>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">Zipcode:</div>
-    <div class="col-lg-6"><%= f.text_field :zipcode, placeholder: "< zipcode >" %></div>
+    <div class="col-lg-6"><%= f.text_field :zipcode, placeholder: "< zipcode >", required: true %></div>
   </div>
   <% else %>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">dmv_number:</div>
-    <div class="col-lg-6"><%= f.text_field :dmv_number , placeholder: "< dmv number >" %></div>
+    <div class="col-lg-6"><%= f.text_field :dmv_number , placeholder: "< dmv number >", required: true %></div>
   </div>
   <% end %>
   <div class="row">
-    <div class="col-lg-6"><%= f.hidden_field :user_id, value: @user.id %></div>
-    <div class="col-lg-6"><%= f.hidden_field :function, value: @user.function %></div>
+    <div class="col-sm-2"><%= f.hidden_field :function, :value => @function %></div>
   </div>
-
-    <div class="col-lg-offset-5 col-lg-2 btn btn-primary"><%= f.button "Save Profile" %></div>
+  <div class="row">
+    <div class="col-sm-offset-5 col-sm-2 btn btn-primary"><%= f.submit %>
+  </div>
 <% end %>
-</h4>

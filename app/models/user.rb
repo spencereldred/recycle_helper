@@ -8,12 +8,16 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
   validates :function, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :phone, presence: true
 
   geocoded_by :full_address
   after_validation :geocode
 
   def full_address
-    :zipcode
+    :address
      # "#{:address}, #{:city} #{:state} #{:zipcode}"
   end
 

@@ -36,6 +36,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @function = @user[:function]
 
   end
 

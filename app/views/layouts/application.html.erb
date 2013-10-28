@@ -15,7 +15,7 @@
   <header>
     <div class="navbar navbar-inverse ">
       <div class="container">
-         <% if !@user %>
+         <% if !@user || !@user[:id] %>
           <div class="navbar-brand  col-sm-2">
             <a href="/">Home</a>
           </div>
@@ -33,15 +33,17 @@
             <div class="navbar-brand col-sm-2">
               <a href="/transactions/new">Recycle</a>
             </div>
-            <% end %>
+
 
             <div class="navbar-brand  col-sm-2" >
               <a href="/users/<%= @user[:id] %>">Profile</a>
             </div>
+            <% end %>
 
           <% end %>
         <div class="navbar-brand col-sm-2" id="login" >
-            <% if @user %>
+
+            <% if current_user %>
               <%= link_to "Logout", logout_path %>
               <% else %>
               <%= link_to "Login", login_path %>
