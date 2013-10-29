@@ -16,6 +16,10 @@
     <div class="col-sm-6"><%= f.select( :other, other_options ) %></div>
 
     <div class="col-sm-6"><%= f.hidden_field :recycler_user_id, value: @user[:id] %></div>
+    <div class="col-sm-6"><%= f.hidden_field :address, value: @user[:address] %></div>
+    <div class="col-sm-6"><%= f.hidden_field :city, value: @user[:city] %></div>
+    <div class="col-sm-6"><%= f.hidden_field :state, value: @user[:state] %></div>
+    <div class="col-sm-6"><%= f.hidden_field :zipcode, value: @user[:zipcode] %></div>
 
     <div class="col-sm-offset-5 col-sm-3 btn btn-primary"><%= f.button "Save Transaction" %></div>
 <% end %>

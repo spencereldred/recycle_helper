@@ -9,7 +9,7 @@ class RedeemersController < ApplicationController
     @local_recyclers = User.near([@user.latitude, @user.longitude], 20).where(function: "recycler")
 
     # Gather all "available" transactions that have not been selected yet (nil).
-    @available = Transaction.where(selection_date: nil)
+    @available = Transaction.near([@user.latitude, @user.longitude], 20).where(selection_date: nil)
 
     # Gather all "selected" transactions that  are assigned to the logged in user and have not been completed yet.
     # Once the transaction is marked completed by the "recycler", it will no longer show on the "redeemer" page.

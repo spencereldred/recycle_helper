@@ -7,6 +7,7 @@ class TransactionsController < ApplicationController
     # @recyclers = User.where(id: @user[:id])
     @transaction = Transaction.new
     # Show Recycler all transactions that match his/her id and that have not been completed
+    # .near([@user.latitude, @user.longitude], 20)
     @all_trans = Transaction.where("recycler_user_id = #{@user[:id]} AND completion_date IS NULL")
   end
 

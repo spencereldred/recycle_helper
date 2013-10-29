@@ -1,12 +1,22 @@
 class Transaction < ActiveRecord::Base
   attr_accessible :recycler_user_id, :redeemer_user_id,
                         :plastic, :glass, :cans, :other,
-                        :selection_date, :completion_date, :rating
+                        :selection_date, :completion_date, :rating,
+                        :address, :city, :state, :zipcode,
+                        :latitude, :longitude
 
  validates :recycler_user_id, presence: true
  validates :plastic, presence: true
  validates :glass, presence: true
  validates :cans, presence: true
  validates :other, presence: true
+
+ geocoded_by :full_address
+ after_validation :geocode
+
+  def full_address
+     "#{self.address}, #{self.city} #{self.state} #{self.zipcode}"
+  end
+
 
 end

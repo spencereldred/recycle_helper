@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027132306) do
+ActiveRecord::Schema.define(:version => 20131029201440) do
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(:version => 20131027132306) do
     t.integer  "rating"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
   end
 
   create_table "users", :force => true do |t|
