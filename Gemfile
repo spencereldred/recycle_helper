@@ -25,6 +25,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'pry'
   gem 'pry-rails'
+  gem 'konacha'
 end
 
 gem 'pg'

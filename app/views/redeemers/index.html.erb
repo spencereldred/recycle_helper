@@ -1,3 +1,7 @@
+<%= @user.inspect %></br>
+Latitude / Longitude: <%=@user.latitude %> / <%= @user.longitude%></br>
+Local Recyclers: <%= @local_recyclers.inspect %></br>
+@available: <%= @available.inspect %>
 <div class="col-sm-offset-5 col-sm-7"><h1>All Available</h1></div>
 <div class="row">
   <h4>
@@ -22,14 +26,15 @@
         </div>
         <div class=" col-sm-2">
           <% recycler = User.where(id: avail[:recycler_user_id]) %>
-          <%= recycler[0][:city]%>, <%= recycler[0][:state]%> <%= recycler[0][:zipcode]%>
-        </div>
-        <div class="col-sm-1"><%= avail[:plastic] %></div>
-        <div class="col-sm-1"><%= avail[:cans] %></div>
-        <div class="col-sm-1"><%= avail[:glass] %></div>
-        <div class="col-sm-1"><%= avail[:other] %></div>
-        <div class="col-sm-2"><%= avail[:created_at].strftime("%b %d, %Y") %></div>
-      </div>
+              <%# recycler.inspect %>
+              <%= recycler[0][:city]%>, <%= recycler[0][:state]%> <%= recycler[0][:zipcode]%>
+              </div>
+              <div class="col-sm-1"><%= avail[:plastic] %></div>
+              <div class="col-sm-1"><%= avail[:cans] %></div>
+              <div class="col-sm-1"><%= avail[:glass] %></div>
+              <div class="col-sm-1"><%= avail[:other] %></div>
+              <div class="col-sm-2"><%= avail[:created_at].strftime("%b %d, %Y") %></div>
+            </div>
         <% end %>
   </h5>
 </div>

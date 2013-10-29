@@ -35,7 +35,6 @@
     <div class="col-lg-offset-4 col-lg-2 form_label">Phone:</div>
     <div class="col-lg-6"><%= f.telephone_field :phone, placeholder: "< phone >", required: true %></div>
   </div>
-  <% if @function == "recycler" %>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">Address:</div>
     <div class="col-lg-6"><%= f.text_field :address, placeholder: "< address >", required: true %></div>
@@ -52,7 +51,7 @@
     <div class="col-lg-offset-4 col-lg-2 form_label">Zipcode:</div>
     <div class="col-lg-6"><%= f.text_field :zipcode, placeholder: "< zipcode >", required: true %></div>
   </div>
-  <% else %>
+  <% if @function == "redeemer" %>
   <div class="row">
     <div class="col-lg-offset-4 col-lg-2 form_label">dmv_number:</div>
     <div class="col-lg-6"><%= f.text_field :dmv_number , placeholder: "< dmv number >", required: true %></div>

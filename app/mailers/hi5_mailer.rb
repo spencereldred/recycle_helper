@@ -7,33 +7,18 @@ class Hi5Mailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Welcome to Hi5 Exchange')
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.hi5_mailer.created.subject
-  #
   def created
     @greeting = "Hi"
 
     mail to: "to@example.org"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.hi5_mailer.selected.subject
-  #
   def selected
     @greeting = "Hi"
 
     mail to: "to@example.org"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.hi5_mailer.closed.subject
-  #
   def closed
     @greeting = "Hi"
 

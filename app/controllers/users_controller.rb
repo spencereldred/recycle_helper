@@ -46,13 +46,17 @@ class UsersController < ApplicationController
     u = params[:user]
     #TODO need to add longitude and latitude to model
     # update these attributes on all users
-    update_user.update_attributes(first_name: u[:first_name], last_name: u[:last_name], email: u[:email], phone: u[:phone])
+    update_user.update_attributes(first_name: u[:first_name],
+                                                    last_name: u[:last_name],
+                                                    email: u[:email],
+                                                    phone: u[:phone],
+                                                    address: u[:address],
+                                                    city: u[:city],
+                                                    state: u[:state],
+                                                    zipcode: u[:zipcode])
     if @user[:function] == "redeemer"
       # update "redeemer" only attributes
       update_user.update_attributes(dmv_number: u[:dmv_number])
-    else
-      # update "recycler" only attributes
-      update_user.update_attributes(address: u[:address], city: u[:city], state: u[:state], zipcode: u[:zipcode])
     end
     # need to sign in because the session token has changed
     sign_in(update_user)

@@ -2,16 +2,17 @@ require "spec_helper"
 
 describe Hi5Mailer do
   describe "welcome_user" do
-    let(:mail) { Hi5Mailer.welcome_user }
+    let(:mail) { Hi5Mailer.welcome_user(User.new) }
 
     it "renders the headers" do
-      mail.subject.should eq("Welcome user")
-      mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.subject.should eq("Welcome to Hi5 Exchange")
+      # mail.to.should eq(["@user.email"])
+      mail.to.should eq([])
+      mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Hi")
+      mail.body.encoded.should match("Hey")
     end
   end
 
@@ -21,7 +22,7 @@ describe Hi5Mailer do
     it "renders the headers" do
       mail.subject.should eq("Created")
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
     it "renders the body" do
@@ -35,7 +36,7 @@ describe Hi5Mailer do
     it "renders the headers" do
       mail.subject.should eq("Selected")
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
     it "renders the body" do
@@ -49,7 +50,7 @@ describe Hi5Mailer do
     it "renders the headers" do
       mail.subject.should eq("Closed")
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
     it "renders the body" do

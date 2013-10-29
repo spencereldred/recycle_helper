@@ -5,6 +5,9 @@ class RedeemersController < ApplicationController
   def index
     @user = current_user
 
+    # Gather list of local recyclers within 20 miles of the redeemer.
+    @local_recyclers = User.near([@user.latitude, @user.longitude], 20).where(function: "recycler")
+
     # Gather all "available" transactions that have not been selected yet (nil).
     @available = Transaction.where(selection_date: nil)
 

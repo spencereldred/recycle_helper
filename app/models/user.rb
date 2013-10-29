@@ -13,12 +13,11 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :phone, presence: true
 
-  geocoded_by :full_address
+  geocoded_by :full_address, :if => :full_address_changed?
   after_validation :geocode
 
   def full_address
-    :address
-     # "#{:address}, #{:city} #{:state} #{:zipcode}"
+     "#{self.address}, #{self.city} #{self.state} #{self.zipcode}"
   end
 
   def create_remember_token

@@ -12,8 +12,6 @@ class TransactionsController < ApplicationController
 
   def create
     transaction = Transaction.create(params[:transaction])
-    puts "$$$$$$$$$$$$$$$ the transaction is: #{transaction}"
-    # transaction.update_attributes(recycler_user_id: @user[:id])
     if transaction.errors.empty?
       redirect_to new_transaction_path
     else
