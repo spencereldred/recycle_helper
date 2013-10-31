@@ -30,11 +30,13 @@ end
 gem 'pg'
 
 # To use ActiveModel has_secure_password
- gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
- gem 'geocoder'
+gem 'geocoder'
 
- gem 'sendgrid'
+gem 'figaro'
+
+ # gem 'foreman'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

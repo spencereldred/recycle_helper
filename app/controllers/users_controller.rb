@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
     if @user.save
         # automail welcome message to new user
+        puts "%%%%%%%%%%%%% inside action mailer block for @user: #{@user.inspect}"
         Hi5Mailer.welcome_user(@user).deliver
       end
 
