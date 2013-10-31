@@ -5,14 +5,18 @@ class Transaction < ActiveRecord::Base
                         :address, :city, :state, :zipcode,
                         :latitude, :longitude
 
- validates :recycler_user_id, presence: true
- validates :plastic, presence: true
- validates :glass, presence: true
- validates :cans, presence: true
- validates :other, presence: true
+  validates :recycler_user_id, presence: true
+  validates :plastic, presence: true
+  validates :glass, presence: true
+  validates :cans, presence: true
+  validates :other, presence: true
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zipcode, presence: true
 
- geocoded_by :full_address
- after_validation :geocode
+  geocoded_by :full_address
+  after_validation :geocode
 
   def full_address
      "#{self.address}, #{self.city} #{self.state} #{self.zipcode}"
