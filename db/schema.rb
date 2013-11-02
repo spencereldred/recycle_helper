@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131029201440) do
+ActiveRecord::Schema.define(:version => 20131023190055) do
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(:version => 20131029201440) do
     t.datetime "selection_date"
     t.datetime "completion_date"
     t.integer  "rating"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -39,8 +39,6 @@ ActiveRecord::Schema.define(:version => 20131029201440) do
     t.string   "function"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
@@ -51,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20131029201440) do
     t.string   "dmv_number"
     t.float    "latitude"
     t.float    "longitude"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

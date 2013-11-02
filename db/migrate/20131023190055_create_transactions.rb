@@ -10,6 +10,13 @@ class CreateTransactions < ActiveRecord::Migration
       t.datetime    :selection_date
       t.datetime    :completion_date
       t.integer       :rating
+      t.float           :latitude
+      t.float           :longitude
+      t.string         :address
+      t.string         :city
+      t.string         :state
+      t.string         :zipcode
+
 
       t.timestamps
     end
