@@ -13,11 +13,6 @@ class UsersController < ApplicationController
   def create
     @user = User.create(params[:user])
 
-    if @user.save
-        # automail welcome message to new user
-        Hi5Mailer.welcome_user(@user).deliver
-    end
-
     if @user.errors.empty?
       sign_in(@user)
       # TODO change where app goes after user created

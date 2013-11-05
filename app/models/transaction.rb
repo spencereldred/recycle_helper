@@ -18,6 +18,8 @@ class Transaction < ActiveRecord::Base
   geocoded_by :full_address
   after_validation :geocode
 
+  scope :not_selected, where(selection_date: nil)
+
   def full_address
      "#{self.address}, #{self.city} #{self.state} #{self.zipcode}"
   end
