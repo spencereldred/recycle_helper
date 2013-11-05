@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :phone, presence: true
 
+  # after_save :send_welcome_email
+
   geocoded_by :full_address, :if => :full_address_changed?
   after_validation :geocode
 
@@ -27,4 +29,16 @@ class User < ActiveRecord::Base
   def create_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
   end
+
+  private
+
+    # def send_welcome_email
+    #   # if @user.save
+    #     # automail welcome message to new user
+    #     Hi5Mailer.welcome_user(self).deliver
+    #   # end
+    # end
+
+
+
 end

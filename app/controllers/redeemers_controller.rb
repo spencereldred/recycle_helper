@@ -6,8 +6,10 @@ class RedeemersController < ApplicationController
     @user = current_user
 
     # Gather list of local recyclers within 20 miles of the redeemer.
+    # @local_recyclers = User.near([@user.latitude, @user.longitude], 20).where(function: "recycler")
     @local_recyclers = User.near([@user.latitude, @user.longitude], 20).where(function: "recycler")
 
+   ### use self.latitude ...
     # Gather all "available" transactions that have not been selected yet (nil).
     @available = Transaction.near([@user.latitude, @user.longitude], 20).where(selection_date: nil)
 

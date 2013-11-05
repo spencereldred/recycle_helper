@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
         # automail welcome message to new user
         Hi5Mailer.welcome_user(@user).deliver
-      end
+    end
 
     if @user.errors.empty?
       sign_in(@user)
