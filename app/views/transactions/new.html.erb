@@ -3,48 +3,54 @@
       <img src="/assets/recycle_dude.gif" class="img-responsive" alt="recycle dude">
   </div>
 </div>
+
 <div class="col-sm-8 col-sm-offset-4">
   <h1>New Transaction for <%= @user[:first_name] %> <%= @user[:last_name] %></h1>
 </div>
+
 <h4>
-
   <%= render  :partial => "transactions/form" %>
-
 </h4>
+
 <div class="row">
     <div class="col-sm-offset-3 col-sm-8">
       <h1>Outstanding Transactions for <%= @user[:first_name] %> <%= @user[:last_name] %></h1>
     </div>
 </div>
 <div class="row">
-  <h4>
-    <div class="col-sm-offset-2 col-sm-1">Complete</div>
-    <div class="col-sm-2">Address</div>
-    <div class="col-sm-1">Plastic</div>
-    <div class="col-sm-1">Cans</div>
-    <div class="col-sm-1">Glass</div>
-    <div class="col-sm-1">Other</div>
-    <div class="col-sm-2">Selected</div>
-  </h4>
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-table">
+      <thead>
+        <tr>
+          <th>Complete</th>
+          <th>Address</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+          <th>Selected</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <% @all_trans.each do |trans| %>
+          <tr>
+            <td>
+              <form action="/transactions/<%= trans[:id] %>" method="post">
+                <input name="_method" type="hidden" value="put" />
+                <input class="btn btn-primary" type="submit" value="Completed"/>
+              </form>
+            </td>
+            <td><%= @user[:address]%></td>
+            <td><%= trans[:plastic] %></td>
+            <td><%= trans[:cans] %></td>
+            <td><%= trans[:glass] %></td>
+            <td><%= trans[:other] %></td>
+            <td><%= if trans[:selection_date] then trans[:selection_date].strftime("%b %d, %Y") end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-<div class="row">
-  <h5>
-    <% @all_trans.each do |trans| %>
-      <div class="row">
-        <div class="col-sm-offset-2 col-sm-1">
-            <form action="/transactions/<%= trans[:id] %>" method="post">
-              <input name="_method" type="hidden" value="put" />
-              <input type="submit" value="Completed"/>
-            </form>
-        </div>
-        <div class="col-sm-2">
-          <%= @user[:address]%>
-        </div>
-        <div class="col-sm-1"><%= trans[:plastic] %></div>
-        <div class="col-sm-1"><%= trans[:cans] %></div>
-        <div class="col-sm-1"><%= trans[:glass] %></div>
-        <div class="col-sm-1"><%= trans[:other] %></div>
-        <div class="col-sm-2"><%= if trans[:selection_date] then trans[:selection_date].strftime("%b %d, %Y") end %></div>
-      </div>
-    <% end %>
-  </h5>
+

@@ -68,7 +68,17 @@ li[class="footer-img"] {
 .form_label {
   text-align: right;
 }
-#login {
+
+#signup, #recycle, #select, #profile, #home {
+  float:right;
+}
+
+#logo {
+  float: left;
+  margin-left: 10%;
+}
+#signin, #signout {
   float: right;
+  margin-right: 10%;
 }
 

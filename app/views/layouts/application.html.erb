@@ -14,48 +14,69 @@
 <body>
   <div id="wrap">
   <header>
-    <div class="navbar navbar-inverse ">
-      <div class="container">
-         <% if !@user || !@user[:id] %>
-          <div class="navbar-brand  col-sm-2">
-            <a href="/">Home</a>
-          </div>
+    <div class="bs">
+        <img id="logo" src="/assets/hi5-modern-large.png" class="img-responsive" style="width: 5%;"alt="HI5 logo">
+      <ul class="nav nav-pills">
+
+        <% if !@user %>
+          <li class="dropdown" id="signin">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Sign In <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">g+</a></li>
+              <li><%= link_to "Email", login_path %></li>
+            </ul>
+          </li>
+          <li class="dropdown" id="signup">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Sign Up <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><%= link_to "As a Recycler", new_user_path( function: 'recycler' ) %></li>
+              <li><%= link_to "As a Redeemer", new_user_path( function: 'redeemer' ) %></li>
+            </ul>
+          </li>
+        <% end %>
+        <% if @user %>
+          <li id="signout"><%= link_to "Logout", logout_path %></li>
         <% end %>
 
-          <% if @user %>
-
-            <% if @user[:function] == "redeemer" || @user[:function] == "admin" %>
-            <div class="navbar-brand  col-sm-2">
-              <a href="/redeemers">Select</a>
-            </div>
-            <% end %>
-
-            <% if @user[:function] == "recycler" || @user[:function] == "admin" %>
-            <div class="navbar-brand col-sm-2">
-              <a href="/transactions/new">Recycle</a>
-            </div>
-             <% end %>
-
-            <div class="navbar-brand  col-sm-2" >
-              <a href="/users/<%= @user[:id] %>">Profile</a>
-            </div>
-
-
+        <% if @user %>
+          <% if @user[:function] == "redeemer" || @user[:function] == "recycler" ||    @user[:function] == "admin" %>
+          <li class="active" id="profile">
+            <a href="/users/<%= @user[:id] %>">Profile</a>
+          </li>
           <% end %>
-        <div class="navbar-brand col-sm-2" id="login" >
+          <% if @user[:function] == "redeemer" || @user[:function] == "admin" %>
+            <li class="active" id="select">
+              <%= link_to "Select", redeemers_path %>
+            </li>
+          <% end %>
+          <% if @user[:function] == "recycler" || @user[:function] == "admin" %>
+            <li class="active" id="recycle">
+              <%= link_to "Recycle", new_transaction_path %>
+            </li>
+          <% end %>
+        <% end %>
 
-            <% if current_user %>
-              <%= link_to "Logout", logout_path %>
-              <% else %>
-              <%= link_to "Login", login_path %>
-            <% end %>
-        </div>
+        <% if !@user || !@user[:id] %>
+          <li class="active" id="home">
+            <%= link_to "Home", root_path %>
+          </li>
+        <% end %>
 
+
+
+      </ul>
     </div>
-  </div>
+
   </header>
   <div class="container">
     <div class="row">
+
       <div class="col-sm-offset-4 col-sm-8 error">
         <% if flash[:errors] %>
           <% flash[:errors].each do |error| %>
@@ -63,11 +84,14 @@
           <% end %>
         <% end %>
      </div>
+
       <%= yield %>
     </div>
   </div>
 </div>
+<div class="row">
   <%= render  :partial => "layouts/footer" %>
+</div>
 </body>
 </html>
 

@@ -2,24 +2,32 @@
 <% bag_options = ['0 bags', '1 bag', '2 bags', '3 bags', '4 bags', '5 bags',
                               '6 bags', '7 bags', '8 bags', '9 bags', '> 10']%>
 <% other_options = [ 'none', 'cardboard', 'glass', 'aluminum', 'plastic']%>
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-input-table">
+      <thead>
+        <tr>
+          <th>Submit</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+        </tr>
 
-    <div class="col-sm-offset-4 col-sm-2 form_label">Plastic:</div>
-    <div class="col-sm-6"><%= f.select( :plastic, bag_options ) %></div>
-
-    <div class="col-sm-offset-4 col-sm-2 form_label">Glass:</div>
-    <div class="col-sm-6"><%= f.select( :glass, bag_options ) %></div>
-
-    <div class="col-sm-offset-4 col-sm-2 form_label">Cans:</div>
-    <div class="col-sm-6"><%= f.select( :cans, bag_options ) %></div>
-
-    <div class="col-sm-offset-4 col-sm-2 form_label">Other:</div>
-    <div class="col-sm-6"><%= f.select( :other, other_options ) %></div>
-
-    <div class="col-sm-6"><%= f.hidden_field :recycler_user_id, value: @user[:id] %></div>
-    <div class="col-sm-6"><%= f.hidden_field :address, value: @user[:address] %></div>
-    <div class="col-sm-6"><%= f.hidden_field :city, value: @user[:city] %></div>
-    <div class="col-sm-6"><%= f.hidden_field :state, value: @user[:state] %></div>
-    <div class="col-sm-6"><%= f.hidden_field :zipcode, value: @user[:zipcode] %></div>
-
-    <div class="col-sm-offset-5 col-sm-3 btn btn-primary"><%= f.button "Save Transaction" %></div>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= f.submit :class=> "btn btn-primary" %></td>
+          <td><%= f.select( :plastic, bag_options ) %></td>
+          <td><%= f.select( :cans, bag_options ) %></td>
+          <td><%= f.select( :glass, bag_options ) %></td>
+          <td><%= f.select( :other, other_options ) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= f.hidden_field :recycler_user_id, value: @user[:id] %>
+  <%= f.hidden_field :address, value: @user[:address] %>
+  <%= f.hidden_field :city, value: @user[:city] %>
+  <%= f.hidden_field :state, value: @user[:state] %></div>
+  <%= f.hidden_field :zipcode, value: @user[:zipcode] %></div>
 <% end %>
