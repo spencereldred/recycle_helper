@@ -1,0 +1,88 @@
+<div class="col-sm-offset-5 col-sm-7"><h1>All Available</h1></div>
+<div class="row">
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-table">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Address</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+          <th>Posted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @available.each do |avail| %>
+          <tr>
+            <td>
+              <form action="/redeemers/<%= avail[:id] %>" method="post">
+                <input name="_method" type="hidden" value="put" />
+                <input type="submit" value="Select"/>
+              </form>
+            </td>
+            <td><%= avail[:city]%>, <%= avail[:state]%> <%= avail[:zipcode]%></td>
+            <td><%= avail[:plastic] %></td>
+            <td><%= avail[:cans] %></td>
+            <td><%= avail[:glass] %></td>
+            <td><%= avail[:other] %></td>
+            <td><%= avail[:created_at].strftime("%b %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= @user[:first_name]%>
+  <%= @user[:last_name]%></h1></div>
+<div class="row">
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-table">
+      <thead>
+        <tr>
+          <th>Unselect</th>
+          <th>Address</th>
+          <th>St. / Zip</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+          <th>Selected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @selected.each do |select| %>
+          <tr>
+            <td>
+              <form action="/redeemers/<%= select[:id] %>" method="post">
+                <input name="_method" type="hidden" value="put" />
+                <input type="submit" value="Unselect"/>
+              </form>
+            </td>
+            <td>
+              <% recycler = User.where(id: select[:recycler_user_id]) %>
+              <%= recycler[0][:address]%>, <%= recycler[0][:city]%>
+                <script>
+                    $(function(){
+                          codeAddress("<%= recycler[0][:address]%>, <%= recycler[0][:city]%> <%= recycler[0][:state]%>")
+                    })
+                </script>
+            </td>
+            <td><%= recycler[0][:state]%>, <%= recycler[0][:zipcode]%></td>
+            <td><%= select[:plastic] %></td>
+            <td><%= select[:cans] %></td>
+            <td><%= select[:glass] %></td>
+            <td><%= select[:other] %></td>
+            <td><%= if select[:selection_date] then select[:selection_date].strftime("%b %d, %Y") end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="map-canvas"></div>
+
+

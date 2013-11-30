@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-sm-offset-5 col-sm-7">
+      <img src="/assets/recycle_dude.gif" class="img-responsive" alt="recycle dude">
+  </div>
+</div>
+
+<div class="col-sm-8 col-sm-offset-4">
+  <h1>New Transaction for <%= @user[:first_name] %> <%= @user[:last_name] %></h1>
+</div>
+
+<h4>
+  <%= render  :partial => "transactions/form" %>
+</h4>
+
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-8">
+      <h1>Outstanding Transactions for <%= @user[:first_name] %> <%= @user[:last_name] %></h1>
+    </div>
+</div>
+<div class="row">
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-table">
+      <thead>
+        <tr>
+          <th>Complete</th>
+          <th>Address</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+          <th>Selected</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <% @all_trans.each do |trans| %>
+          <tr>
+            <td>
+              <form action="/transactions/<%= trans[:id] %>" method="post">
+                <input name="_method" type="hidden" value="put" />
+                <input class="btn btn-primary" type="submit" value="Completed"/>
+              </form>
+            </td>
+            <td><%= @user[:address]%></td>
+            <td><%= trans[:plastic] %></td>
+            <td><%= trans[:cans] %></td>
+            <td><%= trans[:glass] %></td>
+            <td><%= trans[:other] %></td>
+            <td><%= if trans[:selection_date] then trans[:selection_date].strftime("%b %d, %Y") end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
