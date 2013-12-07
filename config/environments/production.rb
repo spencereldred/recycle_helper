@@ -21,6 +21,9 @@ Recycle::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  config.assets.js_compressor = Sprockets::LazyCompressor.new { Uglifier.new(mangle: false) }
+
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
