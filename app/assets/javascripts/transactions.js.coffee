@@ -94,7 +94,7 @@ app.factory "Redeemer", ($resource) ->
   # Adds markers on the map for the transactions already selected.
   $scope.update_trans = (data)=>
     $scope.transactions = data
-    for transaction in $scope.transactions when transaction.selected == true
+    for transaction in $scope.transactions when transaction.selected == true && transaction.completed == false
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
       $scope.add_marker(address)
 
@@ -104,14 +104,11 @@ app.factory "Redeemer", ($resource) ->
 
   # Adds a marker to the map.
   # Calls the google map routine with the address passed in.
-  $scope.add_marker = (address) ->
-    codeAddress(address)
-    # codeAddress(address,todo)
-    # console.log address
-    # addresses.push(address)
-    # console.log addresses.length
-    # for address in addresses
-    #   console.log address
+  $scope.add_marker = (address,action) ->
+    codeAddress(address,action)
+    addresses.push(address) unless action == "delete"
+    addresses = _.uniq(addresses)
+
 
   # The Redeemer selects an item to recycle.
   # Sets { selected: true, selection_date: Time.now }
@@ -127,12 +124,22 @@ app.factory "Redeemer", ($resource) ->
   # The Redeemer unselects an item to recycle
   # sets { selected: false, selection_date: "nil" }
   $scope.unselect = ->
+    # console.log "unselect()"
     transaction = @transaction
+    # for address in addresses
+    #   console.log "before delete",   address
+    # console.log transaction.address, addresses.length
     transaction.selection_date = $('#unselection_date').val()
-    # address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
-    # $scope.add_marker(address)
-    # $scope.clearMarkers()
-    # $scope.showMarkers()
+    address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
+    addresses = _.reject(addresses, (addr) ->
+      address == addr
+    )
+    $scope.add_marker(address,"delete")
+    # console.log address, addresses.length
+    for address in addresses
+      # console.log "after delete", address
+      $scope.add_marker(address)
+
     transaction.$update()
 
 
