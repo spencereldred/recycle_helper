@@ -4,4 +4,5 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Recycle::Application.config.secret_token = 'cd14cf42966b7fe25556a8055da745ffbaa33844c31e5fc1b96a7a7e9d08f53ad098ba8a09c54bbaea6bc63e0117f6c260b9507a51c7718ef3083bf7bf06faf3'
+# Recycle::Application.config.secret_token = "b691020baca108d71396237f4945d14dbc8f76d33e9b5c6878f59227674e975de1767c124fc521501c40b57c6b6fd1d558f6256c58666cd4c1ba4ba4b790d696"
+Recycle::Application.config.secret_token = ENV['SECRET_TOKEN']
