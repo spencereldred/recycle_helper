@@ -1,0 +1,104 @@
+<div ng-controller="TransactionController">
+  <div class="row">
+    <div class="col-sm-offset-5 col-sm-7">
+        <img src="/assets/recycle_dude.gif" class="img-responsive" alt="recycle dude">
+    </div>
+  </div>
+
+  <div class="col-sm-8 col-sm-offset-3">
+    <h1><new></new><%= current_user[:first_name] %> <%= current_user[:last_name] %></h1>
+  </div>
+
+
+    <div class="bs-example col-sm-offset-2 col-sm-8">
+  <table class="table table-hover" id="recycler-input-table">
+    <thead>
+      <tr>
+        <th>Submit</th>
+        <th>Plastic</th>
+        <th>Cans</th>
+        <th>Glass</th>
+        <th>Other</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <button class="btn btn-primary btn-sm"
+                  ng-click="new_recycle_item(transaction)">Submit
+          </button>
+          <input type="hidden" id="user_id" value="<%= current_user[:id] %>" />
+          <input type="hidden" id="user_address" value="<%= current_user[:address] %>" />
+          <input type="hidden" id="user_city" value="<%= current_user[:city] %>" />
+          <input type="hidden" id="user_state" value="<%= current_user[:state] %>" />
+          <input type="hidden" id="user_zipcode" value="<%= current_user[:zipcode] %>" />
+        </td>
+        <td>
+          <select ng-model="transaction.plastic"
+                  ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
+          </select>
+        </td>
+        <td>
+          <select ng-model="transaction.cans"
+                  ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
+          </select>
+        </td>
+        <td>
+          <select ng-model="transaction.glass"
+                  ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
+          </select>
+        </td>
+        <td>
+          <select ng-model="transaction.other"
+                  ng-options="other_option.value as other_option.name for other_option in other_options">
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </h4>
+
+  <div class="row">
+      <div class="col-sm-offset-3 col-sm-8">
+        <h1>Outstanding Transactions for <%= current_user[:first_name] %> <%= current_user[:last_name] %></h1>
+      </div>
+  </div>
+  <div class="row">
+    <div class="bs-example col-sm-offset-2 col-sm-8">
+      <table class="table table-hover" id="recycler-table">
+        <thead>
+          <tr>
+            <th>Complete</th>
+            <th>Address</th>
+            <th>Plastic</th>
+            <th>Cans</th>
+            <th>Glass</th>
+            <th>Other</th>
+            <th>Selected</th>
+          </tr>
+
+        </thead>
+        <tbody>
+            <!-- <tr ng-repeat="transaction in transactions"> -->
+            <tr ng-repeat="transaction in transactions | filter: {recycler_user_id: <%= current_user.id %>} | filter: {completed: false }">
+              <td>
+                <button class="btn btn-primary btn-sm"
+                  ng-click="completed(transaction)">Complete
+                </button>
+                <input type="hidden" id="completion_date" value="<%= Time.now.strftime("%b %d, %Y") %>" />
+              </td>
+              <td><%= current_user[:address]%></td>
+              <td>{{transaction.plastic}}</td>
+              <td>{{transaction.cans}}</td>
+              <td>{{transaction.glass}}</td>
+              <td>{{transaction.other}}</td>
+              <td>{{transaction.selection_date}} </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> <!-- ng-controller -->
+

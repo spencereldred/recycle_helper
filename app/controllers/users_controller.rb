@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         redirect_to redeemers_path
       else
         # new "recycler" is redirected to recycler page
-        redirect_to new_transaction_path
+        redirect_to transactions_path
       end
     else
       flash[:errors] = ["Error!"]

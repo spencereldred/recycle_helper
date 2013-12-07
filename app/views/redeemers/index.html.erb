@@ -1,88 +1,81 @@
-<div class="col-sm-offset-5 col-sm-7"><h1>All Available</h1></div>
-<div class="row">
-  <div class="bs-example col-sm-offset-2 col-sm-8">
-    <table class="table table-hover" id="recycler-table">
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Address</th>
-          <th>Plastic</th>
-          <th>Cans</th>
-          <th>Glass</th>
-          <th>Other</th>
-          <th>Posted</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @available.each do |avail| %>
+<div ng-controller="RedeemerController">
+  <!-- need to require 'json' ?? -->
+  <!-- <input type="hidden" id="transaction_all" value="<%#= Transaction.all.to_json %>" /> -->
+  <!-- <input type="hidden" id="user" value="<%#= User.all.to_json %>" /> -->
+  <div class="col-sm-offset-5 col-sm-7"><all></all></div>
+  <div class="row">
+    <div class="bs-example col-sm-offset-2 col-sm-8">
+      <table class="table table-hover" id="recycler-table">
+        <thead>
           <tr>
-            <td>
-              <form action="/redeemers/<%= avail[:id] %>" method="post">
-                <input name="_method" type="hidden" value="put" />
-                <input type="submit" value="Select"/>
-              </form>
-            </td>
-            <td><%= avail[:city]%>, <%= avail[:state]%> <%= avail[:zipcode]%></td>
-            <td><%= avail[:plastic] %></td>
-            <td><%= avail[:cans] %></td>
-            <td><%= avail[:glass] %></td>
-            <td><%= avail[:other] %></td>
-            <td><%= avail[:created_at].strftime("%b %d, %Y") %></td>
+            <th>Select</th>
+            <th>Address</th>
+            <th>St. / Zip</th>
+            <th>Plastic</th>
+            <th>Cans</th>
+            <th>Glass</th>
+            <th>Other</th>
+            <!-- <th>Posted</th> -->
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <tr ng-repeat="transaction in transactions | filter: {selected: false}">
+            <td>
+              <input type="checkbox" ng-click="select()" ng-model="transaction.selected">
+              <input type="hidden" id="selection_date" value="<%= Time.now.strftime("%b %d, %Y") %>" />
+            </td>
+            <td>{{transaction.address}}, {{transaction.city}}</td>
+            <td>{{transaction.state}} {{transaction.zipcode}}</td>
+            <td>{{transaction.plastic}}</td>
+            <td>{{transaction.cans}}</td>
+            <td>{{transaction.glass}}</td>
+            <td>{{transaction.other}}</td>
+            <!-- <td>{{transaction.created_at}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
-<div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= @user[:first_name]%>
-  <%= @user[:last_name]%></h1></div>
-<div class="row">
-  <div class="bs-example col-sm-offset-2 col-sm-8">
-    <table class="table table-hover" id="recycler-table">
-      <thead>
-        <tr>
-          <th>Unselect</th>
-          <th>Address</th>
-          <th>St. / Zip</th>
-          <th>Plastic</th>
-          <th>Cans</th>
-          <th>Glass</th>
-          <th>Other</th>
-          <th>Selected</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @selected.each do |select| %>
+  <div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= current_user[:first_name]%>
+    <%= current_user[:last_name]%></h1></div>
+  <div class="row">
+    <div class="bs-example col-sm-offset-2 col-sm-8">
+      <table class="table table-hover" id="recycler-table">
+        <thead>
           <tr>
-            <td>
-              <form action="/redeemers/<%= select[:id] %>" method="post">
-                <input name="_method" type="hidden" value="put" />
-                <input type="submit" value="Unselect"/>
-              </form>
-            </td>
-            <td>
-              <% recycler = User.where(id: select[:recycler_user_id]) %>
-              <%= recycler[0][:address]%>, <%= recycler[0][:city]%>
-                <script>
-                    $(function(){
-                          codeAddress("<%= recycler[0][:address]%>, <%= recycler[0][:city]%> <%= recycler[0][:state]%>")
-                    })
-                </script>
-            </td>
-            <td><%= recycler[0][:state]%>, <%= recycler[0][:zipcode]%></td>
-            <td><%= select[:plastic] %></td>
-            <td><%= select[:cans] %></td>
-            <td><%= select[:glass] %></td>
-            <td><%= select[:other] %></td>
-            <td><%= if select[:selection_date] then select[:selection_date].strftime("%b %d, %Y") end %></td>
+            <th>Unselect</th>
+            <th>Address</th>
+            <th>St. / Zip</th>
+            <th>Plastic</th>
+            <th>Cans</th>
+            <th>Glass</th>
+            <th>Other</th>
+            <th>Selected</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+        </thead>
+        <tbody>
+            <tr ng-repeat="transaction in transactions | filter: {selected: true, completed: false}" >
+              <td>
+                <input type="checkbox" ng-click="unselect()" ng-model="transaction.selected" checked>
+                <input type="hidden" id="unselection_date" value="nil" />
 
-<div id="map-canvas"></div>
+              </td>
+              <td>{{transaction.address}}, {{transaction.city}}</td>
+              <td>{{transaction.state}} {{transaction.zipcode}}</td>
+              <td>{{transaction.plastic}}</td>
+              <td>{{transaction.cans}}</td>
+              <td>{{transaction.glass}}</td>
+              <td>{{transaction.other}}</td>
+              <td>{{transaction.selection_date}} </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <input type="hidden" id="center_latitude" value="<%= current_user[:latitude] %>" />
+  <input type="hidden" id="center_longitude" value="<%= current_user[:longitude] %>" />
+  <div id="map-canvas"></div>
+</div><!-- ng-controller -->
 
 

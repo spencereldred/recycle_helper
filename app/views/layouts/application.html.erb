@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Hi5Exchange">
 <head>
   <title>Recycle</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -18,7 +18,7 @@
         <img id="logo" src="/assets/hi5-modern-large.png" class="img-responsive" style="width: 5%;"alt="HI5 logo">
       <ul class="nav nav-pills">
 
-        <% if !@user %>
+        <% if !current_user %>
           <li class="dropdown" id="signin">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               Sign In <span class="caret"></span>
@@ -40,29 +40,29 @@
             </ul>
           </li>
         <% end %>
-        <% if @user %>
+        <% if current_user %>
           <li id="signout"><%= link_to "Logout", logout_path %></li>
         <% end %>
 
-        <% if @user %>
-          <% if @user[:function] == "redeemer" || @user[:function] == "recycler" ||    @user[:function] == "admin" %>
+        <% if current_user %>
+          <% if current_user[:function] == "redeemer" || current_user[:function] == "recycler" ||    current_user[:function] == "admin" %>
           <li class="active" id="profile">
-            <a href="/users/<%= @user[:id] %>">Profile</a>
+            <a href="/users/<%= current_user[:id] %>">Profile</a>
           </li>
           <% end %>
-          <% if @user[:function] == "redeemer" || @user[:function] == "admin" %>
+          <% if current_user[:function] == "redeemer" || current_user[:function] == "admin" %>
             <li class="active" id="select">
               <%= link_to "Select", redeemers_path %>
             </li>
           <% end %>
-          <% if @user[:function] == "recycler" || @user[:function] == "admin" %>
+          <% if current_user[:function] == "recycler" || current_user[:function] == "admin" %>
             <li class="active" id="recycle">
-              <%= link_to "Recycle", new_transaction_path %>
+              <%= link_to "Recycle", transactions_path %>
             </li>
           <% end %>
         <% end %>
 
-        <% if !@user || !@user[:id] %>
+        <% if !current_user || !current_user[:id] %>
           <li class="active" id="home">
             <%= link_to "Home", root_path %>
           </li>

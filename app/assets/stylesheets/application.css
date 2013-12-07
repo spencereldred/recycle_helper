@@ -19,7 +19,7 @@ html, body {
 }
 #map-canvas {
   height: 500px;
-  width: 500px;
+  width: 800px;
   margin: 0px;
   padding: 0px;
   margin-left: auto;

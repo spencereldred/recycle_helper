@@ -2,35 +2,28 @@ class RedeemersController < ApplicationController
   before_filter :authorize
   before_filter :authorize_redeemer
 
+
   def index
-    @user = current_user
-
-    # Gather list of local recyclers within 20 miles of the redeemer.
-    # @local_recyclers = User.near([@user.latitude, @user.longitude], 20).where(function: "recycler")
-    @local_recyclers = User.near([@user.latitude, @user.longitude], 20).recycler
-
-   ### use self.latitude ...
-    # Gather all "available" transactions that have not been selected yet (nil).
-    @available = Transaction.near([@user.latitude, @user.longitude], 20).not_selected
-
-    # Gather all "selected" transactions that  are assigned to the logged in user and have not been completed yet.
-    # Once the transaction is marked completed by the "recycler", it will no longer show on the "redeemer" page.
-    @selected = Transaction.where("redeemer_user_id = #{@user[:id]}  AND completion_date IS NULL")
+    # returns transactions in a 20 mile radius
+    puts params.inspect
+    trans = Transaction.near([current_user.latitude, current_user.longitude], 20)
+    puts trans.inspect
+    respond_to do |format|
+      format.html
+      format.json { render :json => trans }
+    end
   end
 
   def update
-    # Update is triggered by the "select" and "unselect" buttons on the transaction#index page.
-    transaction = Transaction.find(params[:id])
-    if transaction.selection_date == nil
-      # "select" button response.
-      # If the transaction does not have a "selection_date", then set the date to now.
-      transaction.update_attributes(selection_date: Time.now, redeemer_user_id: current_user.id)
-    else
-      # "unselect" button response.
-      # If the transactio does have a "selection_date", then set it to nil.
-      transaction.update_attributes(selection_date: nil, redeemer_user_id: nil)
+    # Update is triggered by the "select" and "unselect" buttons
+    trans = Transaction.find(params[:id])
+    redeemer = {selected: params[:selected],  selection_date: params[:selection_date]}
+    # binding.pry
+    trans.update_attributes(redeemer)
+    respond_to do |format|
+      format.json {render :json => trans}
+      format.html
     end
-    redirect_to redeemers_path
   end
 
 end

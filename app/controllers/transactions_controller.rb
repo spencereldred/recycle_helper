@@ -2,34 +2,36 @@ class TransactionsController < ApplicationController
   before_filter :authorize
   before_filter :authorize_recycler
 
+  def index
+    respond_to do |format|
+      format.html
+      format.json { render :json => Transaction.near([current_user.latitude, current_user.longitude], 20) }
+    end
+  end
+
   def new
-    @user = current_user
-    # @recyclers = User.where(id: @user[:id])
-    @transaction = Transaction.new
-    # Show Recycler all transactions that match his/her id and that have not been completed
-    # .near([@user.latitude, @user.longitude], 20)
-    @all_trans = Transaction.where("recycler_user_id = #{@user[:id]} AND completion_date IS NULL")
+    respond_to do |format|
+      format.html
+      format.json { render :json => Transaction.new }
+    end
   end
 
   def create
-    transaction = Transaction.create(params[:transaction])
-    if transaction.errors.empty?
-      redirect_to new_transaction_path
-    else
-      flash[:errors] = transaction.errors.full_messages
-      @transaction = Transaction.new
-      render :new
+    # binding.pry
+    respond_to do |format|
+      format.html
+      format.json { render :json => Transaction.create(params[:transaction]) }
     end
   end
 
   def update
-    transaction = Transaction.find(params[:id])
-    if transaction[:selection_date] != nil
-      # When the "completed" button is clicked set the completion date to "now",
-      # as long as that transaction was previously selected.
-      transaction.update_attributes(completion_date: Time.now)
+    trans = Transaction.find(params[:id])
+    recycler = {completed: params[:completed], completion_date: params[:completion_date]}
+    trans.update_attributes(recycler)
+    respond_to do |format|
+      format.html
+      format.json { render :json => trans }
     end
-    redirect_to new_transaction_path
   end
 
 end

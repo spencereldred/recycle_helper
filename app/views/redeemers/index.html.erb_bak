@@ -1,0 +1,191 @@
+<div class="col-sm-offset-5 col-sm-7"><h1>All Available</h1></div>
+<div class="row">
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-table">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Address</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+          <th>Posted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @available.each do |avail| %>
+          <tr>
+            <td>
+              <form action="/redeemers/<%= avail[:id] %>" method="post">
+                <input name="_method" type="hidden" value="put" />
+                <input type="submit" value="Select"/>
+              </form>
+            </td>
+            <td><%= avail[:city]%>, <%= avail[:state]%> <%= avail[:zipcode]%></td>
+            <td><%= avail[:plastic] %></td>
+            <td><%= avail[:cans] %></td>
+            <td><%= avail[:glass] %></td>
+            <td><%= avail[:other] %></td>
+            <td><%= avail[:created_at].strftime("%b %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= @user[:first_name]%>
+  <%= @user[:last_name]%></h1></div>
+<div class="row">
+  <div class="bs-example col-sm-offset-2 col-sm-8">
+    <table class="table table-hover" id="recycler-table">
+      <thead>
+        <tr>
+          <th>Unselect</th>
+          <th>Address</th>
+          <th>St. / Zip</th>
+          <th>Plastic</th>
+          <th>Cans</th>
+          <th>Glass</th>
+          <th>Other</th>
+          <th>Selected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @selected.each do |select| %>
+          <tr>
+            <td>
+              <form action="/redeemers/<%= select[:id] %>" method="post">
+                <input name="_method" type="hidden" value="put" />
+                <input type="submit" value="Unselect"/>
+              </form>
+            </td>
+            <td>
+              <% recycler = User.where(id: select[:recycler_user_id]) %>
+              <%= recycler[0][:address]%>, <%= recycler[0][:city]%>
+                <script>
+                    $(function(){
+                          codeAddress("<%= recycler[0][:address]%>, <%= recycler[0][:city]%> <%= recycler[0][:state]%>")
+                    })
+                </script>
+            </td>
+            <td><%= recycler[0][:state]%>, <%= recycler[0][:zipcode]%></td>
+            <td><%= select[:plastic] %></td>
+            <td><%= select[:cans] %></td>
+            <td><%= select[:glass] %></td>
+            <td><%= select[:other] %></td>
+            <td><%= if select[:selection_date] then select[:selection_date].strftime("%b %d, %Y") end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="map-canvas"></div>
+
+if (todo ) {
+      console.log("Option equals delete!");
+      console.log(markers.length)
+      for (var i = 0; i < markers.length; i++) {
+        console.log("Inside setAllMap().")
+        markers[i].setMap(null);
+      }
+      var temp = markers.pop();
+      temp = markers.pop();
+      // clearMarkers();
+      for (var i = 0; i < markers.length; i++) {
+        console.log("Inside setAllMap().")
+        markers[i].setMap(map);
+      }
+    }
+    // console.log(address);
+
+SECRET_TOKEN="cd14cf42966b7fe25556a8055da745ffbaa33844c31e5fc1b96a7a7e9d08f53ad098ba8a09c54bbaea6bc63e0117f6c260b9507a51c7718ef3083bf7bf06faf3"
+
+# $scope.transactions = [
+  #   {recycler_user_id: "1", plastic: "1 bag", glass: "1 bag", cans: "1 bag", other: "cardboard",
+  #   address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768", selected: false,
+  #   selection_date: "nil", completion_date: "nil", latitude: 20.8356524, longitude: -156.3448214,
+  #   completed: false },
+
+  #   {recycler_user_id: "2", plastic: "2 bags", glass: "2 bags", cans: "2 bags", other: "plastic",
+  #   address: "2841 Iolani St.", city: "Makawao", state: "HI", zipcode: "96768", selected: false,
+  #   selection_date: "nil", completion_date: "nil", latitude: 20.8403699, longitude: -156.3488124,
+  #   completed: false },
+
+  #   {recycler_user_id: "3", plastic: "3 bags", glass: "3 bags", cans: "3 bags", other: "plastic",
+  #   address: "296 Liholani St.", city: "Makawao", state: "HI", zipcode: "96768", selected: false,
+  #   selection_date: "nil", completion_date: "nil", latitude: 20.8326689, longitude: -156.3474724,
+  #   completed: false },
+
+  #   {recycler_user_id: "4", plastic: "4 bags", glass: "4 bags", cans: "4 bags", other: "none",
+  #   address: "2942 Aina Lani St.", city: "Makawao", state: "HI", zipcode: "96768", selected: true,
+  #   selection_date: "Nov 30, 2013", completion_date: "nil", latitude: 20.825885, longitude: -156.351612,
+  #   completed: false },
+
+  #   {recycler_user_id: "5", plastic: "5 bags", glass: "5 bags", cans: "5 bags", other: "glass",
+  #   address: "348 Nalani St.", city: "Makawao", state: "HI", zipcode: "96768", selected: true,
+  #   selection_date: "Nov 30, 2013", completion_date: "nil", latitude: 20.8332984, longitude: -156.3520789,
+  #   completed: false },
+
+  #   {recycler_user_id: "6", plastic: "6 bags", glass: "6 bags", cans: "6 bags", other: "aluminum",
+  #   address: "414 Brannan St.", city: "San Francisco", state: "CA", zipcode: "94107", selected: false,
+  #   selection_date: "nil", completion_date: "nil", latitude: 37.7798936, longitude: -122.394879,
+  #   completed: false }
+  #   ]
+
+  # console.log $scope.transactions
+
+  # $scope.users = [
+  #   {id: 1, username: "recycler1", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "recycler", first_name: "Willie", last_name: "Mays",
+  #   password: "recycler1",password_confirmation: "recycler1",
+  #   address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 2, username: "recycler2", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "recycler", first_name: "Willie", last_name: "McCovey",
+  #   password: "recycler2",password_confirmation: "recycler2",
+  #   address: "2841 Iolani St.", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 3, username: "recycler3", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "recycler", first_name: "Juan", last_name: "Marchial",
+  #   password: "recycler3",password_confirmation: "recycler3",
+  #   address: "296 Liholani St.", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 4, username: "recycler4", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "recycler", first_name: "Orlando", last_name: "Cepeda",
+  #   password: "recycler4",password_confirmation: "recycler4",
+  #   address: "2942 Aina Lani St.", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 5, username: "recycler5", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "recycler", first_name: "Gaylord", last_name: "Perry",
+  #   password: "recycler5",password_confirmation: "recycler5",
+  #   address: "348 Nalani St.", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 6, username: "recycler6", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "recycler", first_name: "Jack", last_name: "Clark",
+  #   password: "recycler6",password_confirmation: "recycler6",
+  #   address: "414 Brannan St.", city: "San Francisco", state: "CA", zipcode: "94107" },
+
+  #   {id: 7, username: "redeemer1", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "redeemer", first_name: "John", last_name: "Brodie",
+  #   password: "redeemer1",password_confirmation: "redeemer1",
+  #   address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 8, username: "redeemer2", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "redeemer", first_name: "Ken", last_name: "Willard",
+  #   password: "redeemer2",password_confirmation: "redeemer2",
+  #   address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768" },
+
+  #   {id: 9, username: "redeemer3", email: "spencereldred@yahoo.com", phone: "8082803758",
+  #   function: "redeemer", first_name: "Jerry", last_name: "Rice",
+  #   password: "redeemer3",password_confirmation: "redeemer3",
+  #   address: "268 St. Charles Ave", city: "San Francisco", state: "CA", zipcode: "94132" }
+  #   ]
+
+  # console.log $scope.users
+
+
+

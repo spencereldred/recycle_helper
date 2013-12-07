@@ -16,6 +16,8 @@ class CreateTransactions < ActiveRecord::Migration
       t.string         :city
       t.string         :state
       t.string         :zipcode
+      t.boolean        :selected
+      t.boolean        :completed
 
 
       t.timestamps

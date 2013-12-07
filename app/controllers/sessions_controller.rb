@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       if user[:function] == "redeemer"
         redirect_to redeemers_path
       else
-        redirect_to new_transaction_path
+        redirect_to transactions_path
       end
     else
       flash[:errors] = ["Error!"]

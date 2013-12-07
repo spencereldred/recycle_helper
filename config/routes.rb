@@ -2,15 +2,16 @@ Recycle::Application.routes.draw do
 
   root :to => 'hi5exchanges#index'
 
-  get '/hi5exchanges/descriptions' =>'hi5exchanges#descriptions'
-
-  get "/transactions/new", to: "transactions#new", as: "new_transaction"
-  post "/transactions", to: "transactions#create"
-  put "/transactions/:id", to: "transactions#update"
+  # get '/hi5exchanges/descriptions' =>'hi5exchanges#descriptions'
+  resources :transactions
+  # get "/transactions/new", to: "transactions#new", as: "new_transaction"
+  # post "/transactions", to: "transactions#create"
+  # put "/transactions/:id", to: "transactions#update"
   # resources :transactions
 
-  get '/redeemers' => 'redeemers#index'
-  put "/redeemers/:id", to: "redeemers#update"
+  resources :redeemers
+  # get '/redeemers' => 'redeemers#index'
+  # put "/redeemers/:id", to: "redeemers#update"
 
   resources :users
   resources :sessions
