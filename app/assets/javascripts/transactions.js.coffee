@@ -62,12 +62,12 @@ app.factory "Transaction", ($resource) ->
       # transaction.save()
 
   # Recycler marks the transaction as completed.
-  # Sets { completed: true, completion_date: Time.now }
+  # Sets { completed: true, completion_date: new Date() }
   # The transaction is removed from the view by a filter.
   # The view only shows transactions where "filter: { completed: false}"."
   $scope.completed = ->
     transaction = @transaction
-    transaction.completion_date = $('#completion_date').val()
+    transaction.completion_date = new Date()
     transaction.completed = true
     transaction.$update()
 
@@ -111,12 +111,13 @@ app.factory "Redeemer", ($resource) ->
 
 
   # The Redeemer selects an item to recycle.
-  # Sets { selected: true, selection_date: Time.now }
+  # Sets { selected: true, selection_date: new Date() }
   # Places a pin on the map at the location for recycle pickup by
   # calling add_marker(address) with the address of the Recycler.
   $scope.select = ->
     transaction = @transaction
-    transaction.selection_date = $('#selection_date').val()
+    # transaction.selected = true
+    transaction.selection_date = new Date()
     address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
     $scope.add_marker(address)
     transaction.$update()

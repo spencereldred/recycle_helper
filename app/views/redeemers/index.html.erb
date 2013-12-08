@@ -22,7 +22,6 @@
           <tr ng-repeat="transaction in transactions | filter: {selected: false}">
             <td>
               <input type="checkbox" ng-click="select()" ng-model="transaction.selected">
-              <input type="hidden" id="selection_date" value="<%= Time.now.strftime("%b %d, %Y") %>" />
             </td>
             <td>{{transaction.address}}, {{transaction.city}}</td>
             <td>{{transaction.state}} {{transaction.zipcode}}</td>
@@ -67,7 +66,7 @@
               <td>{{transaction.cans}}</td>
               <td>{{transaction.glass}}</td>
               <td>{{transaction.other}}</td>
-              <td>{{transaction.selection_date}} </td>
+              <td>{{transaction.selection_date | date:'MM/dd/yy h:mm a' }} </td>
             </tr>
         </tbody>
       </table>

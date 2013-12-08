@@ -87,14 +87,13 @@
                 <button class="btn btn-primary btn-sm"
                   ng-click="completed(transaction)">Complete
                 </button>
-                <input type="hidden" id="completion_date" value="<%= Time.now.strftime("%b %d, %Y") %>" />
               </td>
               <td><%= current_user[:address]%></td>
               <td>{{transaction.plastic}}</td>
               <td>{{transaction.cans}}</td>
               <td>{{transaction.glass}}</td>
               <td>{{transaction.other}}</td>
-              <td>{{transaction.selection_date}} </td>
+              <td>{{transaction.selection_date | date:'MM/dd/yy h:mm a'}} </td>
             </tr>
         </tbody>
       </table>
