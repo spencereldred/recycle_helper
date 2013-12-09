@@ -15,7 +15,7 @@
     <div class="col-sm-offset-4 col-sm-2 form_label"><%= f.label :password_confirmation %></div>
     <div class="col-sm-2"><%= f.password_field :password_confirmation, placeholder: "<password confirmation>", required: true %></div>
   </div>
-  <% end %>
+<% end %>
   <div class="row">
     <div class="col-sm-offset-4 col-sm-4 "><h2>Profile Information</h2></div>
   </div>
@@ -61,7 +61,66 @@
   <div class="row">
     <div class="col-sm-2"><%= f.hidden_field :function, :value => @function %></div>
   </div>
+  </br>
+
+  <style type="text/css">
+
+    /*h1  {font:bold 1.2em/1.6em arial;margin:4px 0;padding:4px 0;}
+    h2  {font:normal 1.1em/1.5em arial;margin:14px 0 0 0;padding:4px 0;}
+    div, p {font: normal 1em/1.3em arial;}
+*/
+    textarea.terms {
+      width:600px;
+      height:200px;
+      border:1px solid #ccc;
+      background:#f2f2f2;
+      font:normal 11px/15px arial;
+      padding:6px;
+      color:#333;
+    }
+
+  </style>
+  <% if !@user[:id] %>
   <div class="row">
-    <div class="col-sm-offset-5 col-sm-2"><%= f.submit :class=> "btn btn-primary" %>
+    <div class="col-sm-offset-4 col-sm-6"><textarea class="terms" readonly="readonly">
+  Hi5Exchange Terms and Conditions
+
+  GENERAL
+
+  Servicing servicing resistor video computer element transponder prototype analog solution mainframe network. Solution video debugged feedback sampling extended, infrared, generator generator.
+
+  * list item number one
+  * list item number two
+  * list item number three
+
+  Harmonic gigabyte generator in sequential interface. Services, integer device read-only supporting cascading cache capacitance. Proxy boolean solution or data overflow element overflow processor arrray video, reflective extended. Gigabyte debugged distributed, reflective controller disk encapsulated phase network arrray feedback element cache high silicon. Sampling backbone analog remote adaptive extended bridgeware n-tier integer audio femtosecond.
+
+  IMPORTANT STUFF
+
+  Interface broadband developer backbone fragmentation messaging software transmission, sampling cascading element high silicon backbone. Reflective servicing coordinated boolean connectivity extended inversion sequential for. Data distributed backbone bridgeware connectivity logarithmic, sampling ethernet for. Extended logarithmic log video echo gigabyte. Or procedural phaselock sequential port extended deviation sequential, disk recognition gigabyte phaselock proxy messaging arrray. Encapsulated echo deviation boolean system ethernet reducer, pc.
+
+  Backbone frequency echo ethernet patch femtosecond sampling, integer digital floating-point n-tier dithering disk. Processor reflective boolean includes phase deviation, with log, integral logistically femtosecond, in, integral infrared phaselock. Element developer pc harmonic, plasma with, integral floating-point. Reflective feedback infrared, echo anomoly integral generator reflective led, high overflow servicing gigabyte. Extended integral data, infrared frequency disk broadband transistorized processor disk anomoly, sampling potentiometer kilohertz. Bus overflow, bridgeware fragmentation bypass prototype, interface, for internet pc generator integral, bypass disk, frequency.
+
+  FEES
+
+  Sequential ENCAPSULATED RESISTOR element converter pc harmonic. Feedback cache hyperlinked debugged generator infrared device network, fragmentation connectivity, debugged. For, dithering interface debugged sequential recognition bypass bridgeware processor backbone sampling logarithmic software. Anomoly infrared logarithmic logarithmic procedural plasma resistor integral silicon deviation. Computer broadband plasma, encapsulated cable kilohertz scan. With logarithmic bridgeware indeterminate sampling, port. Development procedural hyperlinked mainframe, encapsulated boolean software processor transistorized cable with backbone.
+
+  Reflective backbone log transmission cable logarithmic mainframe. Messaging backbone debugged feedback development phaselock metafile n-tier coordinated, cable coordinated coordinated in. Analog device transistorized, sequential transistorized with scalar normalizing. Mainframe phase cache anomoly feedback servicing harmonic. Services software pc, femtosecond bypass scalar data element extended cascading capacitance harmonic. Adaptive plasma bypass supporting cascading deviation system pulse broadband bridgeware.
+
+  AGREEMENT
+
+  Servicing hyperlinked analog encapsulated disk cable with, capacitance element partitioned potentiometer read-only dithering. Normalizing kilohertz network solution logarithmic device bus connectivity system mainframe prototype phaselock phase cache.
+
+  Coordinated transmission overflow floating-point distributed supporting scan converter. Bridgeware backbone coordinated sampling overflow broadband normalizing connectivity or, internet transmission, bus, encapsulated. Extended element element echo messaging scan, cache video deviation debugged broadband. Pc, supporting hyperlinked coordinated patch, bridgeware transistorized, led frequency scalar. Servicing, plasma recursive boolean includes, computer, femtosecond inversion. Services integer harmonic mainframe scalar prototype broadband n-tier. Echo software application indeterminate dithering bypass plasma bus harmonic patch. Digital, mainframe scalar anomoly bypass, bus potentiometer phaselock plasma, phaselock prompt data disk inversion.
+    </textarea>
+  </div>
+    </br>
+    <div class="row">
+    <div class="col-sm-offset-4 col-sm-6"><input type="checkbox" required> I agree with the Terms and Conditions.
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-sm-offset-5 col-sm-2"><%= f.submit  :class=> "btn btn-primary"  %>
   </div>
 <% end %>
