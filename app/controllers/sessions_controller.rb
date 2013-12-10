@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
       sign_in(user)
       #redirect_to root_path, :notice => "Signed in!"
       if user[:function] == "redeemer"
+        puts "$$$$$$$$$$$$$$ Signed in as Redeemer"
         redirect_to redeemers_path
       else
         redirect_to transactions_path

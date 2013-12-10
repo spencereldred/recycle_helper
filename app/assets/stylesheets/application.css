@@ -17,6 +17,17 @@ html, body {
   margin: 0px;
   padding: 0px
 }
+
+textarea.terms {
+  width:400px;
+  height:200px;
+  border:1px solid #ccc;
+  background:#f2f2f2;
+  font:normal 11px/15px arial;
+  padding:6px;
+  color:#333;
+}
+
 #map-canvas {
   height: 500px;
   width: 800px;
@@ -80,5 +91,9 @@ li[class="footer-img"] {
 #signin, #signout {
   float: right;
   margin-right: 10%;
+}
+
+#myModal {
+
 }
 

@@ -1,0 +1,132 @@
+<!-- Button trigger modal -->
+<button class="btn btn-default btn-lg" data-toggle="modal" data-target="#recyclerModal">
+  Recycler Sign Up
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="recyclerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel2">Recycler Sign up</h4>
+      </div>
+      <div class="modal-body">
+        <% @user = User.new %>
+          <%= form_for @user do |f| %>
+            <% if !@user[:id] %>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 "><h2>Login Information</h2></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label"><%= f.label :username %></div>
+                <div class="col-sm-2"><%= f.text_field :username, placeholder: "<username>",  required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label"><%= f.label :password %></div>
+                <div class="col-sm-2"><%= f.password_field :password, placeholder: "<password>", required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-0  col-sm-4 form_label"><%= f.label :password_confirmation %></div>
+                <div class="col-sm-2"><%= f.password_field :password_confirmation, placeholder: "<password confirmation>", required: true %></div>
+              </div>
+            <% end %>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 "><h2>Profile Information</h2></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-1 col-sm-3 form_label">First Name:</div>
+                <div class="col-sm-4"><%= f.text_field :first_name, placeholder: "< first name >", required: true %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-1 col-sm-3 form_label">Last Name:</div>
+                <div class="col-sm-6"><%= f.text_field :last_name, placeholder: "< last name >", required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">Email:</div>
+                <div class="col-sm-6"><%= f.email_field :email, placeholder: "< email >", required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">Phone:</div>
+                <div class="col-sm-6"><%= f.telephone_field :phone, placeholder: "< phone >", required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">Address:</div>
+                <div class="col-sm-6"><%= f.text_field :address, placeholder: "< address >", required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">City:</div>
+                <div class="col-sm-6"><%= f.text_field :city, placeholder: "< city >", required: true %></div>
+              </div>
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">State:</div>
+                <div class="col-sm-6"><%= f.text_field :state, placeholder: "< state >", required: true %></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">Zipcode:</div>
+                <div class="col-sm-6"><%= f.text_field :zipcode, placeholder: "< zipcode >", required: true %></div>
+              </div>
+              <% if @function == "redeemer" %>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-2 form_label">dmv_number:</div>
+                <div class="col-sm-6"><%= f.text_field :dmv_number , placeholder: "< dmv number >", required: true %></div>
+              </div>
+              <% end %>
+              <div class="row">
+                <div class="col-sm-2"><%= f.hidden_field :function, :value => "recycler" %></div>
+              </div>
+              </br>
+
+              <% if !@user[:id] %>
+              <div class="row">
+    <div class="col-sm-offset-1 col-sm-6"><textarea class="terms" readonly="readonly">
+  Hi5Exchange Terms and Conditions
+
+  GENERAL
+
+  Servicing servicing resistor video computer element transponder prototype analog solution mainframe network. Solution video debugged feedback sampling extended, infrared, generator generator.
+
+  * list item number one
+  * list item number two
+  * list item number three
+
+  Harmonic gigabyte generator in sequential interface. Services, integer device read-only supporting cascading cache capacitance. Proxy boolean solution or data overflow element overflow processor arrray video, reflective extended. Gigabyte debugged distributed, reflective controller disk encapsulated phase network arrray feedback element cache high silicon. Sampling backbone analog remote adaptive extended bridgeware n-tier integer audio femtosecond.
+
+  IMPORTANT STUFF
+
+  Interface broadband developer backbone fragmentation messaging software transmission, sampling cascading element high silicon backbone. Reflective servicing coordinated boolean connectivity extended inversion sequential for. Data distributed backbone bridgeware connectivity logarithmic, sampling ethernet for. Extended logarithmic log video echo gigabyte. Or procedural phaselock sequential port extended deviation sequential, disk recognition gigabyte phaselock proxy messaging arrray. Encapsulated echo deviation boolean system ethernet reducer, pc.
+
+  Backbone frequency echo ethernet patch femtosecond sampling, integer digital floating-point n-tier dithering disk. Processor reflective boolean includes phase deviation, with log, integral logistically femtosecond, in, integral infrared phaselock. Element developer pc harmonic, plasma with, integral floating-point. Reflective feedback infrared, echo anomoly integral generator reflective led, high overflow servicing gigabyte. Extended integral data, infrared frequency disk broadband transistorized processor disk anomoly, sampling potentiometer kilohertz. Bus overflow, bridgeware fragmentation bypass prototype, interface, for internet pc generator integral, bypass disk, frequency.
+
+  FEES
+
+  Sequential ENCAPSULATED RESISTOR element converter pc harmonic. Feedback cache hyperlinked debugged generator infrared device network, fragmentation connectivity, debugged. For, dithering interface debugged sequential recognition bypass bridgeware processor backbone sampling logarithmic software. Anomoly infrared logarithmic logarithmic procedural plasma resistor integral silicon deviation. Computer broadband plasma, encapsulated cable kilohertz scan. With logarithmic bridgeware indeterminate sampling, port. Development procedural hyperlinked mainframe, encapsulated boolean software processor transistorized cable with backbone.
+
+  Reflective backbone log transmission cable logarithmic mainframe. Messaging backbone debugged feedback development phaselock metafile n-tier coordinated, cable coordinated coordinated in. Analog device transistorized, sequential transistorized with scalar normalizing. Mainframe phase cache anomoly feedback servicing harmonic. Services software pc, femtosecond bypass scalar data element extended cascading capacitance harmonic. Adaptive plasma bypass supporting cascading deviation system pulse broadband bridgeware.
+
+  AGREEMENT
+
+  Servicing hyperlinked analog encapsulated disk cable with, capacitance element partitioned potentiometer read-only dithering. Normalizing kilohertz network solution logarithmic device bus connectivity system mainframe prototype phaselock phase cache.
+
+  Coordinated transmission overflow floating-point distributed supporting scan converter. Bridgeware backbone coordinated sampling overflow broadband normalizing connectivity or, internet transmission, bus, encapsulated. Extended element element echo messaging scan, cache video deviation debugged broadband. Pc, supporting hyperlinked coordinated patch, bridgeware transistorized, led frequency scalar. Servicing, plasma recursive boolean includes, computer, femtosecond inversion. Services integer harmonic mainframe scalar prototype broadband n-tier. Echo software application indeterminate dithering bypass plasma bus harmonic patch. Digital, mainframe scalar anomoly bypass, bus potentiometer phaselock plasma, phaselock prompt data disk inversion.
+    </textarea></div>
+          </div>
+            </br>
+            <div class="row">
+            <div class="col-sm-offset-2 col-sm-6"><input type="checkbox" required> I agree with the Terms and Conditions.</div>
+            </div>
+          <% end %>
+
+          <div class="row">
+            <div class="col-sm-offset-5 col-sm-2"><%= f.submit  :class=> "btn btn-primary"  %></div>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
