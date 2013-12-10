@@ -54,7 +54,7 @@
           </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="transaction in transactions | filter: {selected: true, completed: false}" >
+            <tr ng-repeat="transaction in transactions | filter: {selected: true, completed: false, redeemer_user_id: <%= current_user.id %> }" >
               <td>
                 <input type="checkbox" ng-click="unselect()" ng-model="transaction.selected" checked>
                 <input type="hidden" id="unselection_date" value="nil" />
@@ -72,8 +72,9 @@
       </table>
     </div>
   </div>
-  <input type="hidden" id="center_latitude" value="<%= current_user[:latitude] %>" />
-  <input type="hidden" id="center_longitude" value="<%= current_user[:longitude] %>" />
+  <input type="hidden" id="center_latitude" value="<%= current_user.latitude %>" />
+  <input type="hidden" id="center_longitude" value="<%= current_user.longitude %>" />
+  <input type="hidden" id="current_user_id" value="<%= current_user.id %>" />
   <div id="map-canvas"></div>
 </div><!-- ng-controller -->
 

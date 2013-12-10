@@ -46,7 +46,7 @@ $(function(){
         }
         markers.push(marker);
         markers = _.uniq(markers);
-        // console.log("markers length: ", markers.length)
+        console.log("markers length: ", markers.length)
       });
     }
 

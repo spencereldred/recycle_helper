@@ -88,14 +88,17 @@ app.factory "Redeemer", ($resource) ->
   console.log "Made it to the RedeemerController"
   center_latitude = $('#center_latitude').val()
   center_longitude = $('#center_longitude').val()
+  current_user_id = parseInt $('#current_user_id').val()
   addresses = []
 
   # The callback function loads the page with transactions from the database.
   # Adds markers on the map for the transactions already selected.
   $scope.update_trans = (data)=>
     $scope.transactions = data
-    for transaction in $scope.transactions when transaction.selected == true && transaction.completed == false
+    for transaction in $scope.transactions when transaction.selected == true && transaction.completed == false && transaction.redeemer_user_id == current_user_id
+      console.log transaction.redeemer_user_id, current_user_id
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
+      console.log address
       $scope.add_marker(address)
 
   # Asynchronously calls the RedeemerController to retrieve the
@@ -118,6 +121,8 @@ app.factory "Redeemer", ($resource) ->
     transaction = @transaction
     # transaction.selected = true
     transaction.selection_date = new Date()
+    transaction.redeemer_user_id = current_user_id
+    console.log transaction.redeemer_user_id
     address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
     $scope.add_marker(address)
     transaction.$update()
@@ -131,6 +136,8 @@ app.factory "Redeemer", ($resource) ->
     #   console.log "before delete",   address
     # console.log transaction.address, addresses.length
     transaction.selection_date = $('#unselection_date').val()
+    transaction.redeemer_user_id = "nil"
+    console.log transaction.redeemer_user_id
     address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
     addresses = _.reject(addresses, (addr) ->
       address == addr
