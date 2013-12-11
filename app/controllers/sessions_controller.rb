@@ -16,8 +16,9 @@ class SessionsController < ApplicationController
         redirect_to transactions_path
       end
     else
-      flash[:errors] = ["Error!"]
-      render :new
+      flash[:errors] = ["Login error: check username and password."]
+      redirect_to root_path
+      # render :new
     end
 
   end
