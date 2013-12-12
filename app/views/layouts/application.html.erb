@@ -19,6 +19,20 @@
         <%= render :partial => "layouts/signin" %>
         <%= render :partial => "layouts/recycler_signup" %>
         <%= render :partial => "layouts/redeemer_signup" %>
+        <!-- Single button -->
+        <div class="btn-group right">
+          <button type="button" class="btn btn-default btn-lg dropdown-toggle right" data-toggle="dropdown">
+            Action <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <%= render :partial => "layouts/redeemer" %>
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </div>
       <% end %>
       <%# if !current_user || !current_user[:id] %>
         <%#= link_to "Home", root_path %>

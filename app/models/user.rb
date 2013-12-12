@@ -5,8 +5,11 @@ class User < ActiveRecord::Base
                           :latitude, :longitude
 
   before_save :create_remember_token
+  # before_save { self.email = email.downcase }
 
-  validates :username, presence: true, uniqueness: true
+  validates :password, length: { minimum: 6 }, allow_nil: true
+
+  validates :username, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :function, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -14,6 +17,10 @@ class User < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true
   validates :zipcode, presence: true
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
+
   validates :email, presence: true
   validates :phone, presence: true
 
