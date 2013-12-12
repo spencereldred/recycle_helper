@@ -1,7 +1,4 @@
 <div ng-controller="RedeemerController">
-  <!-- need to require 'json' ?? -->
-  <!-- <input type="hidden" id="transaction_all" value="<%#= Transaction.all.to_json %>" /> -->
-  <!-- <input type="hidden" id="user" value="<%#= User.all.to_json %>" /> -->
   <div class="col-sm-offset-5 col-sm-7"><all></all></div>
   <div class="row">
     <div class="bs-example col-sm-offset-2 col-sm-8">
@@ -15,21 +12,22 @@
             <th>Cans</th>
             <th>Glass</th>
             <th>Other</th>
-            <!-- <th>Posted</th> -->
+            <th>Posted</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="transaction in transactions | filter: {selected: false}">
+
             <td>
               <input type="checkbox" ng-click="select()" ng-model="transaction.selected">
             </td>
-            <td>{{transaction.address}}, {{transaction.city}}</td>
+            <td>{{transaction.address}}, {{transaction.city}} {{transaction.recycler_user_id}}</td>
             <td>{{transaction.state}} {{transaction.zipcode}}</td>
             <td>{{transaction.plastic}}</td>
             <td>{{transaction.cans}}</td>
             <td>{{transaction.glass}}</td>
             <td>{{transaction.other}}</td>
-            <!-- <td>{{transaction.created_at}}</td> -->
+            <td>{{transaction.created_at | date:'MM/dd/yy h:mm a' }}</td>
           </tr>
         </tbody>
       </table>
@@ -39,7 +37,7 @@
   <div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= current_user[:first_name]%>
     <%= current_user[:last_name]%></h1></div>
   <div class="row">
-    <div class="bs-example col-sm-offset-2 col-sm-8">
+    <div class="bs-example col-sm-offset-2 col-sm-9">
       <table class="table table-hover" id="recycler-table">
         <thead>
           <tr>
@@ -51,6 +49,7 @@
             <th>Glass</th>
             <th>Other</th>
             <th>Selected</th>
+            <th>Completed</th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +66,10 @@
               <td>{{transaction.glass}}</td>
               <td>{{transaction.other}}</td>
               <td>{{transaction.selection_date | date:'MM/dd/yy h:mm a' }} </td>
+              <td>
+                <input type="checkbox" ng-click="completed()" ng-model="transaction.completed">
+                <input type="hidden" id="completion_date" value="nil" />
+              </td>
             </tr>
         </tbody>
       </table>

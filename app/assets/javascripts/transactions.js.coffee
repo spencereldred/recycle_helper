@@ -65,11 +65,11 @@ app.factory "Transaction", ($resource) ->
   # Sets { completed: true, completion_date: new Date() }
   # The transaction is removed from the view by a filter.
   # The view only shows transactions where "filter: { completed: false}"."
-  $scope.completed = ->
-    transaction = @transaction
-    transaction.completion_date = new Date()
-    transaction.completed = true
-    transaction.$update()
+  # $scope.completed = ->
+  #   transaction = @transaction
+  #   transaction.completion_date = new Date()
+  #   transaction.completed = true
+  #   transaction.$update()
 
 ######################################################
 ################# RedeemerController #################
@@ -117,6 +117,7 @@ app.factory "Redeemer", ($resource) ->
   # Sets { selected: true, selection_date: new Date() }
   # Places a pin on the map at the location for recycle pickup by
   # calling add_marker(address) with the address of the Recycler.
+  # TODO - Fire off an email to the "recycler" that the item has been selected.
   $scope.select = ->
     transaction = @transaction
     # transaction.selected = true
@@ -129,6 +130,7 @@ app.factory "Redeemer", ($resource) ->
 
   # The Redeemer unselects an item to recycle
   # sets { selected: false, selection_date: "nil" }
+  # TODO - Fire off a email to the "recycler" that the job has been unselected?
   $scope.unselect = ->
     # console.log "unselect()"
     transaction = @transaction
@@ -147,6 +149,27 @@ app.factory "Redeemer", ($resource) ->
     for address in addresses
       # console.log "after delete", address
       $scope.add_marker(address)
+
+    transaction.$update()
+
+
+  # Redeemer indicates that the job is complete by checking the "completed"
+  # checkbox. Removes the map marker for this item from the map.
+  # TODO - fire off an action mail to recycler indicating "redeemer" says the job is done
+  $scope.completed = ->
+    transaction = @transaction
+    transaction.completion_date = new Date()
+    transaction.completed = true
+    address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
+    addresses = _.reject(addresses, (addr) ->
+      address == addr
+    )
+    $scope.add_marker(address,"delete")
+    # console.log address, addresses.length
+    for address in addresses
+      # console.log "after delete", address
+      $scope.add_marker(address)
+
 
     transaction.$update()
 
