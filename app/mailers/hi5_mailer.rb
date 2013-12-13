@@ -7,21 +7,24 @@ class Hi5Mailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Welcome to Hi5 Exchange')
   end
 
-  def created
-    @greeting = "Hi"
+  def unselected(user)
+    @user = user
+    @greeting = "Aloha"
 
-    mail to: "to@example.org"
+    mail(to: @user.email, subject: 'Recycle job has been unselected')
   end
 
-  def selected
-    @greeting = "Hi"
+  def selected(user)
+    @user = user
+    @greeting = "Aloha"
 
-    mail to: "to@example.org"
+    mail(to: @user.email, subject: 'Recycle job has been selected')
   end
 
-  def closed
-    @greeting = "Hi"
+  def completed(user)
+    @user = user
+    @greeting = "Aloha"
 
-    mail to: "to@example.org"
+    mail(to: @user.email, subject: 'Recycle job has been completed')
   end
 end

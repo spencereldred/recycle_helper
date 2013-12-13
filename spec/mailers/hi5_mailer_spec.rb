@@ -16,12 +16,12 @@ describe Hi5Mailer do
     end
   end
 
-  describe "created" do
-    let(:mail) { Hi5Mailer.created }
+  describe "unselected" do
+    let(:mail) { Hi5Mailer.unselected(User.new) }
 
     it "renders the headers" do
-      mail.subject.should eq("Created")
-      mail.to.should eq(["to@example.org"])
+      mail.subject.should eq("Recycle job has been unselected")
+      mail.to.should eq([])
       mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
@@ -31,11 +31,11 @@ describe Hi5Mailer do
   end
 
   describe "selected" do
-    let(:mail) { Hi5Mailer.selected }
+    let(:mail) { Hi5Mailer.selected(User.new) }
 
     it "renders the headers" do
-      mail.subject.should eq("Selected")
-      mail.to.should eq(["to@example.org"])
+      mail.subject.should eq("Recycle job has been selected")
+      mail.to.should eq([])
       mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
@@ -44,12 +44,12 @@ describe Hi5Mailer do
     end
   end
 
-  describe "closed" do
-    let(:mail) { Hi5Mailer.closed }
+  describe "completed" do
+    let(:mail) { Hi5Mailer.completed(User.new) }
 
     it "renders the headers" do
-      mail.subject.should eq("Closed")
-      mail.to.should eq(["to@example.org"])
+      mail.subject.should eq("Recycle job has been completed")
+      mail.to.should eq([])
       mail.from.should eq(["eldredspencer@gmail.com"])
     end
 
