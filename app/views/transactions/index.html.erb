@@ -84,7 +84,7 @@
             <tr ng-repeat="transaction in transactions | filter: {recycler_user_id: <%= current_user.id %>} | filter: {completed: false }">
               <td>
                 <button class="btn btn-primary btn-sm"
-                  ng-click="completed(transaction)">Complete
+                  ng-click="">Feedback
                 </button>
               </td>
               <td><%= current_user[:address]%></td>

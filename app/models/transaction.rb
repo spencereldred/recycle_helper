@@ -34,30 +34,31 @@ class Transaction < ActiveRecord::Base
     def send_update_email
         user = User.find(recycler_user_id)
         if self.completed == true && self.selected == true
-          puts "%%%%%%%%%%%%%%%%%% completed: #{user.first_name}: #{user.email}"
           ############ COMPLETED ##############
           # send recycler email that the redeemer indicates the job is done
           Hi5Mailer.completed(user).deliver
+          # send text message
           message = "Aloha #{user.first_name}, the redeemer says your job is done."
           send_text(message, user.phone )
         elsif self.completed == false && self.selected == true
-          puts "%%%%%%%%%%%%%%%%%% selected: #{user.first_name}: #{user.email}"
           ############ SELECTED ##############
           # send recycler an email that states a redeemer has claimed the job
           Hi5Mailer.selected(user).deliver
+          # send text message
           message = "Aloha #{user.first_name}, a redeemer has claimed your job."
           send_text(message, user.phone)
         else
-          puts "%%%%%%%%%%%%%%%%%% unselected: #{user.first_name}: #{user.email}"
           ############ UNSELECTED ##############
           # send recycler an email that states a redeemer has unclaimed the job
           Hi5Mailer.unselected(user).deliver
+          # send text message
           message = "Aloha #{user.first_name}, the redeemer has unclaimed your job. Your job will go back in the queue."
           send_text(message, user.phone)
         end
 
     end
 
+    # Sends text message using Twilio's service
     def send_text(text, phone)
       account_sid    = ENV["ACCOUNT_SID"]
       auth_token     = ENV["AUTH_TOKEN"]

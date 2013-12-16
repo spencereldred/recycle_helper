@@ -67,8 +67,11 @@
               <td>{{transaction.other}}</td>
               <td>{{transaction.selection_date | date:'MM/dd/yy h:mm a' }} </td>
               <td>
-                <input type="checkbox" ng-click="completed()" ng-model="transaction.completed">
-                <input type="hidden" id="completion_date" value="nil" />
+                <button class="btn btn-primary btn-sm" ng-click="completed()"
+                    ng-model="transaction.completed">Completed
+                </button>
+                <!-- <input type="checkbox" ng-click="completed()" ng-model="transaction.completed">
+                <input type="hidden" id="completion_date" value="nil" /> -->
               </td>
             </tr>
         </tbody>
