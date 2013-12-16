@@ -19,6 +19,7 @@ app.factory "Transaction", ($resource) ->
   $scope.update_trans = (data)=>
     $scope.transactions = data
 
+  ## Grab the transactions from the rails database asychronously
   Transaction.query $scope.update_trans
 
   $scope.bag_options = [
@@ -46,6 +47,8 @@ app.factory "Transaction", ($resource) ->
     console.log "add recycle item button was clicked"
     if @transaction
       transaction = @transaction
+      #################
+      # grab values from the user model stashed in the DOM
       transaction.address = $('#user_address').val()
       transaction.city = $('#user_city').val()
       transaction.state = $('#user_state').val()
@@ -54,12 +57,13 @@ app.factory "Transaction", ($resource) ->
       transaction.completion_date = "nil"
       transaction.selected = false
       transaction.completed = false
+
+      ## Update the scoped 'transactions' array for the view
       $scope.transactions.push(transaction)
       console.log transaction
 
+      ## Update the database via the rails controller 'create' method
       Transaction.save(transaction)
-
-      # transaction.save()
 
   # Recycler marks the transaction as completed.
   # Sets { completed: true, completion_date: new Date() }
