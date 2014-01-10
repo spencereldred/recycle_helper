@@ -9,10 +9,6 @@ class Transaction < ActiveRecord::Base
   # belongs_to :user, :class_name=> 'User', :foriegn_key => 'redeemer_user_id'
 
   validates :recycler_user_id, presence: true
-  validates :plastic, presence: true
-  validates :glass, presence: true
-  validates :cans, presence: true
-  validates :other, presence: true
   validates :address, presence: true
   validates :city, presence: true
   validates :state, presence: true

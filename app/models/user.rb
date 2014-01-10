@@ -43,7 +43,11 @@ class User < ActiveRecord::Base
 
     def send_welcome_email
         # automail welcome message to new user
-        Hi5Mailer.welcome_user(self).deliver
+        if self.function == "redeemer"
+          Hi5Mailer.welcome_redeemer(self).deliver
+        else
+          Hi5Mailer.welcome_recycler(self).deliver
+        end
     end
 
 end

@@ -69,7 +69,7 @@
       <table class="table table-hover" id="recycler-table">
         <thead>
           <tr>
-            <th>Complete</th>
+            <th>Remove</th>
             <th>Address</th>
             <th>Plastic</th>
             <th>Cans</th>
@@ -84,7 +84,7 @@
             <tr ng-repeat="transaction in transactions | filter: {recycler_user_id: <%= current_user.id %>} | filter: {completed: false }">
               <td>
                 <button class="btn btn-primary btn-sm"
-                  ng-click="">Feedback
+                  ng-click="remove()" ng-model="transaction">Remove
                 </button>
               </td>
               <td><%= current_user[:address]%></td>

@@ -69,11 +69,10 @@ app.factory "Transaction", ($resource) ->
   # Sets { completed: true, completion_date: new Date() }
   # The transaction is removed from the view by a filter.
   # The view only shows transactions where "filter: { completed: false}"."
-  # $scope.completed = ->
-  #   transaction = @transaction
-  #   transaction.completion_date = new Date()
-  #   transaction.completed = true
-  #   transaction.$update()
+  $scope.remove = ->
+    console.log "remove action clicked"
+    transaction = @transaction
+    transaction.delete
 
 ######################################################
 ################# RedeemerController #################
