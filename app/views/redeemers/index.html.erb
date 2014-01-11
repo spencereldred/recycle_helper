@@ -41,7 +41,7 @@
       <table class="table table-hover" id="recycler-table">
         <thead>
           <tr>
-            <th>Unselect</th>
+            <!-- <th>Unselect</th> -->
             <th>Address</th>
             <th>St. / Zip</th>
             <th>Plastic</th>
@@ -54,11 +54,11 @@
         </thead>
         <tbody>
             <tr ng-repeat="transaction in transactions | filter: {selected: true, completed: false, redeemer_user_id: <%= current_user.id %> }" >
-              <td>
+              <!-- <td>
                 <input type="checkbox" ng-click="unselect()" ng-model="transaction.selected" checked>
                 <input type="hidden" id="unselection_date" value="nil" />
 
-              </td>
+              </td> -->
               <td>{{transaction.address}}, {{transaction.city}}</td>
               <td>{{transaction.state}} {{transaction.zipcode}}</td>
               <td>{{transaction.plastic}}</td>
