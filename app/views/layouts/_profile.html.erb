@@ -67,12 +67,12 @@
                 <div class="col-sm-offset-2 col-sm-2 form_label">Zipcode:</div>
                 <div class="col-sm-6"><%= f.text_field :zipcode, value: current_user.zipcode, required: true %></div>
               </div>
-              <% if @function == "redeemer" %>
-              <div class="row">
+              <%# if @function == "redeemer" %>
+              <!-- <div class="row">
                 <div class="col-sm-offset-2 col-sm-2 form_label">dmv_number:</div>
-                <div class="col-sm-6"><%= f.text_field :dmv_number , value: current_user.dmv_number, required: true %></div>
-              </div>
-              <% end %>
+                <div class="col-sm-6"><%#= f.text_field :dmv_number , value: current_user.dmv_number, required: true %></div>
+              </div> -->
+              <%# end %>
               <div class="row">
                 <div class="col-sm-2"><%= f.hidden_field :function, :value => "redeemer" %></div>
               </div>

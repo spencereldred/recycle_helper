@@ -15,10 +15,10 @@
         <% @user = User.new %>
           <%= form_for @user do |f| %>
             <%= render :partial => "layouts/form", :object => f, :as => :f %>
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-sm-offset-2 col-sm-3 form_label">dmv_number:</div>
-              <div class="col-sm-6"><%= f.text_field :dmv_number , placeholder: "< dmv number >", required: true %></div>
-            </div>
+              <div class="col-sm-6"><%#= f.text_field :dmv_number , placeholder: "< dmv number >", required: true %></div>
+            </div> -->
             <div class="row">
               <div class="col-sm-2"><%= f.hidden_field :function, :value => "redeemer" %></div>
             </div>
