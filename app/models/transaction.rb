@@ -34,14 +34,17 @@ class Transaction < ActiveRecord::Base
           # send recycler email that the redeemer indicates the job is done
           Hi5Mailer.completed(user).deliver
           # send text message
-          message = "Aloha #{user.first_name}, the redeemer says your job is done."
+            message = "Shaka! #{user.first_name}, our records indicate your recycling has been picked up.
+            If this is not so, please contact Annie at hi5exchange@gmail.com."
           send_text(message, user.phone )
         elsif self.completed == false && self.selected == true
           ############ SELECTED ##############
           # send recycler an email that states a redeemer has claimed the job
           Hi5Mailer.selected(user).deliver
           # send text message
-          message = "Aloha #{user.first_name}, a redeemer has claimed your job."
+          # message = "Aloha #{user.first_name}, a redeemer has claimed your job."
+          message = "Shaka! #{user.first_name}, a redeemer has claimed your job, so please make sure your items are out for pickup.
+-Annie from HI5"
           send_text(message, user.phone)
         else
           ############ UNSELECTED ##############
