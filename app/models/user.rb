@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
   validates :email, presence: true
-  validates :phone, presence: true
+  # validates :phone, presence: true
 
   after_create :send_welcome_email
 
