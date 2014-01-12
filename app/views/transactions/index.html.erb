@@ -69,7 +69,7 @@
       <table class="table table-hover" id="recycler-table">
         <thead>
           <tr>
-            <th>Remove</th>
+            <!-- <th>Remove</th> -->
             <th>Address</th>
             <th>Plastic</th>
             <th>Cans</th>
@@ -82,11 +82,12 @@
         <tbody>
             <!-- <tr ng-repeat="transaction in transactions"> -->
             <tr ng-repeat="transaction in transactions | filter: {recycler_user_id: <%= current_user.id %>} | filter: {completed: false }">
-              <td>
+              <!-- status 01 11 2014: remove() function does not work -->
+              <!-- <td>
                 <button class="btn btn-primary btn-sm"
                   ng-click="remove()" ng-model="transaction">Remove
                 </button>
-              </td>
+              </td> -->
               <td><%= current_user[:address]%></td>
               <td>{{transaction.plastic}}</td>
               <td>{{transaction.cans}}</td>
