@@ -6,6 +6,11 @@
   <div class="col-sm-2"><%= f.text_field :username, placeholder: "<username>",  required: true %></div>
 </div>
 <div class="row">
+  <div class="col-sm-offset-2 col-sm-8">
+    <p>Password must be 6 characters or more.</p>
+  </div>
+</div>
+<div class="row">
   <div class="col-sm-offset-2 col-sm-3 form_label">Password:</div>
   <div class="col-sm-2"><%= f.password_field :password, placeholder: "<password>", required: true %></div>
 </div>
