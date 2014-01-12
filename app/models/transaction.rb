@@ -29,6 +29,7 @@ class Transaction < ActiveRecord::Base
 
     def send_update_email
         user = User.find(recycler_user_id)
+        puts "#{user.first_name} - Email"
         if self.completed == true && self.selected == true
           ############ COMPLETED ##############
           # send recycler email that the redeemer indicates the job is done
@@ -36,7 +37,7 @@ class Transaction < ActiveRecord::Base
           # send text message
           message = "Shaka! #{user.first_name}, our records indicate your recycling has been picked up.
           If this is not so, please contact Annie at hi5exchange@gmail.com."
-          binding.pry
+          # binding.pry
           send_text(message, user.phone ) if !user.phone.empty?
         elsif self.completed == false && self.selected == true
           ############ SELECTED ##############
