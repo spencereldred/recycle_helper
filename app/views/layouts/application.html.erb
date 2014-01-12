@@ -17,6 +17,7 @@
     <div class="bs">
       <% if !current_user %>
         <%= render :partial => "layouts/signin" %>
+        <%= render :partial => "layouts/how_it_works" %>
         <%= render :partial => "layouts/recycler_signup" %>
         <%= render :partial => "layouts/redeemer_signup" %>
 
@@ -24,6 +25,7 @@
       <% if current_user %>
         <img id="logo" src="/assets/hi5_medium.png" class="img-responsive" style="width: 10%;"alt="HI5 logo">
         <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
+        <%= render :partial => "layouts/how_it_works" %>
         <% if current_user.function == "redeemer" || current_user.function == "recycler" ||    current_user.function == "admin" %>
           <%= render :partial => "layouts/profile" %>
         <% end %>
