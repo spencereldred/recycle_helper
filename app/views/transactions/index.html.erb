@@ -1,8 +1,7 @@
+
 <div ng-controller="TransactionController">
   <div class="row">
-    <div class="col-sm-offset-5 col-sm-7">
-        <img src="/assets/recycle_dude.gif" class="img-responsive" style="width: 25%;"alt="recycle dude">
-    </div>
+    <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
   </div>
   <div class="row">
     <div class="col-sm-8 col-sm-offset-3">
@@ -24,7 +23,9 @@
         <tbody>
           <tr>
             <td>
-              <button class="btn btn-primary btn-sm"
+              <!-- TODO: Add css selector to unhide the alert-success message -->
+              <!-- application.js JQuery -->
+              <button class="btn btn-primary btn-sm" id="submit_transaction"
                       ng-click="new_recycle_item(transaction)">Submit
               </button>
               <input type="hidden" id="user_id" value="<%= current_user[:id] %>" />
@@ -58,14 +59,39 @@
       </table>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-sm-offset-2 col-sm-8">
-      <div class="alert alert-success alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <!-- TODO: add css selector to hide and unhide alert -->
+  <!-- application.js JQuery -->
+  <!--
+
+<div id="clickme">
+  Click here
+</div>
+<img id="book" src="book.png" alt="" width="100" height="123">
+1
+2
+3
+4
+5
+6
+
+// With the element initially shown, we can hide it slowly:
+$( "#thanks_alert" ).click(function() {
+  $( "#book" ).hide( "slow", function() {
+    alert( "Animation complete." );
+  });
+});
+-->
+
+<!-- style='visibility:hidden' -->
+
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-8"    >
+      <div class="alert alert-success alert-dismissable thanks_alert"  style='visibility:hidden'>
+        <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Shaka!</strong> Shaka! Thanks for participating. Be sure to put your recycling out right away.
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div class="row">
       <div class="col-sm-offset-3 col-sm-8">
