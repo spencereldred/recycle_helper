@@ -23,7 +23,6 @@
 
       <% end %>
       <% if current_user %>
-        <!-- <img id="logo" src="/assets/hi5_medium.png" class="img-responsive" style="width: 10%;"alt="HI5 logo"> -->
         <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
         <%= render :partial => "layouts/how_it_works" %>
         <% if current_user.function == "redeemer" || current_user.function == "recycler" ||    current_user.function == "admin" %>
