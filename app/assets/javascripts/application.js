@@ -15,3 +15,15 @@
 //= require angular
 //= require angular-resource
 //= require_tree .
+
+// $(function(){
+
+//   $('#submit_transaction').click(function() {
+//     $( '#thanks_alert' ).css('visibility','visible');
+//     });
+//   });
+
+// });
+
+
+

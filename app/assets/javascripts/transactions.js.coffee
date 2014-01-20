@@ -45,6 +45,7 @@ app.factory "Transaction", ($resource) ->
   # The transaction is added to the view.
   $scope.new_recycle_item = ->
     console.log "add recycle item button was clicked"
+    # $('#thanks_alert').css('visibility','visible');
     if @transaction
       transaction = @transaction
       #################
