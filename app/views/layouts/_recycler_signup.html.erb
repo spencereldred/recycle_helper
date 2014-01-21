@@ -16,12 +16,12 @@
           <%= form_for @user do |f| %>
             <%= render :partial => "layouts/form", :object => f, :as => :f %>
             <div class="row">
-              <div class="col-xs-2"><%= f.hidden_field :function, :value => "recycler" %></div>
+              <div class="col-sm-2"><%= f.hidden_field :function, :value => "recycler" %></div>
             </div>
             </br>
             <%= render :partial => "layouts/terms" %>
             <div class="row">
-              <div class="col-xs-offset-5 col-xs-2"><%= f.submit  :class=> "btn btn-primary"  %></div>
+              <div class="col-sm-offset-5 col-sm-2"><%= f.submit  :class=> "btn btn-primary"  %></div>
             </div>
           <% end %>
         </div>
