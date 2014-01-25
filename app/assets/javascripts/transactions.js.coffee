@@ -23,14 +23,14 @@ app.factory "Transaction", ($resource) ->
   Transaction.query $scope.update_trans
 
   $scope.bag_options = [
-    {name: "none", value: "none"},
-    {name: "1 bag", value: "1 bag"},
-    {name: "2 bags", value: "2 bags"},
-    {name: "3 bags", value: "3 bags"},
-    {name: "4 bags", value: "4 bags"},
-    {name: "5 bags", value: "5 bags"},
-    {name: "6 bags", value: "6 bags"},
-    {name: "7 bags", value: "7 bags"}
+    {name: "none", value: "0" },
+    {name: "1 bag", value: "1" },
+    {name: "2 bags", value: "2" },
+    {name: "3 bags", value: "3" },
+    {name: "4 bags", value: "4" },
+    {name: "5 bags", value: "5" },
+    {name: "6 bags", value: "6" },
+    {name: "7 bags", value: "7" }
   ]
 
   $scope.other_options = [
