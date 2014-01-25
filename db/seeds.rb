@@ -55,27 +55,27 @@ users = User.create([
    ])
 
 transactions = Transaction.create([
-    {recycler_user_id: "1", plastic: "1 bag", glass: "1 bag", cans: "1 bag", other: "cardboard",
+    {recycler_user_id: "1", plastic: "1", glass: "1", cans: "1", other: "cardboard",
     address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768",
     selected: false, completed: false },
 
-    {recycler_user_id: "2", plastic: "2 bags", glass: "2 bags", cans: "2 bags", other: "plastic",
+    {recycler_user_id: "2", plastic: "2", glass: "2", cans: "2", other: "plastic",
     address: "2841 Iolani St.", city: "Makawao", state: "HI", zipcode: "96768",
     selected: false, completed: false },
 
-    {recycler_user_id: "3", plastic: "3 bags", glass: "3 bags", cans: "3 bags", other: "plastic",
+    {recycler_user_id: "3", plastic: "3", glass: "3", cans: "3", other: "plastic",
     address: "296 Liholani St.", city: "Makawao", state: "HI", zipcode: "96768",
     selected: false, completed: false },
 
-    {recycler_user_id: "4", plastic: "4 bags", glass: "4 bags", cans: "4 bags", other: "none",
+    {recycler_user_id: "4", plastic: "4", glass: "4", cans: "4", other: "none",
     address: "2942 Aina Lani St.", city: "Makawao", state: "HI", zipcode: "96768",
     selected: false, completed: false },
 
-    {recycler_user_id: "5", plastic: "5 bags", glass: "5 bags", cans: "5 bags", other: "glass",
+    {recycler_user_id: "5", plastic: "5", glass: "5", cans: "5", other: "glass",
     address: "348 Nalani St.", city: "Makawao", state: "HI", zipcode: "96768",
     selected: false, completed: false },
 
-    {recycler_user_id: "6", plastic: "6 bags", glass: "6 bags", cans: "6 bags", other: "aluminum",
+    {recycler_user_id: "6", plastic: "6", glass: "6", cans: "6", other: "aluminum",
     address: "414 Brannan St.", city: "San Francisco", state: "CA", zipcode: "94107",
     selected: false, completed: false }
 
