@@ -3,9 +3,9 @@ require 'spec_helper'
 describe User do
   describe "User respond to" do
     before { @user = User.new(
-    username: "recycler1", email: "spencereldred@yahoo.com", phone: "8082803758",
+    username: "recycler100", email: "spencereldred@yahoo.com", phone: "8082803758",
     function: "recycler", first_name: "Willie", last_name: "Mays",
-    password: "recycler1",password_confirmation: "recycler1",
+    password: "recycler100",password_confirmation: "recycler100",
     address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768") }
 
     subject { @user }
