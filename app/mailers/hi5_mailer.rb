@@ -29,7 +29,7 @@ class Hi5Mailer < ActionMailer::Base
     @user = user
     @greeting = "Aloha"
 
-    mail(to: @user.email, subject: 'Recycle job has been unselected')
+    mail(to: @user.email, subject: 'Your recycle job has been unselected')
   end
 
   def selected(user)
