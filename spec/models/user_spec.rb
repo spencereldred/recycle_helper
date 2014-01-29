@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  describe "User respond to" do
+  describe "respond to" do
     before { @user = User.new(
     username: "recycler100", email: "spencereldred@yahoo.com", phone: "8082803758",
     function: "recycler", first_name: "Willie", last_name: "Mays",
@@ -73,7 +73,7 @@ describe User do
 
     describe "when phone is not present" do
       before { @user.phone = ""}
-      it{ should_not be_valid}
+      it{ should be_valid}
     end
 
     describe "when username is too long" do
@@ -139,6 +139,6 @@ describe User do
     it { should validate_presence_of(:state) }
     it { should validate_presence_of(:zipcode) }
     it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:phone) }
+    it { should_not validate_presence_of(:phone) }
   end
 end

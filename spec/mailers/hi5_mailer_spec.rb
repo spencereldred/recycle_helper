@@ -1,17 +1,32 @@
 require "spec_helper"
 
 describe Hi5Mailer do
-  describe "welcome_user" do
-    let(:mail) { Hi5Mailer.welcome_user(User.new) }
+  describe "welcome_redeemer" do
+    let(:mail) { Hi5Mailer.welcome_redeemer(User.new) }
 
     it "renders the headers" do
       mail.subject.should eq("Welcome to Hi5 Exchange")
       # mail.to.should eq(["@user.email"])
       mail.to.should eq([])
-      mail.from.should eq(["eldredspencer@gmail.com"])
+      mail.from.should eq(["hi5exchange@gmail.com"])
     end
 
-    it "renders the body" do
+    xit "renders the body" do
+      mail.body.encoded.should match("Hey")
+    end
+  end
+
+  describe "welcome_recycler" do
+    let(:mail) { Hi5Mailer.welcome_recycler(User.new) }
+
+    it "renders the headers" do
+      mail.subject.should eq("Welcome to Hi5 Exchange")
+      # mail.to.should eq(["@user.email"])
+      mail.to.should eq([])
+      mail.from.should eq(["hi5exchange@gmail.com"])
+    end
+
+    xit "renders the body" do
       mail.body.encoded.should match("Hey")
     end
   end
@@ -22,10 +37,10 @@ describe Hi5Mailer do
     it "renders the headers" do
       mail.subject.should eq("Recycle job has been unselected")
       mail.to.should eq([])
-      mail.from.should eq(["eldredspencer@gmail.com"])
+      mail.from.should eq(["hi5exchange@gmail.com"])
     end
 
-    it "renders the body" do
+    xit "renders the body" do
       mail.body.encoded.should match("Hi")
     end
   end
@@ -36,10 +51,10 @@ describe Hi5Mailer do
     it "renders the headers" do
       mail.subject.should eq("Recycle job has been selected")
       mail.to.should eq([])
-      mail.from.should eq(["eldredspencer@gmail.com"])
+      mail.from.should eq(["hi5exchange@gmail.com"])
     end
 
-    it "renders the body" do
+    xit "renders the body" do
       mail.body.encoded.should match("Hi")
     end
   end
@@ -50,10 +65,10 @@ describe Hi5Mailer do
     it "renders the headers" do
       mail.subject.should eq("Recycle job has been completed")
       mail.to.should eq([])
-      mail.from.should eq(["eldredspencer@gmail.com"])
+      mail.from.should eq(["hi5exchange@gmail.com"])
     end
 
-    it "renders the body" do
+    xit "renders the body" do
       mail.body.encoded.should match("Hi")
     end
   end
