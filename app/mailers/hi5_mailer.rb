@@ -1,9 +1,5 @@
 class Hi5Mailer < ActionMailer::Base
-<<<<<<< HEAD
   default from:  "eldredspencer@gmail.com"
-=======
-  default from: "hi5exchange@gmail.com"
->>>>>>> master
 
   # def welcome_user(user)
   #   @user = user
