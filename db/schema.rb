@@ -11,12 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140125211857) do
+ActiveRecord::Schema.define(:version => 20140208222046) do
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
     t.integer  "redeemer_user_id"
-    t.string   "other"
     t.datetime "selection_date"
     t.datetime "completion_date"
     t.integer  "rating"
@@ -33,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20140125211857) do
     t.integer  "plastic"
     t.integer  "cans"
     t.integer  "glass"
+    t.integer  "other"
   end
 
   create_table "users", :force => true do |t|

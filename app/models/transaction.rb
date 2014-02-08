@@ -45,7 +45,7 @@ class Transaction < ActiveRecord::Base
           Hi5Mailer.selected(user).deliver
           # send recycler a text message
           message = "Shaka! #{user.first_name}, a redeemer will swing by within 24 hours, so please make sure your items are already out for pickup.
--Annie from HI5"
+-Annie at hi5exchange@gmail.com"
 
           send_text(message, user.phone) if !user.phone.empty?
         else

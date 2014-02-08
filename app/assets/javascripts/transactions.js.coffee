@@ -33,14 +33,6 @@ app.factory "Transaction", ($resource) ->
     {name: "7 bags", value: "7" }
   ]
 
-  $scope.other_options = [
-    {name: "cardboard", value: "cardboard"},
-    {name: "plastic", value: "plastic"},
-    {name: "glass", value: "glass"},
-    {name: "cans", value: "cans"},
-    {name: "other", value: "other"}
-  ]
-
   # Recycler creates a transaction and saves it to the database.
   # The transaction is added to the view.
   $scope.new_recycle_item = ->

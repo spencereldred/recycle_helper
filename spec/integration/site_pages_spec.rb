@@ -6,6 +6,7 @@ describe "Site Pages" do
     it 'welcomes the user' do
       visit root_path
       page.should have_content('Welcome to Hi5 Exchange')
+      page.should have_content('Sign In')
     end
     it 'has h2 selector' do
       visit root_path

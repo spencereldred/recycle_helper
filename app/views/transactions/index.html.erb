@@ -17,7 +17,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Other</th>
+            <th>Mixed Hi5</th>
           </tr>
         </thead>
         <tbody>
@@ -51,7 +51,7 @@
             </td>
             <td>
               <select ng-model="transaction.other"
-                      ng-options="other_option.value as other_option.name for other_option in other_options">
+                      ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
             </td>
           </tr>
