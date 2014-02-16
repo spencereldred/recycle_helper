@@ -55,7 +55,7 @@ class UsersController < ApplicationController
                                                     zipcode: u[:zipcode])
     if @user[:function] == "redeemer"
       # update "redeemer" only attributes
-      update_user.update_attributes(dmv_number: u[:dmv_number])
+      update_user.update_attributes(radius: u[:radius])
     end
     # need to sign in because the session token has changed
     sign_in(update_user)
