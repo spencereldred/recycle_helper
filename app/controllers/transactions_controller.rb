@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render :json => Transaction.near([current_user.latitude, current_user.longitude], 20) }
+      format.json { render :json => Transaction.near([current_user.latitude, current_user.longitude], current_user.radius) }
     end
   end
 

@@ -11,12 +11,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts "@@@@@@@@@@@@@@@@@@@@ Inside User-create"
     @user = User.create(params[:user])
 
     if @user.errors.empty?
       sign_in(@user)
-      # TODO change where app goes after user created
       if @user.function == "redeemer"
         # new "redeemer" is redirected to redeemer page
         redirect_to redeemers_path
@@ -37,13 +35,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    puts "@@@@@@@@@@@@@@@@@@@@ Inside User-update"
     @user = current_user
     update_user = User.find(params[:id])
-    puts "&&&&&&&&&&&&&&&&&&&&&& update_user: #{update_user.inspect}"
     u = params[:user]
-    puts"$$$$$$$$$$$$$$$$$$$ params[:user]: #{u}"
-    #TODO need to add longitude and latitude to model
     # update these attributes on all users
     update_user.update_attributes(first_name: u[:first_name],
                                                     last_name: u[:last_name],
