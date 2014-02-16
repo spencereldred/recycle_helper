@@ -53,5 +53,13 @@ class Hi5Mailer < ActionMailer::Base
     mail(to: @user.email, subject: 'New recycle job is available.')
   end
 
+  def profile_updated(user)
+    @user = user
+    @greeting = "Aloha"
+
+    mail(to: @user.email, subject: 'Profile updated.')
+  end
+
+
 
 end

@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   # validates :phone, presence: true
 
   after_create :send_welcome_email
+  after_update :send_profile_updated_email
 
   geocoded_by :full_address, :if => :full_address_changed?
   after_validation :geocode
@@ -41,6 +42,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+    def send_profile_updated_email
+      Hi5Mailer.profile_updated(self).deliver
+    end
 
     def send_welcome_email
         # automail welcome message to new user
