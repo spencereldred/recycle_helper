@@ -29,35 +29,35 @@ class Hi5Mailer < ActionMailer::Base
     @user = user
     @greeting = "Aloha"
 
-    mail(to: @user.email, subject: 'Your recycle job has been unselected')
+    mail(to: @user.email, subject: 'Hi5 Exchange: Your recycle job has been unselected')
   end
 
   def selected(user)
     @user = user
     @greeting = "Aloha"
 
-    mail(to: @user.email, subject: 'Recycle job has been selected')
+    mail(to: @user.email, subject: 'Hi5 Exchange: Recycle job has been selected')
   end
 
   def completed(user)
     @user = user
     @greeting = "Aloha"
 
-    mail(to: @user.email, subject: 'Recycle job has been completed')
+    mail(to: @user.email, subject: 'Hi5 Exchange: Recycle job has been completed')
   end
 
   def job_available(user)
     @user = user
     @greeting = "Aloha"
 
-    mail(to: @user.email, subject: 'New recycle job is available.')
+    mail(to: @user.email, subject: 'Hi5 Exchange: New recycle job is available.')
   end
 
   def profile_updated(user)
     @user = user
     @greeting = "Aloha"
 
-    mail(to: @user.email, subject: 'Profile updated.')
+    mail(to: @user.email, subject: 'Hi5 Exchange: Profile updated.')
   end
 
 
