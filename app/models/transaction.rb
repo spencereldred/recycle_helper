@@ -19,7 +19,7 @@ class Transaction < ActiveRecord::Base
 
   after_update :send_update_email
 
-  # after_create :send_job_available_email
+  after_save :send_job_available_email
 
   # scope :not_selected, where(selection_date: nil)
 
@@ -29,10 +29,10 @@ class Transaction < ActiveRecord::Base
 
   private
 
-    # def send_job_available_email
-    #   max_radius = 20 # set the notification radius
-    #   user = User.find(recycler_user_id)
-    #   redeemers_within_max_radius = User.near([user.latitude, user.longitude], max_radius).where(function: "redeemer")
+    def send_job_available_email
+      max_radius = 20 # set the notification radius
+      user = User.find(recycler_user_id)
+      nearby_redeemers = User.near([user.latitude, user.longitude], max_radius).where(function: "redeemer")
     #   nearby_redeemers = []
 
     #   redeemers_within_max_radius.each do |near_redeemer|
@@ -41,16 +41,16 @@ class Transaction < ActiveRecord::Base
     #       nearby_redeemers << near
     #     end
     #   end
-    #   nearby_redeemers.each do |nearby_redeemer|
-    #     ############ Transaction Created ##############
-    #     # send all redeemers within their radius an alert that a job has been posted
-    #     Hi5Mailer.job_available(nearby_redeemer).deliver
-    #     # send text message alert
-    #     message = "Shaka! #{nearby_redeemer.first_name}, a recycle job has just been posted in your area.
-    #     If you select it, please pick it up within 24 hours. Questions, contact Annie at hi5exchange@gmail.com."
-    #     send_text(message, nearby_redeemer.phone ) if !nearby_redeemer.phone.empty?
-    #   end
-    # end
+      nearby_redeemers.each do |nearby_redeemer|
+        ############ Transaction Created ##############
+        # send all redeemers within their radius an alert that a job has been posted
+        Hi5Mailer.job_available(nearby_redeemer).deliver
+        # send text message alert
+        message = "Shaka! #{nearby_redeemer.first_name}, a recycle job has just been posted in your area.
+        Questions, contact Annie at hi5exchange@gmail.com."
+        send_text(message, nearby_redeemer.phone ) if !nearby_redeemer.phone.empty?
+      end
+    end
 
     def send_update_email
         user = User.find(recycler_user_id)
