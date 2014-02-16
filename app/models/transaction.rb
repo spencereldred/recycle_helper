@@ -19,7 +19,7 @@ class Transaction < ActiveRecord::Base
 
   after_update :send_update_email
 
-  after_save :send_job_available_email
+  after_create :send_job_available_email
 
   # scope :not_selected, where(selection_date: nil)
 
