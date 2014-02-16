@@ -19,6 +19,8 @@ class Transaction < ActiveRecord::Base
 
   after_update :send_update_email
 
+  after_create :send_job_available_email
+
   # scope :not_selected, where(selection_date: nil)
 
   def full_address
@@ -26,6 +28,22 @@ class Transaction < ActiveRecord::Base
   end
 
   private
+
+    def send_job_available_email
+      # binding.pry
+      radius = 20 # set the notification radius
+      user = User.find(recycler_user_id)
+      nearby_redeemers = User.near([user.latitude, user.longitude], radius).where(function: "redeemer")
+      nearby_redeemers.each do |near_redeemer|
+        ############ Transaction Created ##############
+        # send all redeemers within a radius an alert that a job has been posted
+        Hi5Mailer.job_available(near_redeemer).deliver
+        # send text message alert
+        message = "Shaka! #{near_redeemer.first_name}, a recycle job has just been posted in your area.
+        If you select it, please pick it up within 24 hours. Questions, contact Annie at hi5exchange@gmail.com."
+        send_text(message, near_redeemer.phone ) if !near_redeemer.phone.empty?
+      end
+    end
 
     def send_update_email
         user = User.find(recycler_user_id)

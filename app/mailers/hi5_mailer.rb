@@ -45,4 +45,13 @@ class Hi5Mailer < ActionMailer::Base
 
     mail(to: @user.email, subject: 'Recycle job has been completed')
   end
+
+  def job_available(user)
+    @user = user
+    @greeting = "Aloha"
+
+    mail(to: @user.email, subject: 'New recycle job is available.')
+  end
+
+
 end
