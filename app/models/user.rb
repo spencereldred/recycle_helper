@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   attr_accessible :username, :email, :function, :password, :password_confirmation,
                           :first_name, :last_name, :address, :city, :state, :zipcode, :dmv_number, :phone,
-                          :latitude, :longitude
+                          :latitude, :longitude, :radius
 
   before_save :create_remember_token
   # before_save { self.email = email.downcase }
@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true
   validates :zipcode, presence: true
+  validates :radius, presence: true, :numericality => { :greater_than => 0, :less_than_or_equal_to => 20 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }

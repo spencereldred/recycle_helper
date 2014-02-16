@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140208222046) do
+ActiveRecord::Schema.define(:version => 20140216163414) do
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(:version => 20140208222046) do
     t.string   "state"
     t.string   "zipcode"
     t.string   "phone"
-    t.string   "dmv_number"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "radius",          :default => 10
   end
 
 end

@@ -5,7 +5,7 @@ describe User do
     before { @user = User.new(
     username: "recycler100", email: "spencereldred@yahoo.com", phone: "8082803758",
     function: "recycler", first_name: "Willie", last_name: "Mays",
-    password: "recycler100",password_confirmation: "recycler100",
+    password: "recycler100",password_confirmation: "recycler100", radius: 10,
     address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768") }
 
     subject { @user }
@@ -23,6 +23,7 @@ describe User do
     it { should respond_to(:password_digest) }
     it { should respond_to(:password) }
     it { should respond_to(:password_confirmation) }
+    it { should respond_to(:radius) }
 
     it { should be_valid }
 
@@ -74,6 +75,21 @@ describe User do
     describe "when phone is not present" do
       before { @user.phone = ""}
       it{ should be_valid}
+    end
+
+    describe "when radius is not present" do
+      before { @user.radius = nil }
+      it{ should_not be_valid}
+    end
+
+    describe "when radius is to short" do
+      before { @user.radius = 0}
+      it{ should_not be_valid}
+    end
+
+    describe "when radius is too long" do
+      before { @user.radius = 21}
+      it{ should_not be_valid}
     end
 
     describe "when username is too long" do
