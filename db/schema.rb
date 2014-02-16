@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(:version => 20140216163414) do
     t.string   "phone"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "radius",          :default => 10
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "radius",          :default => 8
   end
 
 end

@@ -41,6 +41,9 @@ class Transaction < ActiveRecord::Base
     #       nearby_redeemers << near
     #     end
     #   end
+
+      binding.pry
+
       nearby_redeemers.each do |nearby_redeemer|
         ############ Transaction Created ##############
         # send all redeemers within their radius an alert that a job has been posted
