@@ -45,15 +45,39 @@ class User < ActiveRecord::Base
 
     def send_profile_updated_email
       Hi5Mailer.profile_updated(self).deliver
+      # send text message alert
+      message = "Shaka! #{self.first_name}, your profile has been updated.
+      Questions, contact Annie at hi5exchange@gmail.com."
+      send_text(message, self.phone ) if !self.phone.empty?
     end
 
     def send_welcome_email
         # automail welcome message to new user
         if self.function == "redeemer"
           Hi5Mailer.welcome_redeemer(self).deliver
+          message = "Shaka! #{self.first_name}, your redeemer account has been created.
+          Questions, contact Annie at hi5exchange@gmail.com."
+          send_text(message, self.phone ) if !self.phone.empty?
         else
           Hi5Mailer.welcome_recycler(self).deliver
+          message = "Shaka! #{self.first_name}, your recycler account has been created.
+          Questions, contact Annie at hi5exchange@gmail.com."
+          send_text(message, self.phone ) if !self.phone.empty?
         end
+    end
+
+    # Sends text message using Twilio's service
+    def send_text(text, phone)
+      account_sid    = ENV["ACCOUNT_SID"]
+      auth_token     = ENV["AUTH_TOKEN"]
+      client = Twilio::REST::Client.new account_sid, auth_token
+
+      account = client.account
+      message = account.sms.messages.create({
+        :from => ENV["PHONE"],
+        :to => phone,
+        :body => text})
+      puts message
     end
 
 end
