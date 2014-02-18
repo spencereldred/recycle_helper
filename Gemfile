@@ -31,6 +31,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem 'unicorn-rails'
 end
 
 group :test do
@@ -43,6 +44,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem 'geocoder'
 
+gem 'unicorn'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
