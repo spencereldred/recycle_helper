@@ -17,11 +17,12 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    # binding.pry
+    trans = Transaction.create(params[:transaction])
     respond_to do |format|
       format.html
-      format.json { render :json => Transaction.create(params[:transaction]) }
+      format.json { render :json => trans }
     end
+    JobAvailableEmailTextWorker.perform_async(trans.recycler_user_id)
   end
 
   def update

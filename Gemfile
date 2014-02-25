@@ -19,7 +19,6 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'pry'
   gem 'pry-rails'
@@ -28,7 +27,10 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-rails'
   gem 'capybara'
+  gem 'email_spec'
+  gem 'sms-spec'
 end
 
 # To use ActiveModel has_secure_password
@@ -37,7 +39,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'geocoder'
 gem 'unicorn'
 gem 'sidekiq'
-gem 'sidetiq'
+# gem 'sidetiq'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

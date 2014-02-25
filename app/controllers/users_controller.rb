@@ -12,13 +12,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(params[:user])
-
     if @user.errors.empty?
       sign_in(@user)
       if @user.function == "redeemer"
+        # fire off redeemer welcome email
+        WelcomeEmailTextRedeemerWorker.perform_async(@user.id)
         # new "redeemer" is redirected to redeemer page
         redirect_to redeemers_path
       else
+        # fire off recycler welcome email
+        WelcomeEmailTextRecyclerWorker.perform_async(@user.id)
         # new "recycler" is redirected to recycler page
         redirect_to transactions_path
       end
@@ -51,8 +54,10 @@ class UsersController < ApplicationController
       # update "redeemer" only attributes
       update_user.update_attributes(radius: u[:radius])
     end
-    # need to sign in because the session token has changed
-    sign_in(update_user)
+    # send_profile_updated_email(@user)
+    ProfileUpdatedEmailTextWorker.perform_async(@user.id)
+
+    sign_in(update_user) # need to sign in because the session token has changed
     if current_user.function == "redeemer"
       redirect_to redeemers_path
     else

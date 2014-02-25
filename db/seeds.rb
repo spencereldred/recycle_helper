@@ -54,32 +54,32 @@ users = User.create([
 
    ])
 
-transactions = Transaction.create([
-    {recycler_user_id: "1", plastic: "1", glass: "1", cans: "1", other: "1",
-    address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768",
-    selected: false, completed: false },
+# transactions = Transaction.create([
+#     {recycler_user_id: "1", plastic: "1", glass: "1", cans: "1", other: "1",
+#     address: "183 Pukulani St.", city: "Makawao", state: "HI", zipcode: "96768",
+#     selected: false, completed: false },
 
-    {recycler_user_id: "2", plastic: "2", glass: "2", cans: "2", other: "2",
-    address: "2841 Iolani St.", city: "Makawao", state: "HI", zipcode: "96768",
-    selected: false, completed: false },
+#     {recycler_user_id: "2", plastic: "2", glass: "2", cans: "2", other: "2",
+#     address: "2841 Iolani St.", city: "Makawao", state: "HI", zipcode: "96768",
+#     selected: false, completed: false },
 
-    {recycler_user_id: "3", plastic: "3", glass: "3", cans: "3", other: "3",
-    address: "296 Liholani St.", city: "Makawao", state: "HI", zipcode: "96768",
-    selected: false, completed: false },
+#     {recycler_user_id: "3", plastic: "3", glass: "3", cans: "3", other: "3",
+#     address: "296 Liholani St.", city: "Makawao", state: "HI", zipcode: "96768",
+#     selected: false, completed: false },
 
-    {recycler_user_id: "4", plastic: "4", glass: "4", cans: "4", other: "4",
-    address: "2942 Aina Lani St.", city: "Makawao", state: "HI", zipcode: "96768",
-    selected: false, completed: false },
+#     {recycler_user_id: "4", plastic: "4", glass: "4", cans: "4", other: "4",
+#     address: "2942 Aina Lani St.", city: "Makawao", state: "HI", zipcode: "96768",
+#     selected: false, completed: false },
 
-    {recycler_user_id: "5", plastic: "5", glass: "5", cans: "5", other: "5",
-    address: "348 Nalani St.", city: "Makawao", state: "HI", zipcode: "96768",
-    selected: false, completed: false },
+#     {recycler_user_id: "5", plastic: "5", glass: "5", cans: "5", other: "5",
+#     address: "348 Nalani St.", city: "Makawao", state: "HI", zipcode: "96768",
+#     selected: false, completed: false },
 
-    {recycler_user_id: "6", plastic: "6", glass: "6", cans: "6", other: "6",
-    address: "414 Brannan St.", city: "San Francisco", state: "CA", zipcode: "94107",
-    selected: false, completed: false }
+#     {recycler_user_id: "6", plastic: "6", glass: "6", cans: "6", other: "6",
+#     address: "414 Brannan St.", city: "San Francisco", state: "CA", zipcode: "94107",
+#     selected: false, completed: false }
 
-  ])
+#   ])
 
 
 
