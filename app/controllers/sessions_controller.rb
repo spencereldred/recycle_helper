@@ -7,8 +7,10 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_username( params[:username] )
+
     if user && user.authenticate( params[:password] ) # authenticate is a bycrypt method
       sign_in(user)
+
       #redirect_to root_path, :notice => "Signed in!"
       if user[:function] == "redeemer"
         redirect_to redeemers_path

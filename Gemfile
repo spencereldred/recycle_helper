@@ -29,8 +29,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'email_spec'
-  gem 'sms-spec'
 end
 
 # To use ActiveModel has_secure_password
