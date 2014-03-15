@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140216163414) do
+ActiveRecord::Schema.define(:version => 20140315195955) do
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
@@ -27,12 +27,19 @@ ActiveRecord::Schema.define(:version => 20140216163414) do
     t.string   "zipcode"
     t.boolean  "selected"
     t.boolean  "completed"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "plastic"
     t.integer  "cans"
     t.integer  "glass"
     t.integer  "other"
+    t.boolean  "cardboard",        :default => false
+    t.boolean  "non_hi5_plastic",  :default => false
+    t.boolean  "non_hi5_glass",    :default => false
+    t.boolean  "non_hi5_cans",     :default => false
+    t.boolean  "magazines",        :default => false
+    t.boolean  "newspaper",        :default => false
+    t.boolean  "paper",            :default => false
   end
 
   create_table "users", :force => true do |t|
