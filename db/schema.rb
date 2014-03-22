@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20140315195955) do
     t.boolean  "magazines",        :default => false
     t.boolean  "newspaper",        :default => false
     t.boolean  "paper",            :default => false
+    t.string   "trans_type"
   end
 
   create_table "users", :force => true do |t|

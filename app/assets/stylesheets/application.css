@@ -102,3 +102,11 @@ li[class="footer-img"] {
     visibility: hidden;
 }
 
+/*.ng-hide {
+  display:block!important;
+
+  position:absolute;
+  top:-9999px;
+  left:-9999px;
+}*/
+

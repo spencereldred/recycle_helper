@@ -7,7 +7,19 @@ app = angular.module("Hi5Exchange", ["ngResource"])
 ################# Directives #################
 app.directive "new", () ->
   restrict: "E",
-  template: "New Transaction for "
+  template: "Enter Redeemable Transaction:"
+
+app.directive "sam", () ->
+  restrict: "E",
+  template: "Enter Good Samaritan Transaction:"
+
+app.directive "outred", () ->
+  restrict: "E",
+  template: "Open Redeemable Transactions"
+
+app.directive "outsam", () ->
+  restrict: "E",
+  template: "Open Good Samaritan Transactions"
 
 ################# Routes #####################
 app.factory "Transaction", ($resource) ->
@@ -18,6 +30,7 @@ app.factory "Transaction", ($resource) ->
 
   $scope.update_trans = (data)=>
     $scope.transactions = data
+    return
 
   ## Grab the transactions from the rails database asychronously
   Transaction.query $scope.update_trans
@@ -33,11 +46,13 @@ app.factory "Transaction", ($resource) ->
     {name: "7", value: "7" }
   ]
 
-  # Recycler creates a transaction and saves it to the database.
+  $scope.hi = () ->
+    console.log "hii"
+
+  # Recycler creates a redeemable transaction and saves it to the database.
   # The transaction is added to the view.
   $scope.new_recycle_item = ->
     console.log "add recycle item button was clicked"
-    # $('#thanks_alert').css('visibility','visible');
     if @transaction
       transaction = @transaction
       #################
@@ -50,6 +65,15 @@ app.factory "Transaction", ($resource) ->
       transaction.completion_date = "nil"
       transaction.selected = false
       transaction.completed = false
+      transaction.trans_type = "redeemable"
+      # no samaritan items in a redeemable transaction
+      transaction.cardboard = false
+      transaction.non_hi5_plastic = false
+      transaction.non_hi5_glass = false
+      transaction.non_hi5_cans = false
+      transaction.magazines = false
+      transaction.newspaper = false
+      transaction.paper = false
 
       ## Update the scoped 'transactions' array for the view
       $scope.transactions.push(transaction)
@@ -57,6 +81,53 @@ app.factory "Transaction", ($resource) ->
 
       ## Update the database via the rails controller 'create' method
       Transaction.save(transaction)
+      # clear select boxes
+      # $('#plastic').selectedIndex = 0
+      # transaction.other = 0
+      # transaction.plastic = 0
+      # transaction.glass = 0
+      # transaction.cans = 0
+      return
+
+  # Recycler creates a Good Samaritan transaction and saves it to the database.
+  $scope.new_samaritan_item  =  ->
+    event.preventDefault()
+    console.log "add samaritan item button was clicked"
+    if @transaction
+      transaction = @transaction
+      #################
+      # grab values from the user model stashed in the DOM
+      transaction.address = $('#user_address').val()
+      transaction.city = $('#user_city').val()
+      transaction.state = $('#user_state').val()
+      transaction.zipcode = $('#user_zipcode').val()
+      transaction.recycler_user_id = $('#user_id').val()
+      transaction.completion_date = "nil"
+      transaction.selected = false
+      transaction.completed = false
+      transaction.trans_type = "samaritan"
+      # no redeemable items in a samaritan transaction
+      transaction.other = 0
+      transaction.plastic = 0
+      transaction.glass = 0
+      transaction.cans = 0
+
+      ## Update the scoped 'transactions' array for the view
+      $scope.transactions.push(transaction)
+      console.log transaction
+
+      ## Update the database via the rails controller 'create' method
+      Transaction.save(transaction)
+      #clear checkboxes
+      # transaction.cardboard = false
+      # transaction.non_hi5_plastic = false
+      # transaction.non_hi5_glass = false
+      # transaction.non_hi5_cans = false
+      # transaction.magazines = false
+      # transaction.newspaper = false
+      # transaction.paper = false
+      return
+
 
   # Recycler marks the transaction as completed.
   # Sets { completed: true, completion_date: new Date() }

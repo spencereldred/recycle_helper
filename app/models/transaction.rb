@@ -3,7 +3,9 @@ class Transaction < ActiveRecord::Base
                         :plastic, :glass, :cans, :other,
                         :selection_date, :completion_date, :rating,
                         :address, :city, :state, :zipcode,
-                        :latitude, :longitude, :selected, :completed
+                        :latitude, :longitude, :selected, :completed,
+                        :non_hi5_plastic, :non_hi5_glass, :non_hi5_cans,
+                        :magazines, :newspaper, :paper, :trans_type
 
   validates :recycler_user_id, presence: true
   validates :address, presence: true
