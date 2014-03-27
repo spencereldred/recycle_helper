@@ -3,7 +3,9 @@
   <div class="row">
     <div class="col-sm-offset-3 col-sm-9 c-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
   </div>
-  <div class="col-sm-offset-5 col-sm-7"><all></all></div>
+  <div class="col-sm-offset-2 col-sm-10">
+    <redeemable></redeemable>
+  </div>
   <div class="row">
     <div class="bs-example col-sm-offset-2 col-sm-8">
       <table class="table table-hover" id="recycler-table">
@@ -20,12 +22,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="transaction in transactions | filter: {selected: false}">
-
+          <tr ng-repeat="transaction in transactions | filter: {trans_type: 'redeemable'} | filter: {selected: false}">
             <td>
               <input type="checkbox" ng-click="select()" ng-model="transaction.selected">
             </td>
-            <td>{{transaction.address}}, {{transaction.city}} {{transaction.recycler_user_id}}</td>
+            <td>{{transaction.address}}, {{transaction.city}}</td>
             <td>{{transaction.state}} {{transaction.zipcode}}</td>
             <td>{{transaction.plastic}}</td>
             <td>{{transaction.cans}}</td>
@@ -37,15 +38,38 @@
       </table>
     </div>
   </div>
+  <div class="col-sm-offset-2 col-sm-10">
+    <samaritan></samaritan>
+  </div>
+  <div class="row">
+    <div class="bs-example col-sm-offset-2 col-sm-8">
+      <span class="col-sm-12">
+          <div ng-repeat="transaction in transactions |filter: {trans_type: 'samaritan'}  | filter: {selected: false}">
+            <span class="col-sm-1">
+              <input type="checkbox" ng-click="select()" ng-model="transaction.selected"></input>
+            </span>
+            <span class="col-sm-4">{{transaction.address}}, {{transaction.city}}</span>
+            <span class="col-sm-2" ng-show="transaction.cardboard" >cardboard</span>
+            <span class="col-sm-2" ng-show="transaction.newspaper" >newspaper</span>
+            <span class="col-sm-2" ng-show="transaction.non_hi5_plastic" >non_hi5_plastic</span>
+            <span class="col-sm-2" ng-show="transaction.non_hi5_glass" >non_hi5_glass</span>
+            <span class="col-sm-2" ng-show="transaction.non_hi5_cans" >non_hi5_cans</span>
+            <span class="col-sm-2" ng-show="transaction.magazines" >magazines</span>
+            <span class="col-sm-1" ng-show="transaction.paper" >paper</span></br></br>
+          </div>
+      </span>
+    </div>
+  </div>
 
-  <div class="col-sm-offset-4 col-sm-8"><h1>Selected  by <%= current_user[:first_name]%>
-    <%= current_user[:last_name]%></h1></div>
+  <div class="col-sm-offset-2 col-sm-10">
+    <redeemableselected></redeemableselected>
+    <!-- <h1>Transactions selected  by <%#= current_user[:first_name]%> <%#= current_user[:last_name]%></h1> -->
+  </div>
   <div class="row">
     <div class="bs-example col-sm-offset-2 col-sm-9">
       <table class="table table-hover" id="recycler-table">
         <thead>
           <tr>
-            <!-- <th>Unselect</th> -->
             <th>Address</th>
             <th>St. / Zip</th>
             <th>Plastic</th>
@@ -57,12 +81,7 @@
           </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="transaction in transactions | filter: {selected: true, completed: false, redeemer_user_id: <%= current_user.id %> }" >
-              <!-- <td>
-                <input type="checkbox" ng-click="unselect()" ng-model="transaction.selected" checked>
-                <input type="hidden" id="unselection_date" value="nil" />
-
-              </td> -->
+            <tr ng-repeat="transaction in transactions | filter: {trans_type: 'redeemable'} | filter: {selected: true, completed: false, redeemer_user_id: <%= current_user.id %> }" >
               <td>{{transaction.address}}, {{transaction.city}}</td>
               <td>{{transaction.state}} {{transaction.zipcode}}</td>
               <td>{{transaction.plastic}}</td>
@@ -74,12 +93,35 @@
                 <button class="btn btn-primary btn-sm" ng-click="completed()"
                     ng-model="transaction.completed">Completed
                 </button>
-                <!-- <input type="checkbox" ng-click="completed()" ng-model="transaction.completed">
-                <input type="hidden" id="completion_date" value="nil" /> -->
               </td>
             </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="col-sm-offset-2 col-sm-10">
+    <samaritanselected></samaritanselected>
+  </div>
+  <div class="row">
+    <div class="bs-example col-sm-offset-2 col-sm-8">
+      <span class="col-sm-12">
+          <div ng-repeat="transaction in transactions |filter: {trans_type: 'samaritan'}  | filter: {selected: true, completed: false, redeemer_user_id: <%= current_user.id %> }" >
+            <span class="col-sm-4">{{transaction.address}}, {{transaction.city}}</span>
+            <span class="col-sm-2" ng-show="transaction.cardboard" >cardboard</span>
+            <span class="col-sm-2" ng-show="transaction.newspaper" >newspaper</span>
+            <span class="col-sm-2" ng-show="transaction.non_hi5_plastic" >non_hi5_plastic</span>
+            <span class="col-sm-2" ng-show="transaction.non_hi5_glass" >non_hi5_glass</span>
+            <span class="col-sm-2" ng-show="transaction.non_hi5_cans" >non_hi5_cans</span>
+            <span class="col-sm-2" ng-show="transaction.magazines" >magazines</span>
+            <span class="col-sm-1" ng-show="transaction.paper" >paper</span>
+            <span class="col-sm-2">
+              <button class="btn btn-primary btn-sm" ng-click="completed()"
+                      ng-model="transaction.completed">Completed
+              </button>
+            </span>
+            </br></br>
+          </div>
+      </span>
     </div>
   </div>
   <input type="hidden" id="center_latitude" value="<%= current_user.latitude %>" />

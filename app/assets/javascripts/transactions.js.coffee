@@ -81,12 +81,6 @@ app.factory "Transaction", ($resource) ->
 
       ## Update the database via the rails controller 'create' method
       Transaction.save(transaction)
-      # clear select boxes
-      # $('#plastic').selectedIndex = 0
-      # transaction.other = 0
-      # transaction.plastic = 0
-      # transaction.glass = 0
-      # transaction.cans = 0
       return
 
   # Recycler creates a Good Samaritan transaction and saves it to the database.
@@ -118,14 +112,6 @@ app.factory "Transaction", ($resource) ->
 
       ## Update the database via the rails controller 'create' method
       Transaction.save(transaction)
-      #clear checkboxes
-      # transaction.cardboard = false
-      # transaction.non_hi5_plastic = false
-      # transaction.non_hi5_glass = false
-      # transaction.non_hi5_cans = false
-      # transaction.magazines = false
-      # transaction.newspaper = false
-      # transaction.paper = false
       return
 
 
@@ -143,9 +129,21 @@ app.factory "Transaction", ($resource) ->
 ######################################################
 
 ################# Directives #################
-app.directive "all", () ->
+app.directive "redeemable", () ->
   restrict: "E",
-  template: "<h1>All Available</h1>"
+  template: "<h1>Available Redeemable Transactions</h1>"
+
+app.directive "samaritan", () ->
+  restrict: "E",
+  template: "<h1>Available Good Samaritan Transactions</h1>"
+
+app.directive "redeemableselected", () ->
+  restrict: "E",
+  template: "<h1>Redeemable Transactions Selected</h1>"
+
+app.directive "samaritanselected", () ->
+  restrict: "E",
+  template: "<h1>Good Samaritan Transactions Selected</h1>"
 
 ################# Routes #####################
 app.factory "Redeemer", ($resource) ->
@@ -167,7 +165,6 @@ app.factory "Redeemer", ($resource) ->
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
       console.log address
       $scope.add_marker(address)
-
   # Asynchronously calls the RedeemerController to retrieve the
   # transactions within a 20 mile radius of the Redeemer.
   Redeemer.query $scope.update_trans
@@ -187,7 +184,6 @@ app.factory "Redeemer", ($resource) ->
   # TODO - Fire off an email to the "recycler" that the item has been selected.
   $scope.select = ->
     transaction = @transaction
-    # transaction.selected = true
     transaction.selection_date = new Date()
     transaction.redeemer_user_id = current_user_id
     console.log transaction.redeemer_user_id
@@ -199,11 +195,7 @@ app.factory "Redeemer", ($resource) ->
   # sets { selected: false, selection_date: "nil" }
   # TODO - Fire off a email to the "recycler" that the job has been unselected?
   $scope.unselect = ->
-    # console.log "unselect()"
     transaction = @transaction
-    # for address in addresses
-    #   console.log "before delete",   address
-    # console.log transaction.address, addresses.length
     transaction.selection_date = $('#unselection_date').val()
     transaction.redeemer_user_id = "nil"
     console.log transaction.redeemer_user_id
@@ -212,11 +204,8 @@ app.factory "Redeemer", ($resource) ->
       address == addr
     )
     $scope.add_marker(address,"delete")
-    # console.log address, addresses.length
     for address in addresses
-      # console.log "after delete", address
       $scope.add_marker(address)
-
     transaction.$update()
 
 
@@ -232,12 +221,8 @@ app.factory "Redeemer", ($resource) ->
       address == addr
     )
     $scope.add_marker(address,"delete")
-    # console.log address, addresses.length
     for address in addresses
-      # console.log "after delete", address
       $scope.add_marker(address)
-
-
     transaction.$update()
 
 
