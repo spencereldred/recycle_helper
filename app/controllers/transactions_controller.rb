@@ -22,7 +22,9 @@ class TransactionsController < ApplicationController
       format.html
       format.json { render :json => trans }
     end
-    JobAvailableEmailTextWorker.perform_async(trans.recycler_user_id)
+    if trans.trans_type == "redeemable"
+      JobAvailableEmailTextWorker.perform_async(trans.recycler_user_id)
+    end
   end
 
   def update
