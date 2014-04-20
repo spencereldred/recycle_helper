@@ -112,7 +112,7 @@ app.factory "Transaction", ($resource) ->
 
       ## Update the database via the rails controller 'create' method
       Transaction.save(transaction)
-      return
+      # return
 
 
   # Recycler marks the transaction as completed.
