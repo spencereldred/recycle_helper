@@ -1,4 +1,4 @@
-# Hi5Exchange - Pier to Pier Recycling App
+# Hi5Exchange.org - Pier to Pier Recycling App
 
 ## Ruby version 2.0.0
 
@@ -7,7 +7,7 @@
 ## AngularJS front end
 
 ## Sidekiq workers handling ActionMailer email and Twilio text messages
-  
+
 <hr>
 ## How it works:
 
