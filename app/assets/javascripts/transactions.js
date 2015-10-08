@@ -40,6 +40,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
     console.log("Made it to the TransactionController");
 
     $scope.update_trans = function (data) {
+      console.log("TransactionController - update_trans");
       $scope.transactions = data;
       return;
     };
@@ -65,7 +66,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
     // # Recycler creates a redeemable transaction and saves it to the database.
     // # The transaction is added to the view.
     $scope.new_recycle_item = function () {
-      console.log("add recycle item button was clicked");
+      console.log("TransactionController - new_recycle_item");
       if (this.transaction) {
         var transaction = this.transaction;
         // #################
@@ -97,7 +98,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
 
     $scope.new_samaritan_item  = function () {
       event.preventDefault();
-      console.log("add samaritan item button was clicked");
+      console.log("TransactionController - new_samaritan_item");
       if (this.transaction) {
         var transaction = this.transaction;
         // #################
@@ -129,7 +130,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
     // # The transaction is removed from the view by a filter.
     // # The view only shows transactions where "filter: { completed: false}"."
     $scope.remove = function () {
-      console.log("remove action clicked");
+      console.log("TransactionController - remove");
       var transaction = this.transaction;
       transaction.delete();
     };
@@ -183,9 +184,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     var current_user_id = parseInt($('#current_user_id').val());
     var addresses = [];
 
+
     // # The callback function loads the page with transactions from the database.
     // # Adds markers on the map for the transactions already selected.
     $scope.update_trans = function (data) {
+      console.log("update_trans: %O", data);
       $scope.transactions = data;
       // TODO - coffeescript to javascript program output:
       var address, i, len, ref, transaction;
@@ -209,6 +212,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // # Adds a marker to the map.
     // # Calls the google map routine with the address passed in.
     $scope.add_marker = function (address,action) {
+      console.log("Redeemer - add_marker");
       codeAddress(address,action);
       if (action !== "delete") {
         addresses.push(address);
@@ -222,8 +226,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // calling add_marker(address) with the address of the Recycler.
     // TODO - Fire off an email to the "recycler" that the item has been selected.
     $scope.select = function () {
+      console.log("Redeemer - select");
       var transaction, address;
-      transaction = this.transaction
+      transaction = this.transaction;
+      transaction.selected = true;
+      console.log("this.transaction: %O", this.transaction);
       transaction.selection_date = new Date();
       transaction.redeemer_user_id = current_user_id;
       console.log(transaction.redeemer_user_id);
@@ -236,6 +243,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // # sets { selected: false, selection_date: "nil" }
     // # TODO - Fire off a email to the "recycler" that the job has been unselected?
     $scope.unselect = function () {
+      console.log("Redeemer - unselect");
       var transaction, address;
       transaction = this.transaction;
       transaction.selection_date = $('#unselection_date').val();
@@ -256,6 +264,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // checkbox. Removes the map marker for this item from the map.
     // TODO - fire off an action mail to recycler indicating "redeemer" says the job is done
     $scope.completed = function () {
+      console.log("Redeemer - completed");
       var transaction, address;
       transaction = this.transaction;
       transaction.completion_date = new Date();
