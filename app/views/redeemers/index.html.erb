@@ -17,7 +17,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Other</th>
+            <th>Mixed Hi5</th>
             <th>Posted</th>
           </tr>
         </thead>
@@ -78,7 +78,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Other</th>
+            <th>Mixed Hi5</th>
             <th>Selected</th>
             <th>Completed</th>
           </tr>
@@ -131,6 +131,7 @@
   <input type="hidden" id="center_latitude" value="<%= current_user.latitude %>" />
   <input type="hidden" id="center_longitude" value="<%= current_user.longitude %>" />
   <input type="hidden" id="current_user_id" value="<%= current_user.id %>" />
+  <input type="hidden" id="current_user_radius" value="<%= current_user.radius %>" />
   <div id="map-canvas"></div>
 </div><!-- ng-controller -->
 

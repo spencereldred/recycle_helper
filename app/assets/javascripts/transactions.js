@@ -69,8 +69,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
       console.log("TransactionController - new_recycle_item");
       if (this.transaction) {
         var transaction = this.transaction;
-        // #################
-        // # grab values from the user model stashed in the DOM
+        // grab values from the user model stashed in the DOM
         transaction.address = $('#user_address').val();
         transaction.city = $('#user_city').val();
         transaction.state = $('#user_state').val();
@@ -80,7 +79,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
         transaction.selected = false;
         transaction.completed = false;
         transaction.trans_type = "redeemable";
-        // # no samaritan items in a redeemable transaction
+        // no samaritan items in a redeemable transaction
         transaction.cardboard = false;
         transaction.non_hi5_plastic = false;
         transaction.non_hi5_glass = false;
@@ -101,8 +100,7 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
       console.log("TransactionController - new_samaritan_item");
       if (this.transaction) {
         var transaction = this.transaction;
-        // #################
-        // # grab values from the user model stashed in the DOM
+        // grab values from the user model stashed in the DOM
         transaction.address = $('#user_address').val();
         transaction.city = $('#user_city').val();
         transaction.state = $('#user_state').val();
@@ -112,12 +110,12 @@ app.controller('TransactionController', ['$scope', '$resource', 'Transaction',
         transaction.selected = false;
         transaction.completed = false;
         transaction.trans_type = "samaritan";
-        // # no redeemable items in a samaritan transaction
+        // no redeemable items in a samaritan transaction
         transaction.other = 0;
         transaction.plastic = 0;
         transaction.glass = 0;
         transaction.cans = 0;
-        // ## Update the scoped 'transactions' array for the view
+        // Update the scoped 'transactions' array for the view
         $scope.transactions.push(transaction);
         console.log(transaction);
         // ## Update the database via the rails controller 'create' method
@@ -179,14 +177,17 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
   function($scope, $resource, Redeemer){
     console.log("Made it to the RedeemerController");
 
-    var center_latitude = $('#center_latitude').val();
-    var center_longitude = $('#center_longitude').val();
-    var current_user_id = parseInt($('#current_user_id').val());
-    var addresses = [];
+    var center_latitude = $('#center_latitude').val(),
+        center_longitude = $('#center_longitude').val(),
+        user_radius = $('#current_user_radius').val() * 1609.34,
+        // user_radius = 5 * 1609.34,
+        current_user_id = parseInt($('#current_user_id').val()),
+        addresses = [],  markers = [],
+        map, geocoder;
 
-
-    // # The callback function loads the page with transactions from the database.
-    // # Adds markers on the map for the transactions already selected.
+    // The callback function from Redeemer.query loads the page with
+    // transactions from the database.
+    // Adds markers on the map for the transactions already selected.
     $scope.update_trans = function (data) {
       console.log("update_trans: %O", data);
       $scope.transactions = data;
@@ -198,22 +199,20 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
         if (!(transaction.selected === true && transaction.completed === false && transaction.redeemer_user_id === current_user_id)) {
           continue;
         }
-        console.log(transaction.redeemer_user_id, current_user_id);
         address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-        console.log(address);
-        $scope.add_marker(address);
+        $scope.add_marker(address, "no-op", transaction);
       }
     };
 
-    // # Asynchronously calls the RedeemerController to retrieve the
-    // # transactions within a 20 mile radius of the Redeemer.
-    var redeemersInRadius = Redeemer.query($scope.update_trans);
+    // Asynchronously calls the RedeemerController to retrieve the
+    // transactions within a 20 mile radius of the Redeemer.
+    Redeemer.query($scope.update_trans);
 
-    // # Adds a marker to the map.
-    // # Calls the google map routine with the address passed in.
-    $scope.add_marker = function (address,action) {
-      console.log("Redeemer - add_marker");
-      codeAddress(address,action);
+    // Adds a marker to the map.
+    // Calls the google map routine to place the marker
+    // with the address passed in.
+    $scope.add_marker = function (address,action,transaction) {
+      codeAddress(address,action,transaction);
       if (action !== "delete") {
         addresses.push(address);
       }
@@ -224,38 +223,37 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // Sets { selected: true, selection_date: new Date() }
     // Places a pin on the map at the location for recycle pickup by
     // calling add_marker(address) with the address of the Recycler.
-    // TODO - Fire off an email to the "recycler" that the item has been selected.
     $scope.select = function () {
       console.log("Redeemer - select");
       var transaction, address;
       transaction = this.transaction;
       transaction.selected = true;
-      console.log("this.transaction: %O", this.transaction);
       transaction.selection_date = new Date();
       transaction.redeemer_user_id = current_user_id;
-      console.log(transaction.redeemer_user_id);
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      $scope.add_marker(address);
+      $scope.add_marker(address,"no-op",transaction);
       transaction.$update();
     };
 
-    // # The Redeemer unselects an item to recycle
-    // # sets { selected: false, selection_date: "nil" }
-    // # TODO - Fire off a email to the "recycler" that the job has been unselected?
+    // The Redeemer unselects an item to recycle
+    // sets { selected: false, selection_date: "nil" }
+    // TODO - Fire off a email to the "recycler" that the job has been unselected?
     $scope.unselect = function () {
       console.log("Redeemer - unselect");
-      var transaction, address;
+      var transaction, address,i, length;
       transaction = this.transaction;
       transaction.selection_date = $('#unselection_date').val();
       transaction.redeemer_user_id = "nil";
-      console.log(transaction.redeemer_user_id);
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      addresses = _.reject(addresses, function (addr) {
-        address == addr
-      });
-      $scope.add_marker(address,"delete");
-      for (address in addresses) {
-        $scope.add_marker(address);
+      for (i = 0, length = addresses.length; i < length; i++ ) {
+        if (address === addresses[i]) {
+          indexToRemove = i;
+        }
+      }
+      addresses.splice(indexToRemove,1);
+      $scope.add_marker(address,"delete",transaction);
+      for (i = 0, length = addresses.length; i < length; i++ ) {
+        $scope.add_marker(addresses[i],"no-op", transaction);
       }
       transaction.$update()
     };
@@ -265,20 +263,111 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // TODO - fire off an action mail to recycler indicating "redeemer" says the job is done
     $scope.completed = function () {
       console.log("Redeemer - completed");
-      var transaction, address;
+      var transaction, address, indexToRemove, i, length;
       transaction = this.transaction;
       transaction.completion_date = new Date();
       transaction.completed = true;
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      addresses = _.reject(addresses, function (addr) {
-        address == addr;
-      });
-      $scope.add_marker(address,"delete");
-      for (address in addresses) {
-        $scope.add_marker(address);
+      for (i = 0, length = addresses.length; i < length; i++ ) {
+        if (address === addresses[i]) {
+          indexToRemove = i;
+        }
+      }
+      addresses.splice(indexToRemove,1);
+      $scope.add_marker(address,"delete",transaction);
+      for (i = 0, length = addresses.length; i < length; i++ ) {
+        $scope.add_marker(addresses[i],"no-op", transaction);
       }
       transaction.$update();
     };
+
+    function initialize() {// start initialize
+      window.mapWasInitialized = true;
+      geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(center_latitude, center_longitude);
+      var mapOptions = {
+        zoom: 12,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    };// end initialize
+
+    window.codeAddress = function(address,todo,transaction) { // start codeAddress
+      if (todo =="delete") { // remove all the
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null);
+        }
+        markers = [];
+      } else {
+        if(!window.mapWasInitialized) { initialize() };
+        geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(center_latitude, center_longitude);
+        drawUserCircleOnMap(map,latlng,user_radius);
+
+        geocoder.geocode( { 'address': address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                draggable:true, // animate
+                animation: google.maps.Animation.DROP,  // animate
+                position: results[0].geometry.location
+            });
+            var infoString = createInfoBoxString(address,transaction);
+            var infoWindow = new google.maps.InfoWindow({
+              content: infoString
+            });
+            marker.addListener('click', function () {
+              infoWindow.open(map,marker);
+            });
+          } else {
+             alert('Geocode was not successful for the following reason: ' + status);
+          }
+          markers.push(marker);
+          markers = _.uniq(markers);
+        });
+      }; // end codeAddress
+
+      function toggleBounce() { // start toggleBounce
+        if (marker.getAnimation() != null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }; // end toggleBounce
+
+      // function hello () {
+      //   console.log("button in infoBox actually works!!");
+      // };
+
+      function drawUserCircleOnMap(map,latlng,user_radius) {
+        var userCircle = new google.maps.Circle({
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.05,
+          map: map,
+          center: latlng,
+          radius: user_radius
+        });
+      };
+
+      function createInfoBoxString (address, transaction) { // start createInfoBoxString
+        var infoBoxString = "";
+        infoBoxString += "<p>Hi5Exchange Transaction Selected.<p>"
+        infoBoxString += "<p>" + address + "<p>";
+        infoBoxString += "<p>Plastic: " + transaction.plastic + ", Cans: " + transaction.cans;
+        infoBoxString += ", Glass: " + transaction.glass + ", Mixed Hi5: " + transaction.other + "<p>";
+        infoBoxString += "<p>Miles from home: " + (transaction.distance * 1).toFixed(2) + "<p>";
+        // infoBoxString += "<button onclick='hello'>Completed</button>";
+
+        return infoBoxString;
+      }; // end createInfoBoxString
+
+    }
+
 
   }
 ]);
