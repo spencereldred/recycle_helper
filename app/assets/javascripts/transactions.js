@@ -201,7 +201,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
         transaction = $scope.transactions[i];
         if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
           address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-          $scope.add_marker(address, "no-op", transaction);
+          addMarker(address, "no-op", transaction);
         }
       }
     };
@@ -213,13 +213,10 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // Adds a marker to the map.
     // Calls the google map routine to place the marker
     // with the address passed in.
-    $scope.add_marker = function (address,action,transaction) {
-      codeAddress(address,action,transaction);
-      if (action !== "delete") {
-        addresses.push(address);
-      }
-      addresses = _.uniq(addresses);
-    };
+    // $scope.add_marker = function (address,action,transaction) {
+    //   addMarker(address,action,transaction);
+
+    // };
 
     // The Redeemer selects an item to recycle.
     // Sets { selected: true, selection_date: new Date() }
@@ -233,7 +230,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
       transaction.selection_date = new Date();
       transaction.redeemer_user_id = current_user_id;
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      $scope.add_marker(address,"no-op",transaction);
+      addMarker(address,"no-op",transaction);
       transaction.$update();
     };
 
@@ -246,16 +243,14 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
       transaction = this.transaction;
       transaction.selection_date = $('#unselection_date').val();
       transaction.redeemer_user_id = "nil";
-      address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      for (i = 0, length = addresses.length; i < length; i++ ) {
-        if (address === addresses[i]) {
-          indexToRemove = i;
+      transaction.selected = false;
+      addMarker(address,"delete",transaction);
+      for (i = 0, length = $scope.transactions.length; i < length; i++) {
+        transaction = $scope.transactions[i];
+        if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
+          address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
+          addMarker(address, "no-op", transaction);
         }
-      }
-      addresses.splice(indexToRemove,1);
-      $scope.add_marker(address,"delete",transaction);
-      for (i = 0, length = addresses.length; i < length; i++ ) {
-        $scope.add_marker(addresses[i],"no-op", transaction);
       }
       transaction.$update()
     };
@@ -272,12 +267,12 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
       transaction.completed = true;
       transaction.$update();
       // redraw markers on map
-      $scope.add_marker(address,"delete",transaction);
+      addMarker(address,"delete",transaction);
       for (i = 0, length = $scope.transactions.length; i < length; i++) {
         transaction = $scope.transactions[i];
         if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
           address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-          $scope.add_marker(address, "no-op", transaction);
+          addMarker(address, "no-op", transaction);
         }
       }
     };
@@ -294,9 +289,9 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     };// end initialize
 
-    window.codeAddress = function(address,todo,transaction) { // start codeAddress
+    window.addMarker = function(address,todo,transaction) { // start addMarker
       var i, length, latlng, marker, infoString, infoWindow, selectStatus, iconColor;
-      if (todo =="delete") { // remove all the
+      if (todo =="delete") { // remove all the markers
         for (i = 0, length = markers.length; i < length; i++) {
           markers[i].setMap(null);
         }
@@ -336,10 +331,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
           } else {
              alert('Geocode was not successful for the following reason: ' + status);
           }
-          markers.push(marker);
-          markers = _.uniq(markers);
+          if (markers.indexOf(marker) === -1) {
+            markers.push(marker);
+          }
         });
-      }; // end codeAddress
+      }; // end addMarker
 
       function toggleBounce() { // start toggleBounce
         if (marker.getAnimation() != null) {
@@ -397,7 +393,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
   //     console.log transaction.redeemer_user_id, current_user_id
   //     address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
   //     console.log address
-  //     $scope.add_marker(address)
+  //     addMarker(address)
 
 
 
