@@ -183,24 +183,26 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
         // user_radius = 5 * 1609.34,
         current_user_id = parseInt($('#current_user_id').val()),
         addresses = [],  markers = [],
-        map, geocoder;
+        map, geocoder
+        $scope.transactions = [];
 
     // The callback function from Redeemer.query loads the page with
     // transactions from the database.
     // Adds markers on the map for the transactions already selected.
     $scope.update_trans = function (data) {
-      console.log("update_trans: %O", data);
-      $scope.transactions = data;
-      // TODO - coffeescript to javascript program output:
-      var address, i, len, ref, transaction;
-      ref = $scope.transactions;
-      for (i = 0, len = ref.length; i < len; i++) {
-        transaction = ref[i];
-        if (!(transaction.selected === true && transaction.completed === false && transaction.redeemer_user_id === current_user_id)) {
-          continue;
+      var address, i,length, transaction;
+      for (i = 0, length = data.length; i < length; i++) {
+        if (!data[i].completed) {
+          $scope.transactions.push(data[i])
         }
-        address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-        $scope.add_marker(address, "no-op", transaction);
+      }
+      console.log("update_trans- $scope.transactions: %O", $scope.transactions);
+      for (i = 0, length = $scope.transactions.length; i < length; i++) {
+        transaction = $scope.transactions[i];
+        if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
+          address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
+          $scope.add_marker(address, "no-op", transaction);
+        }
       }
     };
 
@@ -264,21 +266,20 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     $scope.completed = function () {
       console.log("Redeemer - completed");
       var transaction, address, indexToRemove, i, length;
+      // update transaction
       transaction = this.transaction;
       transaction.completion_date = new Date();
       transaction.completed = true;
-      address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      for (i = 0, length = addresses.length; i < length; i++ ) {
-        if (address === addresses[i]) {
-          indexToRemove = i;
+      transaction.$update();
+      // redraw markers on map
+      $scope.add_marker(address,"delete",transaction);
+      for (i = 0, length = $scope.transactions.length; i < length; i++) {
+        transaction = $scope.transactions[i];
+        if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
+          address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
+          $scope.add_marker(address, "no-op", transaction);
         }
       }
-      addresses.splice(indexToRemove,1);
-      $scope.add_marker(address,"delete",transaction);
-      for (i = 0, length = addresses.length; i < length; i++ ) {
-        $scope.add_marker(addresses[i],"no-op", transaction);
-      }
-      transaction.$update();
     };
 
     function initialize() {// start initialize
@@ -294,28 +295,39 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     };// end initialize
 
     window.codeAddress = function(address,todo,transaction) { // start codeAddress
+      var i, length, latlng, marker, infoString, infoWindow, selectStatus, iconColor;
       if (todo =="delete") { // remove all the
-        for (var i = 0; i < markers.length; i++) {
+        for (i = 0, length = markers.length; i < length; i++) {
           markers[i].setMap(null);
         }
         markers = [];
       } else {
         if(!window.mapWasInitialized) { initialize() };
+        selectStatus = transaction.selected ? "Selected" : "Available";
+        if (transaction.selected) {
+          selectStatus = "Selected";
+          iconColor = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+        } else {
+          selectStatus = "Available";
+          iconColor = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+        }
         geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(center_latitude, center_longitude);
+        latlng = new google.maps.LatLng(center_latitude, center_longitude);
         drawUserCircleOnMap(map,latlng,user_radius);
 
         geocoder.geocode( { 'address': address}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 map: map,
+                icon: iconColor,
+                title: selectStatus,
                 draggable:true, // animate
                 animation: google.maps.Animation.DROP,  // animate
                 position: results[0].geometry.location
             });
-            var infoString = createInfoBoxString(address,transaction);
-            var infoWindow = new google.maps.InfoWindow({
+            infoString = createInfoBoxString(address,transaction);
+            infoWindow = new google.maps.InfoWindow({
               content: infoString
             });
             marker.addListener('click', function () {
@@ -356,7 +368,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
 
       function createInfoBoxString (address, transaction) { // start createInfoBoxString
         var infoBoxString = "";
-        infoBoxString += "<p>Hi5Exchange Transaction Selected.<p>"
+        if (transaction.selected) {
+          infoBoxString += "<p>Hi5Exchange Transaction Selected.<p>";
+        } else {
+          infoBoxString += "<p>Hi5Exchange Transaction Available.<p>";
+        }
         infoBoxString += "<p>" + address + "<p>";
         infoBoxString += "<p>Plastic: " + transaction.plastic + ", Cans: " + transaction.cans;
         infoBoxString += ", Glass: " + transaction.glass + ", Mixed Hi5: " + transaction.other + "<p>";
