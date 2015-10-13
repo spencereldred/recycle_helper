@@ -1,4 +1,4 @@
-class RedeemersController < ApplicationController
+  class RedeemersController < ApplicationController
   before_filter :authorize
   before_filter :authorize_redeemer
 

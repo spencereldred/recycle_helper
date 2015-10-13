@@ -15,42 +15,85 @@
 
 </head>
 <body>
-  <div id="wrap">
-  <header>
-    <div class="bs">
-      <% if !current_user %>
-        <%= render :partial => "layouts/signin" %>
-        <%= render :partial => "layouts/how_it_works" %>
-        <%= render :partial => "layouts/recycler_signup" %>
-        <%= render :partial => "layouts/redeemer_signup" %>
-
-      <% end %>
-      <% if current_user %>
-        <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
-        <%= render :partial => "layouts/how_it_works" %>
-        <% if current_user.function == "redeemer" || current_user.function == "recycler" ||    current_user.function == "admin" %>
-          <%= render :partial => "layouts/profile" %>
+  <div id="wrap" ng-controller="landingPageController">
+    <header>
+      <div class="bs">
+        <% if !current_user %>
+          <%= render :partial => "layouts/signin" %>
+          <%#= render :partial => "layouts/how_it_works" %>
+          <!-- How It Works Button Trigger modal -->
+          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()" data-toggle="modal" data-target="#how_it_worksModal">
+            How it Works
+          </button>
+          <%= render :partial => "layouts/recycler_signup" %>
+          <%= render :partial => "layouts/redeemer_signup" %>
         <% end %>
-      <% end %>
-    </div>
-  </header>
-  <div class="container">
-    <div class="row">
-
-      <div class="col-sm-offset-4 col-sm-8 error">
-        <% if flash[:errors] %>
-          <% flash[:errors].each do |error| %>
-            <div class="alert alert-danger"><li><%= error %></li></div>
+        <% if current_user %>
+          <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
+          <%= render :partial => "layouts/how_it_works" %>
+          <% if current_user.function == "redeemer" || current_user.function == "recycler" ||    current_user.function == "admin" %>
+            <%= render :partial => "layouts/profile" %>
           <% end %>
         <% end %>
-     </div>
-      <%= yield %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <%= render  :partial => "layouts/footer" %>
-</div>
+      </div><!--end class="bs" -->
+    </header>
+    <div class="container">
+      <!-- Error Message -->
+      <div class="row">
+        <div class="col-sm-offset-4 col-sm-8 error">
+          <% if flash[:errors] %>
+            <% flash[:errors].each do |error| %>
+              <div class="alert alert-danger"><li><%= error %></li></div>
+            <% end %>
+          <% end %>
+        </div><!--end col settings -->
+      </div><!--end row -->
+      <!-- End Error Message -->
+      <!-- Banner -->
+      <div class="row">
+        <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
+      </div><!--end row -->
+      <!-- end Banner -->
+
+      <!-- How It Works -->
+      <div class="jumbotron" ng-show="howItWorks">
+        <div class="containger">
+          <h2 class="helping_hawaii_recycle">How it Works</h2>
+          <div class="row">
+              <h2 class="welcome_to_hi5_exchange">Recycler</h2>
+              <li class="col-sm-offset-3 col-sm-8" ng-repeat="rule in recyclerRules">{{rule}}</li>
+              <h2 class="welcome_to_hi5_exchange">Redeemer</h2>
+              <li class="col-sm-offset-3 col-sm-8" ng-repeat="rule in redeemerRules" >{{rule}}</li>
+          </div><!--end row -->
+        </div><!--end container -->
+      </div><!--end howItWorks -->
+
+      <!-- end How It Works -->
+      <!-- Landing Page -->
+      <div class="jumbotron" ng-show="!howItWorks">
+        <div class="containger">
+          <div class="row">
+            <h2 class="helping_hawaii_recycle">Helping Hawaii Recycle</h2>
+            <h2 class="welcome_to_hi5_exchange">Welcome to Hi5 Exchange</h2>
+            <div class="row">
+              <div class="col-sm-offset-3 col-sm-8">
+                <li ng-repeat="comment in welcomeComments">{{comment}}</li>
+              </div>
+            </div><!--end row -->
+            <div class="row">
+              <div style="text-align: center;">
+                <h3>Everybody wins! Sign up now.</h3>
+              </div>
+            </div><!--end row -->
+          </div><!--end row -->
+        </div><!--end container -->
+      </div><!--end jumbotron -->
+      <!-- end Landing Page -->
+    </div><!--end container -->
+  </div><!--end headerBarController -->
+  <div class="row">
+    <%= render  :partial => "layouts/footer" %>
+  </div><!--end row -->
 </body>
 </html>
 

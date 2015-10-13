@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   skip_before_filter :authorize, only: [:new, :create]
 
+  def index
+    users = User.all
+    # image = ["img": "some image"]
+    respond_to do |format|
+      format.html
+      format.json { render :json => users }
+    end
+  end
+
   def show
     @user = current_user
   end
