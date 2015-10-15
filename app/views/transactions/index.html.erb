@@ -1,8 +1,8 @@
-
+<div ng-hide="howItWorks || userProfile">
 <div ng-controller="RecyclerController">
   <div class="row">
     <div class="col-sm-offset-2 col-sm-10">
-      <h2>Aloha <%= current_user[:first_name] %> <%= current_user[:last_name] %>, enter a new Redeemable or Good Samaritan transaction.</h2>
+      <h2>Aloha <%= current_user[:first_name] %> <%= current_user[:last_name] %>, enter a new Redeemable.</h2>
     </div>
   </div>
   <div class="row">
@@ -158,6 +158,5 @@
     </div>
   </div>
 
-</div> --> <!-- ng-controller
-
- -->
+</div> --> <!-- ng-controller-->
+</div>

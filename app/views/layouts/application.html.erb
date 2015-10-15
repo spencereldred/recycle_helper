@@ -19,25 +19,29 @@
     <header>
       <div class="bs">
         <% if !current_user %>
-          <button class="btn btn-default btn-lg right" ng-click="toggleSignIn()">
-            Sign In</button>
-          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">
-            How it Works</button>
-          <button class="btn btn-default btn-lg right" ng-click="toggleRecyclerSignUp()">
-            Recycler Sign Up</button>
-          <button class="btn btn-default btn-lg right" ng-click="toggleRedeemerSignUp()">
-            Redeemer Sign Up</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleSignIn()">Sign In</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">How it Works</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleRecyclerSignUp()">Recycler Sign Up</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleRedeemerSignUp()">Redeemer Sign Up</button>
         <% end %>
         <% if current_user %>
           <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
-          <%= render :partial => "layouts/how_it_works" %>
-          <% if current_user.function == "redeemer" || current_user.function == "recycler" ||  current_user.function == "admin" %>
-            <%= render :partial => "layouts/profile" %>
-          <% end %>
+          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">How it Works</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleUserProfile()">Profile</button>
+
+          <%# if current_user.function == "redeemer" || current_user.function == "recycler" ||  current_user.function == "admin" %>
+            <%#= render :partial => "layouts/profile" %>
+          <%# end %>
         <% end %>
       </div><!--end class="bs" -->
     </header>
     <div class="container">
+
+      <!-- Banner -->
+      <div class="row">
+        <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
+      </div><!--end row -->
+      <!-- end Banner -->
 
       <!-- Error Message -->
       <div class="row">
@@ -51,24 +55,77 @@
       </div><!--end row -->
       <!-- End Error Message -->
 
-      <!-- Banner -->
-      <div class="row">
-        <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
-      </div><!--end row -->
-      <!-- end Banner -->
+      <!-- How It Works -->
+        <div class="jumbotron" ng-show="howItWorks">
+          <h2 class="helping_hawaii_recycle">How it Works</h2>
+          <div class="row">
+              <h2 class="text-center">Recycler</h2>
+              <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules"><p>{{rule}}</p></li>
+              <h2 class="text-center">Redeemer</h2>
+              <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li>
+          </div><!--end row -->
+        </div><!--end howItWorks -->
+        <!-- end How It Works -->
+
+        <!-- User Profile -->
+        <% if current_user %>
+        <div class="jumbotron" ng-show="userProfile">
+          <h2 class="helping_hawaii_recycle">Edit <%= current_user.function.capitalize %> Profile</h2>
+          <% @user = current_user %>
+            <%= form_for @user do |f| %>
+              <div class="row">
+                <div class="text-center"><h2>Profile Information</h2></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">First Name:</div>
+                <div class="col-sm-7"><%= f.text_field :first_name, value: current_user.first_name, required: true %>
+                </div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">Last Name:</div>
+                <div class="col-sm-7"><%= f.text_field :last_name, value: current_user.last_name, required: true %></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">Email:</div>
+                <div class="col-sm-7"><%= f.email_field :email, value: current_user.email, required: true %></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">Phone:</div>
+                <div class="col-sm-7"><%= f.telephone_field :phone, value: current_user.phone %></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">Address:</div>
+                <div class="col-sm-7"><%= f.text_field :address, value: current_user.address, required: true %></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">City:</div>
+                <div class="col-sm-7"><%= f.text_field :city, value: current_user.city, required: true %></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">State:</div>
+                <div class="col-sm-7"><%= f.text_field :state, value: current_user.state, required: true %></div>
+
+                <div class="col-sm-offset-2 col-sm-3 form_label">Zipcode:</div>
+                <div class="col-sm-7"><%= f.text_field :zipcode, value: current_user.zipcode, required: true %></div>
+                <% if current_user.function == "redeemer" %>
+                  <div class="col-sm-offset-2 col-sm-3 form_label">Radius:</div>
+                  <div class="col-sm-7"><%= f.text_field :radius , value: current_user.radius, required: true %></div>
+                <% end %>
+                </br>
+                <div class="col-sm-offset-5 col-sm-7"><%= f.submit "Update Profile", :class=> "btn btn-primary"  %></div>
+              </div><!-- end row -->
+          <% end %>
+        </div>
+        <% end %>
+        <!-- End User Profile -->
 
       <%= yield %>
+
       <% if !current_user %>
-      <!-- Landing Page -->
-      <div class="jumbotron" ng-hide="howItWorks || signIn || redeemerSignUp || recyclerSignUp">
-        <h2 class="helping_hawaii_recycle">Helping Hawaii Recycle</h2>
-        <h2 class="text-center">Welcome to Hi5 Exchange</h2>
-        <div class="row">
-          <li class="col-sm-offset-1 col-sm-11" ng-repeat="welcomeComment in welcomeComments"><p>{{welcomeComment}}</p></li>
-        </div><!--end row -->
-        <h3 class="text-center">Everybody wins! Sign up now.</h3>
-      </div><!--end jumbotron -->
-      <!-- end Landing Page -->
+        <!-- Landing Page -->
+        <div class="jumbotron" ng-hide="howItWorks || signIn || redeemerSignUp || recyclerSignUp || userProfile">
+          <h2 class="helping_hawaii_recycle">Helping Hawaii Recycle</h2>
+          <h2 class="text-center">Welcome to Hi5 Exchange</h2>
+          <div class="row">
+            <li class="col-sm-offset-1 col-sm-11" ng-repeat="welcomeComment in welcomeComments"><p>{{welcomeComment}}</p></li>
+          </div><!--end row -->
+          <h3 class="text-center">Everybody wins! Sign up now.</h3>
+        </div><!--end jumbotron -->
+        <!-- end Landing Page -->
+      <% end %>
 
       <!-- User Sign UP -->
       <div class="jumbotron" ng-show="redeemerSignUp || recyclerSignUp">
@@ -139,18 +196,6 @@
       </div><!--end redeemerSignUp -->
       <!-- end User Sign UP -->
 
-      <!-- How It Works -->
-      <div class="jumbotron" ng-show="howItWorks">
-        <h2 class="helping_hawaii_recycle">How it Works</h2>
-        <div class="row">
-            <h2 class="text-center">Recycler</h2>
-            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules"><p>{{rule}}</p></li>
-            <h2 class="text-center">Redeemer</h2>
-            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li>
-        </div><!--end row -->
-      </div><!--end howItWorks -->
-      <!-- end How It Works -->
-
       <!-- Sign In -->
       <div class="jumbotron" ng-show="signIn">
         <h2 class="helping_hawaii_recycle">Hi5 Exchange Login</h2>
@@ -170,7 +215,9 @@
       </div><!-- end jumbotron signIn -->
       <!-- End Sign In -->
 
-      <% end %> <!-- end !current_user -->
+
+
+
 
     </div><!--end container -->
   </div><!--end landingPageController -->

@@ -81,9 +81,13 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
       console.log("Hello from headerBarController: %O", $scope.users);
       debugger;
     };
-    $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
+
+    $scope.signIn = $scope.howItWorks =
+    $scope.recyclerSignUp = $scope.redeemerSignUp =
+    $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+
     $scope.toggleHowItWorks = function () {
-      $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
+      $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = $scope.userProfile = false;
       $scope.howItWorks = !$scope.howItWorks;
     };
 
@@ -102,6 +106,11 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
       $scope.signIn = $scope.howItWorks = $scope.redeemerSignUp = false;
       $scope.recyclerSignUp = !$scope.recyclerSignUp;
       console.log("$scope.recyclerSignUp", $scope.recyclerSignUp);
+    };
+
+    $scope.toggleUserProfile = function() {
+      $scope.howItWorks = false;
+      $scope.userProfile = !$scope.userProfile;
     };
 
     $scope.userSignUp = function (userType) {
