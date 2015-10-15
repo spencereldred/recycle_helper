@@ -5,8 +5,9 @@ var app = angular.module("Hi5Exchange", ["ngResource"]);
 
 // ################# Routes #####################
 app.factory('User', ['$resource', function($resource){
-  return $resource('/users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+  return $resource('/users/:id.json', {id: '@id'});
 }]);
+
 
 app.controller('landingPageController', ['$scope', '$resource', 'User',
   function($scope, $resource, User){
@@ -58,7 +59,7 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     "HI5 makes no promises or representations of any kind concerning the safety, " +
     "availability, timeliness or reliability of its services, the identity of its users, " +
     "or the accuracy of the information provided by its users. Access and use of Hi5, " +
-    "including any communication or contact with others, are entirely at your own risk." +
+    "including any communication or contact with others, are entirely at your own risk.\n" +
     "HI5 AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AFFILIATES, SUCCESSORS AND ASSIGNS " +
     "ARE NOT LIABLE IN CONTRACT OR TORT OR BY STATUTE FOR ANY HARM TO PERSON OR PROPERTY " +
     "WHATSOEVER, INCLUDING INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, " +
@@ -70,18 +71,49 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     "THESE TERMS AND CONDITIONS, OR ARISING FROM YOUR VIOLATION OF ANY RIGHTS OF A THIRD PARTY."
 
     $scope.agreeToTerms = "I agree with the Terms and Conditions.";
+
+    $scope.pwdLength = "Password must be 6 characters or more.";
+    $scope.textAndEmail = "Enter your phone number If you wish to receive text message notification of transaction events. Highly recommended.";
+    $scope.conditions = "I agree with the Terms and Conditions.";
     $scope.users = User.query();
 
     $scope.hello = function () {
       console.log("Hello from headerBarController: %O", $scope.users);
       debugger;
     };
-
-
-    $scope.howItWorks = false;
+    $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
     $scope.toggleHowItWorks = function () {
-      console.log($scope.howItWorks);
+      $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
       $scope.howItWorks = !$scope.howItWorks;
+    };
+
+    $scope.toggleSignIn = function () {
+      $scope.howItWorks = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
+      $scope.signIn = !$scope.signIn;
+    };
+
+    $scope.toggleRedeemerSignUp = function () {
+      $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp = false;
+      $scope.redeemerSignUp = !$scope.redeemerSignUp;
+      console.log("$scope.redeemerSignUp", $scope.redeemerSignUp);
+    };
+
+    $scope.toggleRecyclerSignUp = function () {
+      $scope.signIn = $scope.howItWorks = $scope.redeemerSignUp = false;
+      $scope.recyclerSignUp = !$scope.recyclerSignUp;
+      console.log("$scope.recyclerSignUp", $scope.recyclerSignUp);
+    };
+
+    $scope.userSignUp = function (userType) {
+      console.log("userSignUp type: " + userType);
+      $scope.howItWorks = $scope.signIn = false;
+      if (userType === "recycler") {
+        $scope.redeemerSignUp = false;
+        $scope.recyclerSignUp = !$scope.recyclerSignUp;
+      } else if (userType === "redeemer") {
+        $scope.recyclerSignUp = false;
+        $scope.redeemerSignUp = !$scope.redeemerSignUp;
+      }
     };
 
   }

@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate( params[:password] ) # authenticate is a bycrypt method
       sign_in(user)
 
-      #redirect_to root_path, :notice => "Signed in!"
       if user[:function] == "redeemer"
         redirect_to redeemers_path
       else
@@ -20,7 +19,6 @@ class SessionsController < ApplicationController
     else
       flash[:errors] = ["Login error: check username and password."]
       redirect_to root_path
-      # render :new
     end
 
   end

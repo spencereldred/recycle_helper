@@ -19,25 +19,26 @@
     <header>
       <div class="bs">
         <% if !current_user %>
-          <%= render :partial => "layouts/signin" %>
-          <%#= render :partial => "layouts/how_it_works" %>
-          <!-- How It Works Button Trigger modal -->
-          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()" data-toggle="modal" data-target="#how_it_worksModal">
-            How it Works
-          </button>
-          <%= render :partial => "layouts/recycler_signup" %>
-          <%= render :partial => "layouts/redeemer_signup" %>
+          <button class="btn btn-default btn-lg right" ng-click="toggleSignIn()">
+            Sign In</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">
+            How it Works</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleRecyclerSignUp()">
+            Recycler Sign Up</button>
+          <button class="btn btn-default btn-lg right" ng-click="toggleRedeemerSignUp()">
+            Redeemer Sign Up</button>
         <% end %>
         <% if current_user %>
           <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
           <%= render :partial => "layouts/how_it_works" %>
-          <% if current_user.function == "redeemer" || current_user.function == "recycler" ||    current_user.function == "admin" %>
+          <% if current_user.function == "redeemer" || current_user.function == "recycler" ||  current_user.function == "admin" %>
             <%= render :partial => "layouts/profile" %>
           <% end %>
         <% end %>
       </div><!--end class="bs" -->
     </header>
     <div class="container">
+
       <!-- Error Message -->
       <div class="row">
         <div class="col-sm-offset-4 col-sm-8 error">
@@ -49,51 +50,138 @@
         </div><!--end col settings -->
       </div><!--end row -->
       <!-- End Error Message -->
+
       <!-- Banner -->
       <div class="row">
         <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
       </div><!--end row -->
       <!-- end Banner -->
 
-      <!-- How It Works -->
-      <div class="jumbotron" ng-show="howItWorks">
-        <div class="containger">
-          <h2 class="helping_hawaii_recycle">How it Works</h2>
-          <div class="row">
-              <h2 class="welcome_to_hi5_exchange">Recycler</h2>
-              <li class="col-sm-offset-3 col-sm-8" ng-repeat="rule in recyclerRules">{{rule}}</li>
-              <h2 class="welcome_to_hi5_exchange">Redeemer</h2>
-              <li class="col-sm-offset-3 col-sm-8" ng-repeat="rule in redeemerRules" >{{rule}}</li>
-          </div><!--end row -->
-        </div><!--end container -->
-      </div><!--end howItWorks -->
-
-      <!-- end How It Works -->
+      <%= yield %>
+      <% if !current_user %>
       <!-- Landing Page -->
-      <div class="jumbotron" ng-show="!howItWorks">
-        <div class="containger">
-          <div class="row">
-            <h2 class="helping_hawaii_recycle">Helping Hawaii Recycle</h2>
-            <h2 class="welcome_to_hi5_exchange">Welcome to Hi5 Exchange</h2>
-            <div class="row">
-              <div class="col-sm-offset-3 col-sm-8">
-                <li ng-repeat="comment in welcomeComments">{{comment}}</li>
-              </div>
-            </div><!--end row -->
-            <div class="row">
-              <div style="text-align: center;">
-                <h3>Everybody wins! Sign up now.</h3>
-              </div>
-            </div><!--end row -->
-          </div><!--end row -->
-        </div><!--end container -->
+      <div class="jumbotron" ng-hide="howItWorks || signIn || redeemerSignUp || recyclerSignUp">
+        <h2 class="helping_hawaii_recycle">Helping Hawaii Recycle</h2>
+        <h2 class="text-center">Welcome to Hi5 Exchange</h2>
+        <div class="row">
+          <li class="col-sm-offset-1 col-sm-11" ng-repeat="welcomeComment in welcomeComments"><p>{{welcomeComment}}</p></li>
+        </div><!--end row -->
+        <h3 class="text-center">Everybody wins! Sign up now.</h3>
       </div><!--end jumbotron -->
       <!-- end Landing Page -->
+
+      <!-- User Sign UP -->
+      <div class="jumbotron" ng-show="redeemerSignUp || recyclerSignUp">
+
+        <h2 class="helping_hawaii_recycle" ng-show="redeemerSignUp">Redeemer Sign up</h2>
+        <h2 class="helping_hawaii_recycle" ng-show="redeemerSignUp"><small>Exchange Recyclables for Cash!</small></h2>
+
+        <h2 class="helping_hawaii_recycle" ng-show="recyclerSignUp">Recycler Sign up</h2>
+        <h2 class="helping_hawaii_recycle" ng-show="recyclerSignUp"><small>Recyclables picked up for Free!</small></h2>
+
+        <% @user = User.new %>
+        <%= form_for @user do |f| %>
+          <div class="row">
+            <div class="col-sm-offset-3 col-sm-9 "><h2>Login Information</h2></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Username:</div>
+            <div class="col-sm-7"><%= f.text_field :username, placeholder: "<username>",  required: true %></div>
+
+            <div class="col-sm-offset-3 col-sm-9"><p>{{pwdLength}}</p></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Password:</div>
+            <div class="col-sm-7"><%= f.password_field :password, placeholder: "<password>", required: true %></div>
+
+            <div class="col-sm-offset-0 col-sm-5 form_label">Password Confirmation:</div>
+            <div class="col-sm-7"><%= f.password_field :password_confirmation, placeholder: "<password confirmation>", required: true %></div>
+
+            <div class="col-sm-offset-3 col-sm-9 "><h2>Profile Information</h2></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">First Name:</div>
+            <div class="col-sm-7"><%= f.text_field :first_name, placeholder: "< first name >", required: true %></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Last Name:</div>
+            <div class="col-sm-7"><%= f.text_field :last_name, placeholder: "< last name >", required: true %></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Email:</div>
+            <div class="col-sm-7"><%= f.email_field :email, placeholder: "< email >", required: true %></div>
+
+            <div class="col-sm-offset-3 col-sm-9"><p>{{textAndEmail}}</p></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Phone:</div>
+            <div class="col-sm-7"><%= f.telephone_field :phone, placeholder: "< phone >", required: true %></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Address:</div>
+            <div class="col-sm-7"><%= f.text_field :address, placeholder: "< address >", required: true %></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">City:</div>
+            <div class="col-sm-7"><%= f.text_field :city, placeholder: "< city >", required: true %></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">State:</div>
+            <div class="col-sm-7"><%= f.text_field :state, placeholder: "< state >", required: true %></div>
+
+            <div class="col-sm-offset-2 col-sm-3 form_label">Zipcode:</div>
+            <div class="col-sm-7"><%= f.text_field :zipcode, placeholder: "< zipcode >", required: true %></div>
+
+            <div ng-if="redeemerSignUp"><%= f.hidden_field :function, :value => "redeemer" %></div>
+
+            <div ng-if="recyclerSignUp"><%= f.hidden_field :function, :value => "recycler" %></div>
+
+            </br>
+            <div class="col-sm-offset-3 col-sm-9"><textarea class="terms" readonly="readonly">{{terms}}</textarea></div>
+
+            </br>
+            <div class="col-sm-offset-3 col-sm-9"><input type="checkbox" required> {{conditions}}</div>
+
+            <div class="col-sm-offset-5 col-sm-7"><%= f.submit :class=> "btn btn-primary"  %></div>
+          </div>
+        <% end %> <!-- end User Sign UP -->
+      </div><!--end redeemerSignUp -->
+      <!-- end User Sign UP -->
+
+      <!-- How It Works -->
+      <div class="jumbotron" ng-show="howItWorks">
+        <h2 class="helping_hawaii_recycle">How it Works</h2>
+        <div class="row">
+            <h2 class="text-center">Recycler</h2>
+            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules"><p>{{rule}}</p></li>
+            <h2 class="text-center">Redeemer</h2>
+            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li>
+        </div><!--end row -->
+      </div><!--end howItWorks -->
+      <!-- end How It Works -->
+
+      <!-- Sign In -->
+      <div class="jumbotron" ng-show="signIn">
+        <h2 class="helping_hawaii_recycle">Hi5 Exchange Login</h2>
+        <form action="/sessions" method="post">
+          <div class="row">
+            <div class="col-sm-offset-3 col-sm-2 form_label">Username:</div>
+            <div class="col-sm-4"><input type="text" placeholder="username" name="username"  required></div>
+             <div class="col-sm-offset-3 col-sm-2 form_label">Password: </div>
+             <div class="col-sm-4"><input type="password" placeholder="password" name="password" required ></div>
+
+            <div class="col-sm-offset-3 col-sm-2 form_label">Login: </div>
+            <div class="col-sm-2">
+              <input class="btn btn-primary btn-md" type="submit" ></input
+            </div>
+          </div><!-- end row -->
+         </form>
+      </div><!-- end jumbotron signIn -->
+      <!-- End Sign In -->
+
+      <% end %> <!-- end !current_user -->
+
     </div><!--end container -->
-  </div><!--end headerBarController -->
-  <div class="row">
-    <%= render  :partial => "layouts/footer" %>
-  </div><!--end row -->
+  </div><!--end landingPageController -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 ">Hi5 Exchange - Copyright 2013<br/>
+      </div>
+      <br/><br/>
+    </div>
+  </footer>
 </body>
 </html>
 

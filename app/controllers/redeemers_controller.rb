@@ -5,7 +5,7 @@
 
   def index
     # returns transactions in a 20 mile radius to Redeemers index page
-    puts params.inspect
+    puts "@@@@@@@@@@@@@@@@@??????????!!!!!!!!!!!!!!!! #{current_user}"
     trans = Transaction.near([current_user.latitude, current_user.longitude], 20)
     respond_to do |format|
       format.html
