@@ -1,8 +1,6 @@
-
+<div ng-hide="howItWorks || userProfile">
 <div ng-controller="RedeemerController">
   <div class="row">
-    <div class="col-sm-offset-3 col-sm-9"><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
-  </div>
   <div class="col-sm-offset-2 col-sm-10">
     <redeemable></redeemable>
   </div>
@@ -134,5 +132,5 @@
   <input type="hidden" id="current_user_radius" value="<%= current_user.radius %>" />
   <div id="map-canvas"></div>
 </div><!-- ng-controller -->
-
+</div>
 

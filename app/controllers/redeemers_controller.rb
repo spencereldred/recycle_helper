@@ -1,12 +1,12 @@
-class RedeemersController < ApplicationController
+  class RedeemersController < ApplicationController
   before_filter :authorize
   before_filter :authorize_redeemer
 
 
   def index
     # returns transactions in a 20 mile radius to Redeemers index page
-    puts params.inspect
-    trans = Transaction.near([current_user.latitude, current_user.longitude], 20)
+    puts "@@@@@@@@@@@@@@@@@??????????!!!!!!!!!!!!!!!! #{current_user.function}, #{current_user.radius}"
+    trans = Transaction.near([current_user.latitude, current_user.longitude], current_user.radius)
     respond_to do |format|
       format.html
       format.json { render :json => trans }
