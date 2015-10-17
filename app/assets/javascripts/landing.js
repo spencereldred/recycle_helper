@@ -82,6 +82,10 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
       debugger;
     };
 
+    var clearUserSignUpFields = function () {
+      $scope.newUser = {};
+    };
+
     $scope.signIn = $scope.howItWorks =
     $scope.recyclerSignUp = $scope.redeemerSignUp =
     $scope.userProfile = $scope.redeemer = $scope.recycler = false;
@@ -89,23 +93,23 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     $scope.toggleHowItWorks = function () {
       $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = $scope.userProfile = false;
       $scope.howItWorks = !$scope.howItWorks;
+      clearUserInputFields();
     };
 
     $scope.toggleSignIn = function () {
       $scope.howItWorks = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
       $scope.signIn = !$scope.signIn;
+      clearUserInputFields();
     };
 
     $scope.toggleRedeemerSignUp = function () {
       $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp = false;
       $scope.redeemerSignUp = !$scope.redeemerSignUp;
-      console.log("$scope.redeemerSignUp", $scope.redeemerSignUp);
     };
 
     $scope.toggleRecyclerSignUp = function () {
       $scope.signIn = $scope.howItWorks = $scope.redeemerSignUp = false;
       $scope.recyclerSignUp = !$scope.recyclerSignUp;
-      console.log("$scope.recyclerSignUp", $scope.recyclerSignUp);
     };
 
     $scope.toggleUserProfile = function() {
@@ -113,16 +117,14 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
       $scope.userProfile = !$scope.userProfile;
     };
 
-    $scope.userSignUp = function (userType) {
-      console.log("userSignUp type: " + userType);
-      $scope.howItWorks = $scope.signIn = false;
-      if (userType === "recycler") {
-        $scope.redeemerSignUp = false;
-        $scope.recyclerSignUp = !$scope.recyclerSignUp;
-      } else if (userType === "redeemer") {
-        $scope.recyclerSignUp = false;
-        $scope.redeemerSignUp = !$scope.redeemerSignUp;
-      }
+    $scope.addUser = function () {
+      var user = $scope.newUser;
+      user.function = $('#user_function').val();
+      User.save($scope.newUser);
+      $scope.recyclerSignUp = false;
+      $scope.redeemerSignUp = false;
+      $scope.signIn = true;
+      clearUserInputFields();
     };
 
   }

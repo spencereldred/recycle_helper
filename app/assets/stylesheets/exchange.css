@@ -46,10 +46,17 @@ textarea.terms {
   text-align: right;
 }
 
-.helping_hawaii_recycle {
+.heading_for_jumbotron {
  color: #1350f8;
  font-style: italic;
  font-size: 50px;
+ text-align: center;
+}
+
+.sub_heading_for_jumbotron {
+ color: #808080;
+ font-style: italic;
+ font-size: 25px;
  text-align: center;
 }
 
