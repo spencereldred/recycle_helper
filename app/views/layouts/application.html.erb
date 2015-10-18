@@ -71,24 +71,24 @@
           <form ng-submit="updateUser()">
             <div class="row">
               <h2 class="text-center">Profile Information</h2>
-              <div class="col-sm-offset-2 col-sm-3 form_label">First Name:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">First Name:</div>
               <div class="col-sm-7"><input type="text" ng-value="user.first_name" ng-model="user.first_name" required></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">Last Name:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">Last Name:</div>
               <div class="col-sm-7"><input type="text" ng-value="user.last_name" ng-model="user.last_name" required></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">Email:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">Email:</div>
               <div class="col-sm-7"><input type="email" ng-value="user.email" ng-model="user.email" required ></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">Phone:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">Phone:</div>
               <div class="col-sm-7"><input type="tel" ng-value="user.phone" ng-model="user.phone" ></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">Address:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">Address:</div>
               <div class="col-sm-7"><input type="text" ng-value="user.address" ng-model="user.address" required></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">City:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">City:</div>
               <div class="col-sm-7"><input type="text" ng-value="user.city" ng-model="user.city" required></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">State:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">State:</div>
               <div class="col-sm-7"><input type="text" ng-value="user.state" ng-model="user.state" required></div>
-              <div class="col-sm-offset-2 col-sm-3 form_label">Zipcode:</div>
+              <div class="col-sm-offset-2 col-sm-3 text-right">Zipcode:</div>
               <div class="col-sm-7"><input type="text" ng-value="user.zipcode" ng-model="user.zipcode" required></div>
               <div ng-if="user.function === 'redeemer'">
-                <div class="col-sm-offset-2 col-sm-3 form_label">Radius:</div>
+                <div class="col-sm-offset-2 col-sm-3 text-right">Radius:</div>
                   <div class="col-sm-7"><input type="text" ng-value="user.radius" ng-model="user.radius" required></div>
               </div>
               <p></p>
@@ -127,34 +127,34 @@
             <div class="col-sm-offset-3 col-sm-9 ">
               <h2>Login Information</h2>
             </div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Username:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Username:</div>
             <div class="col-sm-7">
               <input type="text" placeholder="username" ng-model="newUser.username" required>
             </div>
             <div class="col-sm-offset-3 col-sm-9"><p>{{pwdLength}}</p></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Password:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Password:</div>
             <div class="col-sm-7"><input type="password" placeholder="password" ng-model="newUser.password" required></div>
-            <div class="col-sm-offset-0 col-sm-5 form_label">Password Confirmation:</div>
+            <div class="col-sm-offset-0 col-sm-5 text-right">Password Confirmation:</div>
             <div class="col-sm-7"><input type="password" placeholder="password confirmation" ng-model="newUser.password_confirmation" required></div>
             <div class="col-sm-offset-3 col-sm-9 ">
               <h2>Profile Information</h2>
             </div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">First Name:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">First Name:</div>
             <div class="col-sm-7"><input type="text" placeholder="first name" ng-model="newUser.first_name" required></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Last Name:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Last Name:</div>
             <div class="col-sm-7"><input type="text" placeholder="last name" ng-model="newUser.last_name" required></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Email:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Email:</div>
             <div class="col-sm-7"><input type="email" placeholder="email" ng-model="newUser.email" required ></div>
             <div class="col-sm-offset-3 col-sm-9"><p>{{textAndEmail}}</p></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Phone:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Phone:</div>
             <div class="col-sm-7"><input type="tel" placeholder="phone" ng-model="newUser.phone" ></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Address:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Address:</div>
             <div class="col-sm-7"><input type="text" placeholder="address" ng-model="newUser.address" required></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">City:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">City:</div>
             <div class="col-sm-7"><input type="text" placeholder="city" ng-model="newUser.city" required></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">State:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">State:</div>
             <div class="col-sm-7"><input type="text" placeholder="state" ng-model="newUser.state" required></div>
-            <div class="col-sm-offset-2 col-sm-3 form_label">Zipcode:</div>
+            <div class="col-sm-offset-2 col-sm-3 text-right">Zipcode:</div>
             <div class="col-sm-7"><input type="text" placeholder="zipcode" ng-model="newUser.zipcode" required></div>
             <div ng-if="redeemerSignUp"><input type="hidden" id="user_function"  value="redeemer" ></div>
             <div ng-if="recyclerSignUp"><input type="hidden" id="user_function"  value="recycler" ></div>
@@ -176,9 +176,9 @@
         <h2 class="heading_for_jumbotron">Hi5 Exchange Login</h2>
         <form action="/sessions" method="post">
           <div class="row">
-            <div class="col-sm-offset-3 col-sm-2 form_label">Username:</div>
+            <div class="col-sm-offset-3 col-sm-2 text-right">Username:</div>
             <div class="col-sm-4"><input type="text" placeholder="username" name="username"  required></div>
-            <div class="col-sm-offset-3 col-sm-2 form_label">Password: </div>
+            <div class="col-sm-offset-3 col-sm-2 text-right">Password: </div>
             <div class="col-sm-4"><input type="password" placeholder="password" name="password" required ></div>
             <div class="col-sm-offset-5 col-sm-7"><input class="btn btn-primary btn-md" type="submit" ></div>
           </div><!-- end row -->
