@@ -5,9 +5,8 @@ var app = angular.module("Hi5Exchange", ["ngResource"]);
 
 // ################# Routes #####################
 app.factory('User', ['$resource', function($resource){
-  return $resource('/users/:id.json', {id: '@id'});
+  return $resource('/users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }]);
-
 
 app.controller('landingPageController', ['$scope', '$resource', 'User',
   function($scope, $resource, User){
@@ -76,11 +75,7 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     $scope.textAndEmail = "Enter your phone number If you wish to receive text message notification of transaction events. Highly recommended.";
     $scope.conditions = "I agree with the Terms and Conditions.";
     $scope.users = User.query();
-
-    $scope.hello = function () {
-      console.log("Hello from headerBarController: %O", $scope.users);
-      debugger;
-    };
+    var user = $scope.user = {};
 
     var clearUserSignUpFields = function () {
       $scope.newUser = {};
@@ -93,13 +88,13 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     $scope.toggleHowItWorks = function () {
       $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = $scope.userProfile = false;
       $scope.howItWorks = !$scope.howItWorks;
-      clearUserInputFields();
+      clearUserSignUpFields();
     };
 
     $scope.toggleSignIn = function () {
       $scope.howItWorks = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
       $scope.signIn = !$scope.signIn;
-      clearUserInputFields();
+      clearUserSignUpFields();
     };
 
     $scope.toggleRedeemerSignUp = function () {
@@ -113,19 +108,35 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     };
 
     $scope.toggleUserProfile = function() {
+      var id = $('#current_user_id').val(),
+          self = this;
       $scope.howItWorks = false;
       $scope.userProfile = !$scope.userProfile;
+      User.query(function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (parseInt(data[i].id) === parseInt(id) ) {
+              self.user = data[i];
+            }
+        }
+      });
     };
 
     $scope.addUser = function () {
-      var user = $scope.newUser;
-      user.function = $('#user_function').val();
-      User.save($scope.newUser);
+      var newUser = $scope.newUser;
+      newUser.function = $('#user_function').val();
+      User.save(newUser);
       $scope.recyclerSignUp = false;
       $scope.redeemerSignUp = false;
       $scope.signIn = true;
-      clearUserInputFields();
+      clearUserSignUpFields();
     };
+
+    $scope.updateUser = function () {
+      $scope.user.$update();
+      $scope.howItWorks = false;
+      $scope.userProfile = false;
+    };
+
 
   }
 ]);

@@ -21,6 +21,15 @@ img[class="icon"] {
    /*border: 2px solid black;*/
 }
 
+input[type="text"],input[type="email"],
+input[type="password"], input[type="tel"] {
+  width: 200px;
+}
+
+input[type="submit"] {
+  width: 150px;
+}
+
 li[class="footer-img"] {
   display: inline;
   padding: 0px 10px 0px 10px;
@@ -36,6 +45,7 @@ textarea.terms {
   padding:6px;
   color:#333;
 }
+
 
 /* Classes */
 .error {
