@@ -34,14 +34,13 @@ app.factory('Redeemer', ['$resource', function($resource){
   return $resource('/redeemers/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }]);
 
-app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
-  function($scope, $resource, Redeemer){
+app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeout', '$interval',
+  function($scope, $resource, Redeemer, $timeout, $interval){
     console.log("Made it to the RedeemerController");
 
     var center_latitude = $('#center_latitude').val(),
         center_longitude = $('#center_longitude').val(),
         user_radius = $('#current_user_radius').val() * 1609.34,
-        // user_radius = 5 * 1609.34,
         current_user_id = parseInt($('#current_user_id').val()),
         addresses = [],  markers = [],
         map, geocoder
@@ -52,6 +51,7 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     // Adds markers on the map for the transactions already selected.
     $scope.update_trans = function (data) {
       var address, i,length, transaction;
+      $scope.transactions = [];
       for (i = 0, length = data.length; i < length; i++) {
         if (!data[i].completed) {
           $scope.transactions.push(data[i])
@@ -68,16 +68,14 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
     };
 
     // Asynchronously calls the RedeemerController to retrieve the
-    // transactions within a 20 mile radius of the Redeemer.
+    // transactions within user's radius (max 20 mi.) of the Redeemer.
     Redeemer.query($scope.update_trans);
 
-    // Adds a marker to the map.
-    // Calls the google map routine to place the marker
-    // with the address passed in.
-    // $scope.add_marker = function (address,action,transaction) {
-    //   addMarker(address,action,transaction);
-
-    // };
+    var updateInterval = 5 * 60 * 1000; // 5 minutes
+    $interval(function () {
+        console.log("interval - update transactions");
+        Redeemer.query($scope.update_trans);
+    }, updateInterval); //
 
     // The Redeemer selects an item to recycle.
     // Sets { selected: true, selection_date: new Date() }
@@ -91,8 +89,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
       transaction.selection_date = new Date();
       transaction.redeemer_user_id = current_user_id;
       address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      addMarker(address,"no-op",transaction);
-      transaction.$update();
+      // addMarker(address,"no-op",transaction);
+      transaction.$update().then(function () {
+        console.log("select - update transactions");
+        Redeemer.query($scope.update_trans);
+      });
     };
 
     // The Redeemer unselects an item to recycle
@@ -113,7 +114,10 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer',
           addMarker(address, "no-op", transaction);
         }
       }
-      transaction.$update()
+      transaction.$update().then(function () {
+        console.log("unselect - update transactions");
+        Redeemer.query($scope.update_trans);
+      });
     };
 
     // Redeemer indicates that the job is complete by checking the "completed"

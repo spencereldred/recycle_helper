@@ -124,6 +124,9 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     $scope.addUser = function () {
       var newUser = $scope.newUser;
       newUser.function = $('#user_function').val();
+      if (newUser.function === 'redeemer') {
+         newUser.radius = 5;
+      }
       User.save(newUser);
       $scope.recyclerSignUp = false;
       $scope.redeemerSignUp = false;
