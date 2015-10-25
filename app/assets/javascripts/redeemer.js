@@ -43,20 +43,25 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         user_radius = $('#current_user_radius').val() * 1609.34,
         current_user_id = parseInt($('#current_user_id').val()),
         addresses = [],  markers = [],
-        map, geocoder
+        map, geocoder;
         $scope.transactions = [];
 
-    // The callback function from Redeemer.query loads the page with
-    // transactions from the database.
-    // Adds markers on the map for the transactions already selected.
-    $scope.update_trans = function (data) {
+    var updateTransaction = function (transaction) { // start updateTransaction
+      transaction.$update().then(function () {
+        console.log("update transaction");
+        Redeemer.query($scope.update_trans);
+      });
+    }; // end updateTransaction
+
+    $scope.update_trans = function (data) { // start update_trans
       var address, i,length, transaction;
       $scope.transactions = [];
       for (i = 0, length = data.length; i < length; i++) {
         if (!data[i].completed) {
-          $scope.transactions.push(data[i])
+          $scope.transactions.push(data[i]);
         }
       }
+      addMarker(address,"delete",transaction);
       console.log("update_trans- $scope.transactions: %O", $scope.transactions);
       for (i = 0, length = $scope.transactions.length; i < length; i++) {
         transaction = $scope.transactions[i];
@@ -65,10 +70,8 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
           addMarker(address, "no-op", transaction);
         }
       }
-    };
+    };// end update_trans
 
-    // Asynchronously calls the RedeemerController to retrieve the
-    // transactions within user's radius (max 20 mi.) of the Redeemer.
     Redeemer.query($scope.update_trans);
 
     var updateInterval = 5 * 60 * 1000; // 5 minutes
@@ -77,74 +80,37 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         Redeemer.query($scope.update_trans);
     }, updateInterval); //
 
-    // The Redeemer selects an item to recycle.
-    // Sets { selected: true, selection_date: new Date() }
-    // Places a pin on the map at the location for recycle pickup by
-    // calling add_marker(address) with the address of the Recycler.
-    $scope.select = function () {
+    $scope.select = function () { // start select
       console.log("Redeemer - select");
       var transaction, address;
       transaction = this.transaction;
       transaction.selected = true;
       transaction.selection_date = new Date();
       transaction.redeemer_user_id = current_user_id;
-      address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-      // addMarker(address,"no-op",transaction);
-      transaction.$update().then(function () {
-        console.log("select - update transactions");
-        Redeemer.query($scope.update_trans);
-      });
-    };
+      updateTransaction(transaction);
+    }; // end select
 
-    // The Redeemer unselects an item to recycle
-    // sets { selected: false, selection_date: "nil" }
-    // TODO - Fire off a email to the "recycler" that the job has been unselected?
-    $scope.unselect = function () {
+    $scope.unselect = function () { // start unselect
       console.log("Redeemer - unselect");
       var transaction, address,i, length;
       transaction = this.transaction;
       transaction.selection_date = $('#unselection_date').val();
       transaction.redeemer_user_id = "nil";
       transaction.selected = false;
-      addMarker(address,"delete",transaction);
-      for (i = 0, length = $scope.transactions.length; i < length; i++) {
-        transaction = $scope.transactions[i];
-        if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
-          address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-          addMarker(address, "no-op", transaction);
-        }
-      }
-      transaction.$update().then(function () {
-        console.log("unselect - update transactions");
-        Redeemer.query($scope.update_trans);
-      });
-    };
+      updateTransaction(transaction);
+    };// end unselect
 
-    // Redeemer indicates that the job is complete by checking the "completed"
-    // checkbox. Removes the map marker for this item from the map.
-    // TODO - fire off an action mail to recycler indicating "redeemer" says the job is done
-    $scope.completed = function () {
+    $scope.completed = function () { // start completed
       console.log("Redeemer - completed");
       var transaction, address, indexToRemove, i, length;
-      // update transaction
       transaction = this.transaction;
       transaction.completion_date = new Date();
       transaction.completed = true;
-      transaction.$update();
-      // redraw markers on map
-      addMarker(address,"delete",transaction);
-      for (i = 0, length = $scope.transactions.length; i < length; i++) {
-        transaction = $scope.transactions[i];
-        if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
-          address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"];
-          addMarker(address, "no-op", transaction);
-        }
-      }
-    };
+      updateTransaction(transaction);
+    }; // end completed
 
     function initialize() {// start initialize
       window.mapWasInitialized = true;
-      geocoder = new google.maps.Geocoder();
       var latlng = new google.maps.LatLng(center_latitude, center_longitude);
       var mapOptions = {
         zoom: 12,
@@ -155,7 +121,9 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
     };// end initialize
 
     window.addMarker = function(address,todo,transaction) { // start addMarker
-      var i, length, latlng, marker, infoString, infoWindow, selectStatus, iconColor;
+      var i, length, markerLatLng, marker, centerLatLng,
+          infoString, infoWindow, selectStatus, iconColor;
+      centerLatLng = null;
       if (todo =="delete") { // remove all the markers
         for (i = 0, length = markers.length; i < length; i++) {
           markers[i].setMap(null);
@@ -171,35 +139,30 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
           selectStatus = "Available";
           iconColor = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
         }
-        geocoder = new google.maps.Geocoder();
-        latlng = new google.maps.LatLng(center_latitude, center_longitude);
-        drawUserCircleOnMap(map,latlng,user_radius);
-
-        geocoder.geocode( { 'address': address}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            map.setCenter(results[0].geometry.location);
-            marker = new google.maps.Marker({
-                map: map,
-                icon: iconColor,
-                title: selectStatus,
-                draggable:true, // animate
-                animation: google.maps.Animation.DROP,  // animate
-                position: results[0].geometry.location
-            });
-            infoString = createInfoBoxString(address,transaction);
-            infoWindow = new google.maps.InfoWindow({
-              content: infoString
-            });
-            marker.addListener('click', function () {
-              infoWindow.open(map,marker);
-            });
-          } else {
-             alert('Geocode was not successful for the following reason: ' + status);
-          }
-          if (markers.indexOf(marker) === -1) {
-            markers.push(marker);
-          }
+        if (!centerLatLng) {
+          centerLatLng = new google.maps.LatLng(center_latitude, center_longitude);
+          map.setCenter(centerLatLng);
+          drawUserCircleOnMap(map, centerLatLng, user_radius);
+        }
+        markerLatLng = new google.maps.LatLng(transaction.latitude, transaction.longitude);
+        marker = new google.maps.Marker({
+            map: map,
+            icon: iconColor,
+            title: selectStatus,
+            draggable:true, // animate
+            animation: google.maps.Animation.DROP,  // animate
+            position: markerLatLng
         });
+        infoString = createInfoBoxString(address,transaction);
+        infoWindow = new google.maps.InfoWindow({
+          content: infoString
+        });
+        marker.addListener('click', function () {
+          infoWindow.open(map,marker);
+        });
+        if (markers.indexOf(marker) === -1) {
+          markers.push(marker);
+        }
       }; // end addMarker
 
       function toggleBounce() { // start toggleBounce
@@ -210,22 +173,18 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         }
       }; // end toggleBounce
 
-      // function hello () {
-      //   console.log("button in infoBox actually works!!");
-      // };
-
-      function drawUserCircleOnMap(map,latlng,user_radius) {
+      function drawUserCircleOnMap(map,latlng,user_radius) { // start drawUserCircleOnMap
         var userCircle = new google.maps.Circle({
           strokeColor: '#FF0000',
           strokeOpacity: 0.8,
           strokeWeight: 2,
           fillColor: '#FF0000',
-          fillOpacity: 0.025,
+          fillOpacity: 0.015,
           map: map,
           center: latlng,
           radius: user_radius
         });
-      };
+      };// end drawUserCircleOnMap
 
       function createInfoBoxString (address, transaction) { // start createInfoBoxString
         var infoBoxString = "";
@@ -238,26 +197,10 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         infoBoxString += "<p>Plastic: " + transaction.plastic + ", Cans: " + transaction.cans;
         infoBoxString += ", Glass: " + transaction.glass + ", Mixed Hi5: " + transaction.other + "<p>";
         infoBoxString += "<p>Miles from home: " + (transaction.distance * 1).toFixed(2) + "<p>";
-        // infoBoxString += "<button onclick='hello'>Completed</button>";
-
         return infoBoxString;
       }; // end createInfoBoxString
 
     }
 
-
   }
 ]);
-
-
-  // # The callback function loads the page with transactions from the database.
-  // # Adds markers on the map for the transactions already selected.
-  // $scope.update_trans = (data)=>
-  //   $scope.transactions = data
-  //   for transaction in $scope.transactions when transaction.selected == true && transaction.completed == false && transaction.redeemer_user_id == current_user_id
-  //     console.log transaction.redeemer_user_id, current_user_id
-  //     address = transaction["address"] + ", " + transaction["city"] + " " + transaction["state"]
-  //     console.log address
-  //     addMarker(address)
-
-
