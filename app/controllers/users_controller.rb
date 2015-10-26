@@ -25,10 +25,12 @@ class UsersController < ApplicationController
     if @user.errors.empty?
       sign_in(@user)
       if @user.function == "redeemer"
-        WelcomeEmailTextRedeemerWorker.perform_async(@user.id)
+        WelcomeEmailRedeemerWorker.perform_async(@user.id)
+        WelcomeTextRedeemerWorker.perform_async(@user.id)
         redirect_to redeemers_path
       else
-        WelcomeEmailTextRecyclerWorker.perform_async(@user.id)
+        WelcomeEmailRecyclerWorker.perform_async(@user.id)
+        WelcomeTextRecyclerWorker.perform_async(@user.id)
         redirect_to transactions_path
       end
     else
@@ -60,6 +62,7 @@ class UsersController < ApplicationController
     end
 
     ProfileUpdatedEmailTextWorker.perform_async(@user.id)
+    ProfileUpdatedTextWorker.perform_async(@user.id)
 
     sign_in(update_user) # need to sign in because the session token has changed
     if current_user.function == "redeemer"

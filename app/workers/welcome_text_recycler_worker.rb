@@ -1,13 +1,9 @@
-class ProfileUpdatedEmailTextWorker
+class WelcomeTextRecyclerWorker
   include Sidekiq::Worker
-  # include Sidetiq::Schedulable
 
-  # recurrence {hourly}
   def perform(user_id)
     user = User.find(user_id)
-    Hi5Mailer.profile_updated(user).deliver
-    # send text message alert
-    message = "Shaka! #{user.first_name}, your profile has been updated.
+    message = "Shaka! #{user.first_name}, your recycler account has been created.
     Questions, contact Annie at hi5exchange@gmail.com."
     send_text(message, user.phone ) if !user.phone.empty?
   end

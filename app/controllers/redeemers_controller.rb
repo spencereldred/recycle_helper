@@ -37,7 +37,8 @@
                 completed: params[:completed],
                 completion_date: params[:completion_date]}
     trans.update_attributes(redeemer)
-    TransactionUpdateEmailTextWorker.perform_async(trans.id)
+    TransactionUpdateEmailWorker.perform_async(trans.id)
+    TransactionUpdateTextWorker.perform_async(trans.id)
     respond_to do |format|
       format.json {render :json => trans}
       format.html
