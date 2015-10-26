@@ -12,6 +12,7 @@ class TransactionUpdateEmailTextWorker
         ############ COMPLETED ##############
         # send recycler email that the redeemer indicates the job is done
         Hi5Mailer.completed(user).deliver
+
         # send recycler a text message
         message = "Shaka! #{user.first_name}, our records indicate your recycling has been picked up.
         If this is not true, please contact Annie at hi5exchange@gmail.com."
@@ -21,7 +22,8 @@ class TransactionUpdateEmailTextWorker
       if trans.completed == false && trans.selected == true
         ############ SELECTED ##############
         # send recycler an email that states a redeemer has claimed the job
-        Hi5Mailer.selected(user).deliver
+        # Hi5Mailer.selected(user).deliver
+
         # send recycler a text message
         message = "Shaka! #{user.first_name}, a redeemer will swing by within 24 hours, so please make sure your items are already out for pickup.
 -Annie at hi5exchange@gmail.com"
