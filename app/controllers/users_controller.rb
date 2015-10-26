@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       update_user.update_attributes(radius: u[:radius])
     end
 
-    ProfileUpdatedEmailTextWorker.perform_async(@user.id)
+    ProfileUpdatedEmailWorker.perform_async(@user.id)
     ProfileUpdatedTextWorker.perform_async(@user.id)
 
     sign_in(update_user) # need to sign in because the session token has changed
