@@ -19,6 +19,15 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
+  # blog: https://coderwall.com/p/fprnhg/free-background-jobs-on-heroku
+  Sidekiq.configure_client do |config|
+    config.redis = { :size => 1 }
+  end
+  Sidekiq.configure_server do |config|
+    config.redis = { :size => 5 }
+  end
+
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
 end
+
