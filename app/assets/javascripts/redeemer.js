@@ -109,8 +109,20 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
       updateTransaction(transaction);
     }; // end completed
 
+    function drawUserCircleOnMap(map,latlng,user_radius) { // start drawUserCircleOnMap
+        var userCircle = new google.maps.Circle({
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.015,
+          map: map,
+          center: latlng,
+          radius: user_radius
+        });
+      };// end drawUserCircleOnMap
+
     function initialize() {// start initialize
-      window.mapWasInitialized = true;
       var latlng = new google.maps.LatLng(center_latitude, center_longitude);
       var mapOptions = {
         zoom: 12,
@@ -118,9 +130,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      drawUserCircleOnMap(map, latlng, user_radius);
     };// end initialize
+    initialize();
 
-    window.addMarker = function(address,todo,transaction) { // start addMarker
+    function addMarker(address,todo,transaction) { // start addMarker
       var i, length, markerLatLng, marker, centerLatLng,
           infoString, infoWindow, selectStatus, iconColor;
       centerLatLng = null;
@@ -130,7 +144,6 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         }
         markers = [];
       } else {
-        if(!window.mapWasInitialized) { initialize() };
         selectStatus = transaction.selected ? "Selected" : "Available";
         if (transaction.selected) {
           selectStatus = "Selected";
