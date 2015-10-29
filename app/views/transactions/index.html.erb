@@ -5,14 +5,14 @@
       <h2>Aloha <%= current_user[:first_name] %> <%= current_user[:last_name] %>, enter a new Redeemable.</h2>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-sm-offset-2 col-sm-8"    >
       <div class="alert alert-success alert-dismissable thanks_alert"  style='visibility:hidden'>
         <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Shaka!</strong> Shaka! Thanks for participating. Be sure to put your recycling out right away.
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="row">
     <div class="col-sm-offset-2 col-sm-10">
       <h2><new></new></h2>
@@ -44,21 +44,25 @@
             </td>
             <td>
               <select id="plastic" ng-model="transaction.plastic"
+                  ng-init="transaction.plastic = bag_options[0].value"
                   ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
             </td>
             <td>
               <select ng-model="transaction.cans"
+                      ng-init="transaction.cans = bag_options[0].value"
                       ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
             </td>
             <td>
               <select ng-model="transaction.glass"
+                      ng-init="transaction.glass = bag_options[0].value"
                       ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
             </td>
             <td>
               <select ng-model="transaction.other"
+                      ng-init="transaction.other = bag_options[0].value"
                       ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
             </td>
