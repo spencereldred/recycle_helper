@@ -11,11 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140315195955) do
+ActiveRecord::Schema.define(:version => 20151030164258) do
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "recycler_user_id"
     t.integer  "redeemer_user_id"
+    t.integer  "group_id"
     t.datetime "selection_date"
     t.datetime "completion_date"
     t.integer  "rating"
@@ -58,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20140315195955) do
     t.string   "phone"
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "group_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.integer  "radius",          :default => 8

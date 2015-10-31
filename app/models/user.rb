@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
+  belongs_to :group
   attr_accessible :username, :email, :function, :password, :password_confirmation,
                           :first_name, :last_name, :address, :city, :state, :zipcode, :dmv_number, :phone,
-                          :latitude, :longitude, :radius
+                          :latitude, :longitude, :radius, :group_id
 
   before_save :create_remember_token
   # before_save { self.email = email.downcase }

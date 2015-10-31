@@ -156,6 +156,9 @@
             <div class="col-sm-7"><input type="text" placeholder="state" ng-model="newUser.state" required></div>
             <div class="col-sm-offset-2 col-sm-3 text-right">Zipcode:</div>
             <div class="col-sm-7"><input type="text" placeholder="zipcode" ng-model="newUser.zipcode" required></div>
+            <!-- New Group Id  -->
+            <div><input type="hidden" ng-model="newUser.group_id" id="group_id" value="3"></div>
+
             <div ng-if="redeemerSignUp"><input type="hidden" id="user_function"  value="redeemer" ></div>
             <div ng-if="recyclerSignUp"><input type="hidden" id="user_function"  value="recycler" ></div>
             </br>

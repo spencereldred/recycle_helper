@@ -124,6 +124,7 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     $scope.addUser = function () {
       var newUser = $scope.newUser;
       newUser.function = $('#user_function').val();
+      newUser.group_id = $('#group_id').val();
       if (newUser.function === 'redeemer') {
          newUser.radius = 5;
       }

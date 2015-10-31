@@ -1,0 +1,36 @@
+class GroupsController < ApplicationController
+  before_filter :authorize
+
+  def index
+    respond_to do |format|
+      format.html
+      format.json { render :json => Group.all }
+    end
+  end
+
+  def new
+    respond_to do |format|
+      format.html
+      format.json { render :json => Group.new }
+    end
+  end
+
+  def create
+    group = Group.create(params[:group])
+    respond_to do |format|
+      format.html
+      format.json { render :json => group }
+    end
+  end
+
+  def update
+    group = Group.find(params[:id])
+    changes = {name: params[:name], url: params[:url], description: params[:description]}
+    group.update_attributes(changes)
+    respond_to do |format|
+      format.html
+      format.json { render :json => trans }
+    end
+  end
+
+end
