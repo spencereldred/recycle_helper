@@ -7,11 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # requires Group Controller
-groups = Group.create([
-  {name: "Admin", url: "admin.com", description: "Oversees all."},
-  {name: "Public", url: "public.com", description: "No group."},
-  {name: "Maui Civil Air Patrol", url: "mcap.com", description: "First group, numero uno!"}
-])
+# groups = Group.create([
+#   {name: "Admin", url: "admin.com", description: "Oversees all."},
+#   {name: "Public", url: "public.com", description: "No group."},
+#   {name: "Maui Civil Air Patrol", url: "mcap.com", description: "First group, numero uno!"}
+# ])
 
 # users = User.create([
 #   {username: "makawao1", email: "eldredspencer@gmail.com", phone: "8082803758",
