@@ -126,7 +126,7 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
       newUser.function = $('#user_function').val();
       newUser.group_id = $('#group_id').val();
       if (newUser.function === 'redeemer') {
-         newUser.radius = 5;
+         newUser.radius = 8;
       }
       User.save(newUser);
       $scope.recyclerSignUp = false;
