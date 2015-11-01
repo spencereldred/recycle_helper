@@ -5,14 +5,6 @@
       <h2>Aloha <%= current_user[:first_name] %> <%= current_user[:last_name] %>, enter a new Redeemable.</h2>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-sm-offset-2 col-sm-8"    >
-      <div class="alert alert-success alert-dismissable thanks_alert"  style='visibility:hidden'>
-        <button type="button"  class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Shaka!</strong> Shaka! Thanks for participating. Be sure to put your recycling out right away.
-      </div>
-    </div>
-  </div> -->
   <div class="row">
     <div class="col-sm-offset-2 col-sm-10">
       <h2><new></new></h2>
@@ -27,7 +19,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Mixed Hi5</th>
+            <!-- <th>Mixed Hi5</th> -->
           </tr>
         </thead>
         <tbody>
@@ -60,12 +52,12 @@
                       ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
             </td>
-            <td>
+            <!-- <td>
               <select ng-model="transaction.other"
                       ng-init="transaction.other = bag_options[0].value"
                       ng-options="bag_option.value as bag_option.name for bag_option in bag_options">
               </select>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
@@ -86,7 +78,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Other</th>
+            <!-- <th>Other</th> -->
             <th>Selected</th>
           </tr>
         </thead>
@@ -96,7 +88,7 @@
               <td>{{transaction.plastic}}</td>
               <td>{{transaction.cans}}</td>
               <td>{{transaction.glass}}</td>
-              <td>{{transaction.other}}</td>
+              <!-- <td>{{transaction.other}}</td> -->
               <td>{{transaction.selection_date | date:'MM/dd/yy h:mm a'}} </td>
             </tr>
         </tbody>

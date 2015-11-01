@@ -15,7 +15,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Mixed Hi5</th>
+            <!-- <th>Mixed Hi5</th> -->
             <th>Posted</th>
           </tr>
         </thead>
@@ -32,7 +32,7 @@
             <td>{{transaction.plastic}}</td>
             <td>{{transaction.cans}}</td>
             <td>{{transaction.glass}}</td>
-            <td>{{transaction.other}}</td>
+            <!-- <td>{{transaction.other}}</td> -->
             <td>{{transaction.created_at | date:'MM/dd/yy h:mm a' }}</td>
           </tr>
         </tbody>
@@ -76,7 +76,7 @@
             <th>Plastic</th>
             <th>Cans</th>
             <th>Glass</th>
-            <th>Mixed Hi5</th>
+            <!-- <th>Mixed Hi5</th> -->
             <th>Selected</th>
             <th>Completed</th>
           </tr>
@@ -89,7 +89,7 @@
               <td>{{transaction.plastic}}</td>
               <td>{{transaction.cans}}</td>
               <td>{{transaction.glass}}</td>
-              <td>{{transaction.other}}</td>
+              <!-- <td>{{transaction.other}}</td> -->
               <td>{{transaction.selection_date | date:'MM/dd/yy h:mm a' }} </td>
               <td>
                 <button class="btn btn-primary btn-sm" ng-click="completed()"
