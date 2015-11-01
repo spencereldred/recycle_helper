@@ -25,7 +25,12 @@ class GroupsController < ApplicationController
 
   def update
     group = Group.find(params[:id])
-    changes = {name: params[:name], url: params[:url], description: params[:description]}
+    changes = {
+      name:         params[:name],
+      url:          params[:url],
+      description:  params[:description],
+      promo_code:   params[:promo_code]
+    }
     group.update_attributes(changes)
     respond_to do |format|
       format.html

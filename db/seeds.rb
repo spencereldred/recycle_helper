@@ -8,9 +8,9 @@
 
 # requires Group Controller
 groups = Group.create([
-  {name: "Admin", url: "admin.com", description: "Oversees all."},
-  {name: "Public", url: "public.com", description: "No group."},
-  {name: "Maui Civil Air Patrol", url: "mcap.com", description: "First group, numero uno!"}
+  {name: "Admin", url: "admin.com", description: "Oversees all.", promo_code: "admin"},
+  {name: "Public", url: "public.com", description: "No group.", promo_code: "public"},
+  {name: "Maui Civil Air Patrol", url: "mcap.com", description: "First group, numero uno!", promo_code: "patrol"}
 ])
 
 # users = User.create([
