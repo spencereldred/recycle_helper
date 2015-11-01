@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(:version => 20151030164258) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
-    t.string   "url"
     t.string   "promo_code"
+    t.string   "url"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
