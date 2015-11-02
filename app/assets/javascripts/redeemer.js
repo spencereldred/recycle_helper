@@ -65,7 +65,7 @@ app.controller('RedeemerController', ['$scope', '$rootScope', '$resource', 'Rede
         }
       }
       addMarker(address,"delete",transaction);
-      console.log("update_trans- $scope.transactions: %O", $scope.transactions);
+      // console.log("update_trans- $scope.transactions: %O", $scope.transactions);
       for (i = 0, length = $scope.transactions.length; i < length; i++) {
         transaction = $scope.transactions[i];
         if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
@@ -79,8 +79,8 @@ app.controller('RedeemerController', ['$scope', '$rootScope', '$resource', 'Rede
     Redeemer.query($scope.update_trans);
 
     $interval(function () {
-        Redeemer.query($scope.update_trans);
-        $rootScope.showFlash = false;
+      Redeemer.query($scope.update_trans);
+      $rootScope.showFlash = false;
     }, updateInterval); //
 
     $scope.select = function () { // start select

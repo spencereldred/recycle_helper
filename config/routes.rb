@@ -19,6 +19,11 @@ Recycle::Application.routes.draw do
   get '/logout' => "sessions#destroy"
   get '/login' => "sessions#new"
 
+  # resources :admins
+  get '/admins' => 'admins#index'
+
+  resources :groups
+
  # root :to => 'samples#index'
  #  get "/samples", to: "samples#index"
  #  get "/samples/new", to: "samples#new", as: "new_sample"

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     # sends user back to login page if current_user is nil
-    redirect_to new_session_path if !current_user
+    redirect_to new_session_path unless current_user
   end
 
   def authorize_redeemer #helper
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_admin
-    redirect_to root_path if current_user.function != "admin"
+    redirect_to root_path unless current_user.function == "admin"
   end
 
   protected

@@ -11,13 +11,19 @@ class SessionsController < ApplicationController
     if user && user.authenticate( params[:password] ) # authenticate is a bycrypt method
       sign_in(user)
 
-      if user[:function] == "redeemer"
-        redirect_to redeemers_path
-      else
-        redirect_to transactions_path
+      case user[:function]
+        when "redeemer"
+          redirect_to redeemers_path
+        when "recycler"
+          redirect_to transactions_path
+        when "admin"
+          redirect_to admins_path
+        else
+          puts "I'm not a redeemer."
       end
+
     else
-      # flash[:errors] = ["Login error: check username and password."]
+      # flash[:danger] = "Login error: check username and password."
       redirect_to root_path
     end
 
@@ -25,7 +31,8 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to root_path #, :notice => "Signed out!"
+    flash[:info] = "Signed out!"
+    redirect_to root_path
   end
 
 end
