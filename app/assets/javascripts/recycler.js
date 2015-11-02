@@ -33,17 +33,22 @@ app.factory('Transaction', ['$resource', function($resource){
   return $resource('/transactions/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }]);
 
-app.controller('RecyclerController', ['$scope', '$resource', 'Transaction',
-  function($scope, $resource, Transaction){
-    console.log("Made it to the RecyclerController");
+app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Transaction',
+  function($scope, $rootScope, $resource, Transaction){
+
+    var message = {
+      "post":   "Congratulations, you have posted a recycling job. " +
+                "You will be notified via email when a redeemer has selected your job. " +
+                "Thank You for helping Hawaii recycle."
+    };
 
     $scope.update_trans = function (data) {
-      console.log("RecyclerController - update_trans");
       $scope.transactions = data;
       return;
     };
 
-     // Grab the transactions from the rails database asychronously
+    // Grab the transactions from the rails database asychronously
+    $rootScope.showFlash = false;
     Transaction.query($scope.update_trans);
 
     $scope.bag_options = [
@@ -57,14 +62,9 @@ app.controller('RecyclerController', ['$scope', '$resource', 'Transaction',
       {name: "7 bags", value: "7" }
     ];
 
-    $scope.hi = function () {
-      console.log("hii");
-    };
-
     // # Recycler creates a redeemable transaction and saves it to the database.
     // # The transaction is added to the view.
     $scope.new_recycle_item = function () {
-      console.log("RecyclerController - new_recycle_item");
       if (this.transaction) {
         var transaction = this.transaction;
         // grab values from the user model stashed in the DOM
@@ -90,12 +90,12 @@ app.controller('RecyclerController', ['$scope', '$resource', 'Transaction',
         console.log(transaction);
         // Update the database via the rails controller 'create' method
         Transaction.save(transaction);
+        $rootScope.showFlashMessage("success", message.post);
       }
     };
 
     $scope.new_samaritan_item  = function () {
       event.preventDefault();
-      console.log("RecyclerController - new_samaritan_item");
       if (this.transaction) {
         var transaction = this.transaction;
         // grab values from the user model stashed in the DOM
@@ -126,7 +126,6 @@ app.controller('RecyclerController', ['$scope', '$resource', 'Transaction',
     // # The transaction is removed from the view by a filter.
     // # The view only shows transactions where "filter: { completed: false}"."
     $scope.remove = function () {
-      console.log("RecyclerController - remove");
       var transaction = this.transaction;
       transaction.delete();
     };

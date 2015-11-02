@@ -21,8 +21,6 @@
     if ( (params[:selected] == true && trans.selected == false) ||
          (params[:selected] == true && trans.selected == true &&
           params[:completed] == true && trans.completed == false) )
-      # puts "@@@@@@@@@@@@@@@@@@@ this is params[:selected]:  #{params[:selected]}  ; trans.selected:  #{trans.selected} @@@@@@@@@@@@@@@@@@@"
-      # puts "@@@@@@@@@@@@@@@@@@@ this is params[:completed]: #{params[:completed]} ; trans.completed: #{trans.completed} @@@@@@@@@@@@@@@@@@@"
       redeemer = {selected: params[:selected],
                 selection_date: params[:selection_date],
                 redeemer_user_id: params[:redeemer_user_id],
@@ -31,14 +29,11 @@
       trans.update_attributes(redeemer)
     end
 
-    redeemer = {selected: params[:selected],
-                selection_date: params[:selection_date],
-                redeemer_user_id: params[:redeemer_user_id],
-                completed: params[:completed],
-                completion_date: params[:completion_date]}
-    trans.update_attributes(redeemer)
-    TransactionUpdateEmailWorker.perform_async(trans.id)
-    TransactionUpdateTextWorker.perform_async(trans.id)
+    if trans.errors.empty?
+      TransactionUpdateEmailWorker.perform_async(trans.id)
+      TransactionUpdateTextWorker.perform_async(trans.id)
+    end
+
     respond_to do |format|
       format.json {render :json => trans}
       format.html

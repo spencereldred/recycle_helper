@@ -39,17 +39,16 @@
       </div><!--end row -->
       <!-- end Banner -->
 
-      <!-- Error Message -->
-      <div class="row">
-        <div class="col-sm-offset-4 col-sm-8 error">
-          <% if flash[:errors] %>
-            <% flash[:errors].each do |error| %>
-              <div class="alert alert-danger"><li><%= error %></li></div>
-            <% end %>
-          <% end %>
+      <!-- Flash Message -->
+      <div class="row" ng-if="showFlash">
+        <div class="col-sm-offset-2 col-sm-8 ">
+          <div class="alert alert-{{flash.type}}">
+            <button type="button" class="close closeRight" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{flash.message}}
+          </div>
         </div><!--end col settings -->
       </div><!--end row -->
-      <!-- End Error Message -->
+      <!-- End Flash Message -->
 
       <!-- How It Works -->
       <div class="jumbotron" ng-show="howItWorks">
@@ -63,7 +62,7 @@
       </div><!--end howItWorks -->
       <!-- end How It Works -->
 
-      <!-- User Profile -->
+      <!-- User Profile users_controller -->
       <% if current_user %>
         <div class="jumbotron" ng-show="userProfile">
           <h2 class="heading_for_jumbotron">Edit <%= current_user.function.capitalize %> Profile</h2>
@@ -116,7 +115,7 @@
         <!-- end Landing Page -->
       <% end %><!--end !current_user -->
 
-      <!-- User Sign UP -->
+      <!-- User Sign UP users_controller -->
       <div class="jumbotron" ng-show="redeemerSignUp || recyclerSignUp">
         <h2 class="heading_for_jumbotron" ng-show="redeemerSignUp">Redeemer Sign up</h2>
         <h2 class="sub_heading_for_jumbotron" ng-show="redeemerSignUp">Exchange Recyclables for Cash!</h2>
@@ -174,7 +173,7 @@
       </div><!--end jumbotron - redeemerSignUp -->
       <!-- end User Sign UP -->
 
-      <!-- Sign In -->
+      <!-- Sign In sessions_controller -->
       <div class="jumbotron" ng-show="signIn">
         <h2 class="heading_for_jumbotron">Hi5 Exchange Login</h2>
         <form action="/sessions" method="post">

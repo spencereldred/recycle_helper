@@ -34,7 +34,6 @@ class UsersController < ApplicationController
         redirect_to transactions_path
       end
     else
-      flash[:errors] = ["Error!"]
       render :new
     end
   end

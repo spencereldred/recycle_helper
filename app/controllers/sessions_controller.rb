@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
         redirect_to transactions_path
       end
     else
-      flash[:errors] = ["Login error: check username and password."]
+      # flash[:errors] = ["Login error: check username and password."]
       redirect_to root_path
     end
 
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to root_path, :notice => "Signed out!"
+    redirect_to root_path #, :notice => "Signed out!"
   end
 
 end

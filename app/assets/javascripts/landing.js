@@ -8,9 +8,14 @@ app.factory('User', ['$resource', function($resource){
   return $resource('/users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }]);
 
-app.controller('landingPageController', ['$scope', '$resource', 'User',
-  function($scope, $resource, User){
-    console.log("Made it to the landingPageController");
+// app.factory('Sessions', ['$resource', function($resource){
+//   return $resource('/sessions/:id.json', {id: '@id'});
+// }]);
+// 'Sessions',
+// , Sessions
+
+app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'User',
+  function($scope, $rootScope, $resource, User){
     $scope.recyclerRules = [
       "Register as a recycler, then log in anytime to request a redeemer to pick up your recycling.",
       "Only registered redeemers will be able to see this information and claim the job.",
@@ -75,18 +80,32 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
     $scope.textAndEmail = "Enter your phone number If you wish to receive text message notification of transaction events. Highly recommended.";
     $scope.conditions = "I agree with the Terms and Conditions.";
     $scope.users = User.query();
-    var user = $scope.user = {};
+    var user = $scope.user = {},
+        message = {
+          "newUser":      "Your account has been created. Log in anytime.",
+          "userUpdate":   "Your profile has been updated. "
+        };
 
     var clearUserSignUpFields = function () {
       $scope.newUser = {};
     };
 
+    $rootScope.showFlashMessage = function (type, message) {
+      $rootScope.flash = {
+        "type": type,
+        "message": message
+      };
+      $rootScope.showFlash = true;
+    }
+
     $scope.signIn = $scope.howItWorks =
     $scope.recyclerSignUp = $scope.redeemerSignUp =
     $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+    $rootScope.showFlash = false;
 
     $scope.toggleHowItWorks = function () {
       $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = $scope.userProfile = false;
+      $rootScope.showFlash = false;
       $scope.howItWorks = !$scope.howItWorks;
       clearUserSignUpFields();
     };
@@ -111,6 +130,7 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
       var id = $('#current_user_id').val(),
           self = this;
       $scope.howItWorks = false;
+      $rootScope.showFlash = false;
       $scope.userProfile = !$scope.userProfile;
       User.query(function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -129,6 +149,7 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
          newUser.radius = 8;
       }
       User.save(newUser);
+      $rootScope.showFlashMessage("success", message.newUser);
       $scope.recyclerSignUp = false;
       $scope.redeemerSignUp = false;
       $scope.signIn = true;
@@ -137,10 +158,10 @@ app.controller('landingPageController', ['$scope', '$resource', 'User',
 
     $scope.updateUser = function () {
       $scope.user.$update();
+      $rootScope.showFlashMessage("success", message.userUpdate);
       $scope.howItWorks = false;
       $scope.userProfile = false;
     };
-
 
   }
 ]);

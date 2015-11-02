@@ -7,11 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # requires Group Controller
-groups = Group.create([
-  {name: "Admin", url: "admin.com", description: "Oversees all.", promo_code: "admin"},
-  {name: "Public", url: "public.com", description: "No group.", promo_code: "public"},
-  {name: "Maui Civil Air Patrol", url: "mcap.com", description: "First group, numero uno!", promo_code: "patrol"}
-])
+# groups = Group.create([
+#   {name: "Admin", url: "admin.com", description: "Oversees all.", promo_code: "admin"},
+#   {name: "Public", url: "public.com", description: "No group.", promo_code: "public"},
+#   {name: "Maui Civil Air Patrol", url: "mcap.com", description: "First group, numero uno!", promo_code: "patrol"}
+# ])
 
 # users = User.create([
 #   {username: "makawao1", email: "eldredspencer@gmail.com", phone: "8082803758",
@@ -39,15 +39,7 @@ groups = Group.create([
 #   password: "makawao5",password_confirmation: "makawao5", radius: 8,
 #   address: "348 Nalani St.", city: "Makawao", state: "HI", zipcode: "96768" },
 
-#   {username: "makawao6", email: "eldredspencer@gmail.com", phone: "8082803758",
-#   function: "redeemer", first_name: "John", last_name: "Brodie", group_id: "3",
-#   password: "makawao6",password_confirmation: "makawao6", radius: 8,
-#   address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768" },
 
-#   {username: "makawao7", email: "eldredspencer@gmail.com", phone: "8082803758",
-#   function: "redeemer", first_name: "Ken", last_name: "Willard", group_id: "3",
-#   password: "makawao7",password_confirmation: "makawao7", radius: 8,
-#   address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768" },
 
 #   {username: "kihei1", email: "eldredspencer@gmail.com", phone: "8082803758",
 #   function: "recycler", first_name: "Willie", last_name: "Mays", group_id: "3",
@@ -144,6 +136,16 @@ groups = Group.create([
 #   password: "kahului5",password_confirmation: "kahului5", radius: 8,
 #   address: "55 Olena Street", city: "Wailuku", state: "HI", zipcode: "96793" },
 
+#   {username: "makawao6", email: "eldredspencer@gmail.com", phone: "8082803758",
+#   function: "redeemer", first_name: "John", last_name: "Brodie", group_id: "3",
+#   password: "makawao6",password_confirmation: "makawao6", radius: 8,
+#   address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768" },
+
+#   {username: "makawao7", email: "eldredspencer@gmail.com", phone: "8082803758",
+#   function: "redeemer", first_name: "Ken", last_name: "Willard", group_id: "3",
+#   password: "makawao7",password_confirmation: "makawao7", radius: 8,
+#   address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768" },
+
 #   {username: "kahului6", email: "eldredspencer@gmail.com", phone: "8082803758",
 #   function: "redeemer", first_name: "John", last_name: "Brodie", group_id: "3",
 #   password: "kahului6",password_confirmation: "kahului6", radius: 8,
@@ -217,23 +219,23 @@ groups = Group.create([
 #     address: "65 Poinciana Rd", city: "Lahaina", state: "HI", zipcode: "96761",
 #     selected: false, completed: false, trans_type: "redeemable", group_id: "3" },
 
-#     {recycler_user_id: "16", plastic: "1", glass: "1", cans: "1", other: "1",
+#     {recycler_user_id: "6", plastic: "1", glass: "1", cans: "1", other: "1",
 #     address: "34 Ani Street", city: "Kahului", state: "HI", zipcode: "96732",
 #     selected: false, completed: false, trans_type: "redeemable", group_id: "3" },
 
-#     {recycler_user_id: "17", plastic: "2", glass: "2", cans: "2", other: "2",
+#     {recycler_user_id: "7", plastic: "2", glass: "2", cans: "2", other: "2",
 #     address: "55 Molokai Akau Street", city: "Kahului", state: "HI", zipcode: "96732",
 #     selected: false, completed: false, trans_type: "redeemable", group_id: "3" },
 
-#     {recycler_user_id: "18", plastic: "3", glass: "3", cans: "3", other: "3",
+#     {recycler_user_id: "8", plastic: "3", glass: "3", cans: "3", other: "3",
 #     address: "85 Niihau Street", city: "Kahului", state: "HI", zipcode: "96732",
 #     selected: false, completed: false, trans_type: "redeemable", group_id: "3" },
 
-#     {recycler_user_id: "19", plastic: "4", glass: "4", cans: "4", other: "4",
+#     {recycler_user_id: "9", plastic: "4", glass: "4", cans: "4", other: "4",
 #     address: "85 Kaikai Street", city: "Wailuku", state: "HI", zipcode: "96793",
 #     selected: false, completed: false, trans_type: "redeemable", group_id: "3" },
 
-#     {recycler_user_id: "20", plastic: "5", glass: "5", cans: "5", other: "5",
+#     {recycler_user_id: "10", plastic: "5", glass: "5", cans: "5", other: "5",
 #     address: "55 Olena Street", city: "Wailuku", state: "HI", zipcode: "96793",
 #     selected: false, completed: false, trans_type: "redeemable", group_id: "3" }
 

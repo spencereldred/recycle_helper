@@ -34,9 +34,8 @@ app.factory('Redeemer', ['$resource', function($resource){
   return $resource('/redeemers/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }]);
 
-app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeout', '$interval',
-  function($scope, $resource, Redeemer, $timeout, $interval){
-    console.log("Made it to the RedeemerController");
+app.controller('RedeemerController', ['$scope', '$rootScope', '$resource', 'Redeemer', '$timeout', '$interval',
+  function($scope, $rootScope, $resource, Redeemer, $timeout, $interval){
 
     var center_latitude = $('#center_latitude').val(),
         center_longitude = $('#center_longitude').val(),
@@ -44,11 +43,15 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
         current_user_id = parseInt($('#current_user_id').val()),
         addresses = [],  markers = [],
         map, geocoder;
-        $scope.transactions = [];
+        $scope.transactions = [],
+        message = {
+          "selected":   "Congratulations. You have selected a recycling job.",
+          "completed":  "Thank You for helping Hawaii recycle."
+        },
+        updateInterval = 5 * 60 * 1000; // 5 minutes;
 
     var updateTransaction = function (transaction) { // start updateTransaction
       transaction.$update().then(function () {
-        console.log("update transaction");
         Redeemer.query($scope.update_trans);
       });
     }; // end updateTransaction
@@ -72,26 +75,26 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
       }
     };// end update_trans
 
+    $rootScope.showFlash = false;
     Redeemer.query($scope.update_trans);
 
-    var updateInterval = 5 * 60 * 1000; // 5 minutes
     $interval(function () {
-        console.log("interval - update transactions");
         Redeemer.query($scope.update_trans);
+        $rootScope.showFlash = false;
     }, updateInterval); //
 
     $scope.select = function () { // start select
-      console.log("Redeemer - select");
       var transaction, address;
       transaction = this.transaction;
       transaction.selected = true;
       transaction.selection_date = new Date();
+      $rootScope.showFlashMessage("success", message.selected);
       transaction.redeemer_user_id = current_user_id;
+
       updateTransaction(transaction);
     }; // end select
 
     $scope.unselect = function () { // start unselect
-      console.log("Redeemer - unselect");
       var transaction, address,i, length;
       transaction = this.transaction;
       transaction.selection_date = $('#unselection_date').val();
@@ -101,11 +104,11 @@ app.controller('RedeemerController', ['$scope', '$resource', 'Redeemer', '$timeo
     };// end unselect
 
     $scope.completed = function () { // start completed
-      console.log("Redeemer - completed");
       var transaction, address, indexToRemove, i, length;
       transaction = this.transaction;
       transaction.completion_date = new Date();
       transaction.completed = true;
+      $rootScope.showFlashMessage("success", message.completed);
       updateTransaction(transaction);
     }; // end completed
 

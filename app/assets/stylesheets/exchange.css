@@ -48,6 +48,11 @@ textarea.terms {
 
 
 /* Classes */
+.closeRight {
+  float: right;
+  vertical-align: center;
+  margin: 0px 10px;
+}
 .error {
   color: red;
   font-size: 1.2em;
