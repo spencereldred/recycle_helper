@@ -98,6 +98,15 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
       $rootScope.showFlash = true;
     }
 
+    $rootScope.formatDate = function (date) {
+      var dateArray = date.split("T")[0].split("-"),
+          timeArray = date.split("T")[1].split(":"),
+          dateString = dateArray[1] + "/" + dateArray[2] + "/" + dateArray[0].slice(2,4);
+      dateString += " " + timeArray[0]%12 + ":" + timeArray[1];
+      dateString += timeArray[0]/12 > 1 ? " PM" : " AM";
+      return dateString;
+    };
+
     $scope.signIn = $scope.howItWorks =
     $scope.recyclerSignUp = $scope.redeemerSignUp =
     $scope.userProfile = $scope.redeemer = $scope.recycler = false;

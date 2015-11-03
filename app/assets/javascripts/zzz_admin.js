@@ -48,18 +48,6 @@ app.factory('Transaction', ['$resource', function($resource){
 app.controller('TransactionController', ['$scope', '$rootScope', '$resource', 'Transaction',
   function($scope, $rootScope, $resource, Transaction){
 
-    var formatDate = function (date) {
-      var dateArray = date.split("T")[0].split("-");
-      var timeArray = date.split("T")[1].split(":");
-      var dateString = dateArray[1] + "/" + dateArray[2] + "/" + dateArray[0].slice(2,4);
-      dateString += " " + timeArray[0]%12 + ":" + timeArray[1];
-      dateString += timeArray[0]/12 > 1 ? " PM" : " AM";
-      console.log("postDate: %O", dateString);
-
-      return dateString;
-    };
-
-
     var update_trans = function (data) {
       $scope.transactions = data;
       var i, date,
@@ -67,13 +55,13 @@ app.controller('TransactionController', ['$scope', '$rootScope', '$resource', 'T
       for (i = 0; i < length; i++) {
         trans = $scope.transactions[i];
         if (trans.created_at) {
-          trans.created_at = formatDate(trans.created_at);
+          trans.created_at = $rootScope.formatDate(trans.created_at);
         }
         if (trans.selection_date) {
-          trans.selection_date = formatDate(trans.selection_date);
+          trans.selection_date = $rootScope.formatDate(trans.selection_date);
         }
         if (trans.completion_date) {
-          trans.completion_date = formatDate(trans.completion_date);
+          trans.completion_date = $rootScope.formatDate(trans.completion_date);
         }
       }
     };

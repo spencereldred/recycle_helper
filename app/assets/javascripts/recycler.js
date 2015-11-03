@@ -44,6 +44,14 @@ app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Tran
 
     $scope.update_trans = function (data) {
       $scope.transactions = data;
+      var i, trans, length = $scope.transactions.length;
+      for (i = 0; i < length; i++) {
+        trans = $scope.transactions[i];
+        if (trans.selection_date) {
+          trans.selection_date = $rootScope.formatDate(trans.selection_date);
+        }
+      }
+
       return;
     };
 

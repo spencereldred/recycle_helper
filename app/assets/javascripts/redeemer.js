@@ -57,15 +57,22 @@ app.controller('RedeemerController', ['$scope', '$rootScope', '$resource', 'Rede
     }; // end updateTransaction
 
     $scope.update_trans = function (data) { // start update_trans
-      var address, i,length, transaction;
+      var address, i, trans, transaction, length = data.length;
       $scope.transactions = [];
-      for (i = 0, length = data.length; i < length; i++) {
-        if (!data[i].completed) {
-          $scope.transactions.push(data[i]);
+      for (i = 0; i < length; i++) {
+        trans = data[i];
+        if (!trans.completed) {
+          if (trans.created_at) {
+            trans.created_at = $rootScope.formatDate(trans.created_at);
+          }
+          if (trans.selection_date) {
+            trans.selection_date = $rootScope.formatDate(trans.selection_date);
+          }
+          $scope.transactions.push(trans);
         }
       }
       addMarker(address,"delete",transaction);
-      // console.log("update_trans- $scope.transactions: %O", $scope.transactions);
+      console.log("update_trans- $scope.transactions: %O", $scope.transactions);
       for (i = 0, length = $scope.transactions.length; i < length; i++) {
         transaction = $scope.transactions[i];
         if ((transaction.selected && !transaction.completed && transaction.redeemer_user_id === current_user_id) || !transaction.selected) {
