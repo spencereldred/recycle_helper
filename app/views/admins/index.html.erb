@@ -85,10 +85,8 @@
           <th>Plastic</th>
           <th>Cans</th>
           <th>Glass</th>
-          <th>Posted</th>
-          <th>Selected</th>
+          <th>Date Posted</th>
           <th>Date Selected</th>
-          <th>Completed</th>
           <th>Date Completed</th>
         </tr>
       </thead>
@@ -101,9 +99,7 @@
           <td>{{transaction.cans}}</td>
           <td>{{transaction.glass}}</td>
           <td>{{transaction.created_at}}</td>
-          <td>{{transaction.selected}}</td>
           <td>{{transaction.selection_date}}</td>
-          <td>{{transaction.completed}}</td>
           <td>{{transaction.completion_date}}</td>
         </tr>
         <tr ng-repeat="transaction in transactions | filter: {trans_type: 'redeemable'} | filter: {selected: true} | filter: {completed: false}">
@@ -114,9 +110,7 @@
           <td>{{transaction.cans}}</td>
           <td>{{transaction.glass}}</td>
           <td>{{transaction.created_at}}</td>
-          <td>{{transaction.selected}}</td>
           <td>{{transaction.selection_date}}</td>
-          <td>{{transaction.completed}}</td>
           <td>{{transaction.completion_date}}</td>
         </tr>
         <tr ng-repeat="transaction in transactions | filter: {trans_type: 'redeemable'} | filter: {selected: true} | filter: {completed: true}">
@@ -127,9 +121,7 @@
           <td>{{transaction.cans}}</td>
           <td>{{transaction.glass}}</td>
           <td>{{transaction.created_at}}</td>
-          <td>{{transaction.selected}}</td>
           <td>{{transaction.selection_date}}</td>
-          <td>{{transaction.completed}}</td>
           <td>{{transaction.completion_date}}</td>
         </tr>
       </tbody>
