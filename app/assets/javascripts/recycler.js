@@ -81,6 +81,7 @@ app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Tran
         transaction.state = $('#user_state').val();
         transaction.zipcode = $('#user_zipcode').val();
         transaction.recycler_user_id = $('#user_id').val();
+        transaction.group_id = $('#group_id').val();
         transaction.completion_date = "nil";
         transaction.selected = false;
         transaction.completed = false;
