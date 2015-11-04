@@ -36,6 +36,11 @@ app.controller('UserController', ['$scope', '$rootScope', '$resource', 'User',
     };
     User.query(update_users);
 
+    var current_user_function = $('#current_user_function').val();
+    if (current_user_function === "admin") {
+      $rootScope.isAdmin = true;
+    }
+
   }
 ]);
 

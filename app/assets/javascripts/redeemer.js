@@ -41,6 +41,7 @@ app.controller('RedeemerController', ['$scope', '$rootScope', '$resource', 'Rede
         center_longitude = $('#center_longitude').val(),
         user_radius = $('#current_user_radius').val() * 1609.34,
         current_user_id = parseInt($('#current_user_id').val()),
+        current_user_function = $('#current_user_function').val(),
         addresses = [],  markers = [],
         map, geocoder;
         $scope.transactions = [],
@@ -49,6 +50,10 @@ app.controller('RedeemerController', ['$scope', '$rootScope', '$resource', 'Rede
           "completed":  "Thank You for helping Hawaii recycle."
         },
         updateInterval = 5 * 60 * 1000; // 5 minutes;
+
+    if (current_user_function === "admin") {
+      $rootScope.isAdmin = true;
+    }
 
     var updateTransaction = function (transaction) { // start updateTransaction
       transaction.$update().then(function () {

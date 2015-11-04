@@ -36,6 +36,11 @@ app.factory('Transaction', ['$resource', function($resource){
 app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Transaction',
   function($scope, $rootScope, $resource, Transaction){
 
+    var current_user_function = $('#current_user_function').val();
+    if (current_user_function === "admin") {
+      $rootScope.isAdmin = true;
+    }
+
     var message = {
       "post":   "Congratulations, you have posted a recycling job. " +
                 "You will be notified via email when a redeemer has selected your job. " +
