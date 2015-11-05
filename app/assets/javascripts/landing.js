@@ -35,8 +35,7 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
     ];
 
     $scope.welcomeComments = [
-      "As a recycler: Find someone to pick up your recycling for proper disposal. Free.",
-      "As a redeemer: Find someone who needs their returnables removed. Keep the cash for yourself."
+      "Register as a recycler, and post anytime to have someone from the Maui 76 Composite Squadron at Civil Air Patrol pick up your recycling for proper disposal. Free."
     ];
 
     $scope.terms = "WELCOME TO HI5exchange. By accessing our servers, websites, or content therefrom (together, \"HI5\"), " +

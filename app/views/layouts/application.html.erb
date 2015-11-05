@@ -37,6 +37,7 @@
             <a href="/admins" class="right"><button class="btn btn-default btn-lg">Admin</button></a>
           </span>
           <input type="hidden" id="current_user_function" value="<%= current_user.function %>" />
+          <input type="hidden" id="current_user_group_id" value="<%= current_user.group_id %>" />
         <% end %>
       </div><!--end class="bs" -->
     </header>
@@ -124,7 +125,7 @@
           <h2 class="heading_for_jumbotron">Helping Hawaii Recycle</h2>
           <h2 class="text-center">Welcome to Hi5 Exchange</h2>
           <div class="row">
-            <li class="col-sm-offset-1 col-sm-11" ng-repeat="welcomeComment in welcomeComments"><p>{{welcomeComment}}</p></li>
+            <div class="col-sm-offset-1 col-sm-11" ng-repeat="welcomeComment in welcomeComments"><p>{{welcomeComment}}</p></div>
           </div><!--end row -->
           <h3 class="text-center">Everybody wins! Sign up now.</h3>
         </div><!--end jumbotron -->
