@@ -31,13 +31,16 @@ app.factory('User', ['$resource', function($resource){
 app.controller('UserController', ['$scope', '$rootScope', '$resource', 'User',
   function($scope, $rootScope, $resource, User){
 
+    $rootScope.current_user_function = $('#current_user_function').val();
+    $rootScope.current_user_group_id = $('#current_user_group_id').val();
+
     var update_users = function (data) {
       $scope.users = data;
     };
     User.query(update_users);
 
-    var current_user_function = $('#current_user_function').val();
-    if (current_user_function === "admin") {
+    if ($rootScope.current_user_function === "admin" ||
+        $rootScope.current_user_function === "super_admin") {
       $rootScope.isAdmin = true;
     }
 
@@ -84,9 +87,28 @@ app.factory('Group', ['$resource', function($resource){
 app.controller('GroupController', ['$scope', '$rootScope', '$resource', 'Group',
   function($scope, $rootScope, $resource, Group){
 
+    if ($rootScope.current_user_function === "admin" ||
+        $rootScope.current_user_function === "super_admin") {
+      $rootScope.isAdmin = true;
+    }
+
     var update_groups = function (data) {
-      $scope.groups = data;
+      var i, group, length = data.length;
+      $scope.groups = [];
+
+      if ($rootScope.current_user_function === "admin") {
+        for( i = 0; i < length; i++) {
+          group = data[i];
+          if (group.id === parseInt($rootScope.current_user_group_id)) {
+            $scope.groups.push(group);
+          }
+        }
+      } else { // "super_admin"
+        $scope.groups = data;
+      }
+
     };
+
     Group.query(update_groups);
 
   }

@@ -15,16 +15,16 @@ class ApplicationController < ActionController::Base
     redirect_to new_session_path unless current_user
   end
 
-  def authorize_redeemer #helper
-    redirect_to root_path unless current_user.function == "redeemer" || current_user.function == "admin"
+  def authorize_redeemer #redeemer or admin or super_admin
+    redirect_to root_path unless current_user.function == "redeemer" || current_user.function == "admin" || current_user.function == "super_admin"
   end
 
-  def authorize_recycler #supplier
-    redirect_to root_path unless  current_user.function == "recycler" || current_user.function == "admin"
+  def authorize_recycler #recycler or admin or super_admin
+    redirect_to root_path unless  current_user.function == "recycler" || current_user.function == "admin" || current_user.function == "super_admin"
   end
 
-  def authorize_admin
-    redirect_to root_path unless current_user.function == "admin"
+  def authorize_admin # admin or super_admin
+    redirect_to root_path unless current_user.function == "admin" || current_user.function == "super_admin"
   end
 
   protected

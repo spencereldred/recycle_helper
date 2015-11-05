@@ -18,6 +18,8 @@ class SessionsController < ApplicationController
           redirect_to transactions_path
         when "admin"
           redirect_to admins_path
+        when "super_admin"
+          redirect_to admins_path
         else
           puts "I'm not a redeemer."
       end

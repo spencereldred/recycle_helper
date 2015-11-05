@@ -37,7 +37,9 @@ app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Tran
   function($scope, $rootScope, $resource, Transaction){
 
     var current_user_function = $('#current_user_function').val();
-    if (current_user_function === "admin") {
+
+    if (current_user_function === "admin" ||
+        current_user_function === "super_admin") {
       $rootScope.isAdmin = true;
     }
 

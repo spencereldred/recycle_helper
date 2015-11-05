@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :authorize
+  before_filter :authorize_admin
 
   def index
     respond_to do |format|

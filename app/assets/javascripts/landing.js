@@ -16,6 +16,15 @@ app.factory('User', ['$resource', function($resource){
 
 app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'User',
   function($scope, $rootScope, $resource, User){
+
+    current_user_function = $('#current_user_function').val();
+    if (current_user_function && (
+        current_user_function === "admin" ||
+        current_user_function === "super_admin"
+      )) {
+      $rootScope.isAdmin = true;
+    }
+
     $scope.recyclerRules = [
       "Register as a recycler, then log in anytime to request a redeemer to pick up your recycling.",
       "Only registered redeemers will be able to see this information and claim the job.",
@@ -173,12 +182,3 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
 
   }
 ]);
-
-
-
-
-
-
-
-
-
