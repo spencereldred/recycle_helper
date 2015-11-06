@@ -25,6 +25,12 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
       $rootScope.isAdmin = true;
     }
 
+    if (!current_user_function) {
+      $scope.hideBanner = true;
+    } else {
+      $scope.hideBanner = false;
+    }
+
     $scope.recyclerRules = [
       "Register as a recycler, then log in anytime to request a redeemer to pick up your recycling.",
       "Only registered redeemers will be able to see this information and claim the job.",
@@ -115,21 +121,23 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
       return dateString;
     };
 
-    $scope.signIn = $scope.howItWorks =
-    $scope.recyclerSignUp = $scope.redeemerSignUp =
+    $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp =
     $scope.userProfile = $scope.redeemer = $scope.recycler = false;
     $rootScope.showFlash = false;
+    $scope.redeemerSignUp = true;
 
     $scope.toggleHowItWorks = function () {
       $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = $scope.userProfile = false;
       $rootScope.showFlash = false;
-      $scope.howItWorks = !$scope.howItWorks;
+      $scope.hideBanner = false;
+      $scope.howItWorks = true;
       clearUserSignUpFields();
     };
 
     $scope.toggleSignIn = function () {
       $scope.howItWorks = $scope.recyclerSignUp = $scope.redeemerSignUp = false;
-      $scope.signIn = !$scope.signIn;
+      $scope.hideBanner = false;
+      $scope.signIn = true;
       clearUserSignUpFields();
     };
 
@@ -140,7 +148,8 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
 
     $scope.toggleRecyclerSignUp = function () {
       $scope.signIn = $scope.howItWorks = $scope.redeemerSignUp = false;
-      $scope.recyclerSignUp = !$scope.recyclerSignUp;
+      $scope.hideBanner = false;
+      $scope.recyclerSignUp = true;
     };
 
     $scope.toggleUserProfile = function() {
@@ -148,6 +157,23 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
           self = this;
       $scope.howItWorks = false;
       $rootScope.showFlash = false;
+      $scope.redeemerSignUp = false;
+      $scope.userProfile = true;
+      User.query(function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (parseInt(data[i].id) === parseInt(id) ) {
+              self.user = data[i];
+            }
+        }
+      });
+    };
+    $scope.toggleUserProfileSignedIn = function() {
+      var id = $('#current_user_id').val(),
+          self = this;
+      $scope.howItWorks = false;
+      $rootScope.showFlash = false;
+      $scope.redeemerSignUp = false;
+      $scope.hideBanner = false;
       $scope.userProfile = !$scope.userProfile;
       User.query(function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -156,6 +182,32 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
             }
         }
       });
+    };
+
+    $scope.closeProfileWorks = function () {
+      $scope.howItWorks = $scope.userProfile = false;
+      $scope.hideBanner = false;
+    }
+
+    $scope.closeJumboTron = function () {
+      $scope.signIn = $scope.howItWorks =
+      $scope.recyclerSignUp = $scope.redeemerSignUp =
+      $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+      $scope.hideBanner = true;
+    };
+
+    $scope.closeJumboTronSignedIn = function () {
+      $scope.signIn = $scope.howItWorks =
+      $scope.recyclerSignUp = $scope.redeemerSignUp =
+      $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+      $scope.hideBanner = false;
+    };
+
+    $scope.closeProfile = function () {
+      $scope.signIn = $scope.howItWorks =
+      $scope.recyclerSignUp = $scope.redeemerSignUp =
+      $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+      $scope.hideBanner = false;
     };
 
     $scope.addUser = function () {

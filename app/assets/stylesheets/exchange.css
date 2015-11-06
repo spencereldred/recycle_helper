@@ -68,6 +68,10 @@ textarea.terms {
  text-align: center;
 }
 
+.nav-space {
+  margin-top: 80px;
+}
+
 .sub_heading_for_jumbotron {
  color: #808080;
  font-style: italic;

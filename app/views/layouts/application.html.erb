@@ -36,7 +36,7 @@
             <a href="/groups" class="right"><button class="btn btn-default btn-lg">Redeemer Sign Up</button></a>
             <a href="/redeemers" class="right"><button class="btn btn-default btn-lg">Redeemer</button></a>
             <a href="/transactions" class="right"><button class="btn btn-default btn-lg">Recycler</button></a>
-            <a href="/admins" class="right"><button class="btn btn-default btn-lg">Admin</button></a>
+            <a href="/admins" class="right"><button class="btn btn-default btn-lg" ng-click="closeProfileWorks()">Admin</button></a>
           </span>
           <input type="hidden" id="current_user_function" value="<%= current_user.function %>" />
           <input type="hidden" id="current_user_group_id" value="<%= current_user.group_id %>" />
@@ -47,7 +47,7 @@
 
 
       <!-- Banner -->
-      <div class="row">
+      <div class="row" ng-hide="hideBanner">
         <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
       </div><!--end row -->
       <!-- end Banner -->
@@ -77,6 +77,14 @@
           <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules"><p>{{rule}}</p></li>
           <h2 class="text-center">Redeemer</h2>
           <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li>
+          <div class="row">
+            <% if current_user %>
+            <button class="btn btn-default btn-lg right" ng-click="closeJumboTronSignedIn()">Close</button>
+            <% end %>
+            <% if !current_user %>
+            <button class="btn btn-default btn-lg right" ng-click="closeJumboTron()">Close</button>
+            <% end %>
+          </div>
         </div><!--end row -->
       </div><!--end howItWorks -->
       <!-- end How It Works -->
@@ -84,6 +92,7 @@
       <!-- User Profile users_controller -->
       <% if current_user %>
         <div class="jumbotron" ng-show="userProfile">
+          <div class="row">
           <h2 class="heading_for_jumbotron">Edit <%= current_user.function.capitalize %> Profile</h2>
           <input type="hidden" id="current_user_id" value="<%=current_user.id%>"/>
           <form ng-submit="updateUser()">
@@ -115,6 +124,9 @@
               </div>
             </div><!-- end row -->
           </form>
+          <button class="btn btn-default btn-lg right" ng-click="closeProfile()">Close</button>
+          </div>
+          </div>
         </div><!-- end jumbotron userProfile-->
       <% end %><!-- end current_user -->
       <!-- End User Profile -->
@@ -123,19 +135,24 @@
 
       <% if !current_user %>
         <!-- Landing Page -->
-        <div class="jumbotron" ng-hide="howItWorks || signIn || redeemerSignUp || recyclerSignUp || userProfile">
-          <h2 class="heading_for_jumbotron">Helping Hawaii Recycle</h2>
+        <div class="jumbotron nav-space" ng-hide="howItWorks || signIn ||  recyclerSignUp || userProfile">
+          <div class="row">
+            <img id="landing_page_image" src="/assets/LandingPage.png" class="img-responsive" alt="HI5 Welcome">
+          </div><!--end row -->
+          <!-- <h2 class="heading_for_jumbotron">Helping Hawaii Recycle</h2>
           <h2 class="text-center">Welcome to Hi5 Exchange</h2>
           <div class="row">
             <div class="col-sm-offset-1 col-sm-11" ng-repeat="welcomeComment in welcomeComments"><p>{{welcomeComment}}</p></div>
           </div><!--end row -->
-          <h3 class="text-center">Everybody wins! Sign up now.</h3>
-        </div><!--end jumbotron -->
+          <!-- <h3 class="text-center">Everybody wins! Sign up now.</h3> -->
+
+        </div>
+        <!--end jumbotron -->
         <!-- end Landing Page -->
       <% end %><!--end !current_user -->
 
       <!-- User Sign UP users_controller -->
-      <div class="jumbotron" ng-show="redeemerSignUp || recyclerSignUp">
+      <div class="jumbotron" ng-show="recyclerSignUp">
         <h2 class="heading_for_jumbotron" ng-show="redeemerSignUp">Redeemer Sign up</h2>
         <h2 class="sub_heading_for_jumbotron" ng-show="redeemerSignUp">Exchange Recyclables for Cash!</h2>
         <h2 class="heading_for_jumbotron" ng-show="recyclerSignUp">Recycler Sign up</h2>
@@ -189,6 +206,9 @@
             </div>
           </div><!-- end row -->
         </form>
+        <div class="row">
+          <button class="btn btn-default btn-lg right" ng-click="closeJumboTron()">Close</button>
+        </div>
       </div><!--end jumbotron - redeemerSignUp -->
       <!-- end User Sign UP -->
 
@@ -204,6 +224,9 @@
             <div class="col-sm-offset-5 col-sm-7"><input class="btn btn-primary btn-md" type="submit" ></div>
           </div><!-- end row -->
          </form>
+         <div class="row">
+            <button class="btn btn-default btn-lg right" ng-click="closeJumboTron()">Close</button>
+          </div>
       </div><!-- end jumbotron signIn -->
       <!-- End Sign In -->
 
