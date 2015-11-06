@@ -80,12 +80,7 @@
             </tr>
           </thead>
           <tbody>
-              <% if current_user.function == "admin" || current_user.function == "super_admin" %>
-              <tr ng-repeat="transaction in transactions | filter: {trans_type: 'redeemable'} | filter: {selected: true, completed: false}">
-              <% end %>
-              <% if current_user.function == "redeemer" %>
               <tr ng-repeat="transaction in transactions | filter: {trans_type: 'redeemable'} | filter: {selected: true, completed: false, redeemer_user_id: <%= current_user.id %> }" >
-              <% end %>
                 <td>{{transaction.address}}, {{transaction.city}}</td>
                 <td>{{transaction.state}} {{transaction.zipcode}}</td>
                 <td>{{transaction.plastic}}</td>
