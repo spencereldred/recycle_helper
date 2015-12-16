@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
     if current_user.function == 'super_admin'
       groups = Group.all
     else
-      groups = Group.where(id: @current_profile.group_id)
+      groups = Group.where(id: current_user.group_id)
     end
     groups.each do |group|
       group[:member_count] = group.users.length

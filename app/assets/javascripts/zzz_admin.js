@@ -37,6 +37,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$resource', 'User',
     var update_users = function (data) {
       $scope.users = data;
     };
+
     User.query(update_users);
 
     if ($rootScope.current_user_function === "admin" ||
@@ -73,6 +74,7 @@ app.controller('TransactionController', ['$scope', '$rootScope', '$resource', 'T
         }
       }
     };
+
     Transaction.query(update_trans);
 
   }
@@ -106,7 +108,6 @@ app.controller('GroupController', ['$scope', '$rootScope', '$resource', 'Group',
       } else { // "super_admin"
         $scope.groups = data;
       }
-
     };
 
     Group.query(update_groups);

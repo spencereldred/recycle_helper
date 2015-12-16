@@ -3,9 +3,18 @@ class TransactionsController < ApplicationController
   before_filter :authorize_recycler
 
   def index
+    if current_user.function == 'super_admin'
+      trans = Transaction.all
+    else
+      trans = Transaction.where(group_id: current_user.group_id)
+                         .near([current_user.latitude, current_user.longitude], current_user.radius)
+      trans += Transaction.where(group_id: "2")
+                         .near([current_user.latitude, current_user.longitude], current_user.radius)
+      trans.uniq!
+    end
     respond_to do |format|
       format.html
-      format.json { render :json => Transaction.near([current_user.latitude, current_user.longitude], current_user.radius) }
+      format.json { render :json => trans }
     end
   end
 

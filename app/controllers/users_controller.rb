@@ -2,9 +2,15 @@ class UsersController < ApplicationController
   skip_before_filter :authorize, only: [:new, :create]
 
   def index
-    # for test only
-    users = User.all
-    # image = ["img": "some image"]
+    if current_user
+      if current_user.function == 'super_admin'
+        users = User.all
+      else
+        users = User.where(group_id: current_user.group_id)
+      end
+    elsif !current_user
+      users = Group.all
+    end
     respond_to do |format|
       format.html
       format.json { render :json => users }
@@ -27,7 +33,7 @@ class UsersController < ApplicationController
       if @user.function == "redeemer"
         WelcomeEmailRedeemerWorker.perform_async(@user.id)
         WelcomeTextRedeemerWorker.perform_async(@user.id)
-        redirect_to redeemers_path
+        redirect_to admin_path
       else
         WelcomeEmailRecyclerWorker.perform_async(@user.id)
         WelcomeTextRecyclerWorker.perform_async(@user.id)

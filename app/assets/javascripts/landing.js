@@ -8,12 +8,6 @@ app.factory('User', ['$resource', function($resource){
   return $resource('/users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }]);
 
-// app.factory('Sessions', ['$resource', function($resource){
-//   return $resource('/sessions/:id.json', {id: '@id'});
-// }]);
-// 'Sessions',
-// , Sessions
-
 app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'User',
   function($scope, $rootScope, $resource, User){
 
@@ -92,8 +86,33 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
 
     $scope.pwdLength = "Password must be 6 characters or more.";
     $scope.textAndEmail = "Enter your phone number If you wish to receive text message notification of transaction events. Highly recommended.";
+    $scope.selectRedeemerGroup = "Please select a group to pick up your recycleables."
     $scope.conditions = "I agree with the Terms and Conditions.";
-    $scope.users = User.query();
+
+
+    $scope.setAvailableGroups = function (groups) {
+      var group, i, length = groups.length;
+      $scope.data = {
+        groupOptions: [],
+        selectedGroupOption: {}
+      }
+      $scope.selectedGroupOption = {};
+      for(i = 0; i < length; i++) {
+          group = groups[i];
+          if (group.name !== "Admin") {
+               $scope.data.groupOptions.push({
+                                          name: group.name,
+                                          value: group.id
+                                        });
+          }
+          if (group.name === "Maui Civil Air Patrol") {
+            $scope.data.selectedGroupOption = {name: group.name, value: group.id};
+          }
+      }
+    };
+
+    User.query($scope.setAvailableGroups);
+
     var user = $scope.user = {},
         message = {
           "newUser":      "Your account has been created. Log in anytime.",
@@ -122,9 +141,7 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
     };
 
     $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp =
-    $scope.userProfile = $scope.redeemer = $scope.recycler = false;
-    $rootScope.showFlash = false;
-    $scope.redeemerSignUp = true;
+    $scope.redeemerSignUp = $scope.userProfile = $rootScope.showFlash = false;
 
     $scope.toggleHowItWorks = function () {
       $scope.signIn = $scope.recyclerSignUp = $scope.redeemerSignUp = $scope.userProfile = false;
@@ -143,6 +160,7 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
 
     $scope.toggleRedeemerSignUp = function () {
       $scope.signIn = $scope.howItWorks = $scope.recyclerSignUp = false;
+      $scope.userProfile = false;
       $scope.redeemerSignUp = !$scope.redeemerSignUp;
     };
 
@@ -167,22 +185,6 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
         }
       });
     };
-    $scope.toggleUserProfileSignedIn = function() {
-      var id = $('#current_user_id').val(),
-          self = this;
-      $scope.howItWorks = false;
-      $rootScope.showFlash = false;
-      $scope.redeemerSignUp = false;
-      $scope.hideBanner = false;
-      $scope.userProfile = !$scope.userProfile;
-      User.query(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            if (parseInt(data[i].id) === parseInt(id) ) {
-              self.user = data[i];
-            }
-        }
-      });
-    };
 
     $scope.closeProfileWorks = function () {
       $scope.howItWorks = $scope.userProfile = false;
@@ -192,28 +194,30 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
     $scope.closeJumboTron = function () {
       $scope.signIn = $scope.howItWorks =
       $scope.recyclerSignUp = $scope.redeemerSignUp =
-      $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+      $scope.userProfile = false;
       $scope.hideBanner = true;
     };
 
     $scope.closeJumboTronSignedIn = function () {
       $scope.signIn = $scope.howItWorks =
       $scope.recyclerSignUp = $scope.redeemerSignUp =
-      $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+      $scope.userProfile = false;
       $scope.hideBanner = false;
     };
 
     $scope.closeProfile = function () {
       $scope.signIn = $scope.howItWorks =
       $scope.recyclerSignUp = $scope.redeemerSignUp =
-      $scope.userProfile = $scope.redeemer = $scope.recycler = false;
+      $scope.userProfile = false;
       $scope.hideBanner = false;
     };
 
-    $scope.addUser = function () {
+    $scope.addRecycler = function () {
       var newUser = $scope.newUser;
       newUser.function = $('#user_function').val();
-      newUser.group_id = $('#group_id').val();
+      if (!newUser.group_id) {
+        newUser.group_id = 2; // default to 'Public' group
+      }
       if (newUser.function === 'redeemer') {
          newUser.radius = 8;
       }
@@ -223,6 +227,19 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
       $scope.redeemerSignUp = false;
       $scope.signIn = true;
       clearUserSignUpFields();
+    };
+
+    $scope.addRedeemer = function () {
+      var newUser = $scope.newUser;
+      newUser.function = $('#user_function').val();
+      newUser.group_id = $('#admin_group_id').val();
+      if (newUser.function === 'redeemer') {
+         newUser.radius = 8;
+      }
+      User.save(newUser);
+      clearUserSignUpFields();
+      $scope.toggleRedeemerSignUp();
+      $rootScope.showFlashMessage("success", message.newUser);
     };
 
     $scope.updateUser = function () {

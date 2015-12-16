@@ -89,10 +89,10 @@ app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Tran
         transaction.zipcode = $('#user_zipcode').val();
         transaction.recycler_user_id = $('#user_id').val();
         transaction.group_id = $('#group_id').val();
+        transaction.trans_type = "redeemable";
         transaction.completion_date = "nil";
         transaction.selected = false;
         transaction.completed = false;
-        transaction.trans_type = "redeemable";
         // no samaritan items in a redeemable transaction
         transaction.cardboard = false;
         transaction.non_hi5_plastic = false;
@@ -120,10 +120,10 @@ app.controller('RecyclerController', ['$scope', '$rootScope', '$resource', 'Tran
         transaction.state = $('#user_state').val();
         transaction.zipcode = $('#user_zipcode').val();
         transaction.recycler_user_id = $('#user_id').val();
+        transaction.trans_type = "samaritan";
         transaction.completion_date = "nil";
         transaction.selected = false;
         transaction.completed = false;
-        transaction.trans_type = "samaritan";
         // no redeemable items in a samaritan transaction
         transaction.other = 0;
         transaction.plastic = 0;
