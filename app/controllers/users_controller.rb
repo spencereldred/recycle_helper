@@ -62,7 +62,7 @@ class UsersController < ApplicationController
                                   city:       u[:city],
                                   state:      u[:state],
                                   zipcode:    u[:zipcode])
-    if @user[:function] == "redeemer"
+    if @user[:function] == "redeemer" || @user[:function] == "admin" || @user[:function] == "super_admin"
       update_user.update_attributes(radius: u[:radius])
     end
 
