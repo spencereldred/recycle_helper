@@ -10,7 +10,7 @@
 @annieadmin = User.create(username: "annieadmin", email: "anniecollopy@gmail.com", phone: "8082807436",
   function: "super_admin", first_name: "Jerry", last_name: "Rice", group_id: @public_group.id,
   password: "password", password_confirmation: "password", radius: 15,
-  address: "85 Onehee Avenue", city: "Kahului", state: "HI", zipcode: "96732")
+  address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768")
 sleep(1)
 @anniedolphins = User.create(username: "anniedolphins", email: "anniecollopy@gmail.com", phone: "8082807436",
   function: "admin", first_name: "Joe", last_name: "Montana", group_id: @maui_dolphins.id,
@@ -21,7 +21,7 @@ sleep(1)
 @spenceradmin = User.create(username: "spenceradmin", email: "eldredspencer@gmail.com", phone: "8082803758",
   function: "super_admin", first_name: "Gene", last_name: "Washington", group_id: @public_group.id,
   password: "password", password_confirmation: "password", radius: 15,
-  address: "85 Onehee Avenue", city: "Kahului", state: "HI", zipcode: "96732")
+  address: "2741 Leolani Place", city: "Makawao", state: "HI", zipcode: "96768")
 sleep(1)
 @spencerdolphins = User.create(username: "spencerdolphins", email: "eldredspencer@gmail.com", phone: "8082803758",
   function: "admin", first_name: "John", last_name: "Brodie", group_id: @maui_dolphins.id,

@@ -19,19 +19,49 @@
     <header>
       <div class="bs">
         <% if !current_user %>
-          <button class="btn btn-default btn-lg right" ng-click="toggleSignIn()">Sign In</button>
-          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">How it Works</button>
-          <button class="btn btn-default btn-lg right" ng-click="toggleRecyclerSignUp()">Recycler Sign Up</button>
+          <span class="col-xs-12">
+            <button class="btn btn-default btn-lg right" ng-click="toggleSignIn()">Sign In</button>
+            <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">How it Works</button>
+          </span>
+          <span class="col-xs-12">
+            <button class="btn btn-default btn-lg right" ng-click="toggleRecyclerSignUp()">Recycler Sign Up</button>
+          </span>
         <% end %>
         <% if current_user %>
-          <a href="/logout" class="right"><button class="btn btn-default btn-lg">Logout</button></a>
-          <button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">How it Works</button>
-          <button class="btn btn-default btn-lg right" ng-click="toggleUserProfile()">Profile</button>
           <span ng-show="isAdmin">
-            <a href="#" class="right"><button ng-click="toggleRedeemerSignUp()"class="btn btn-default btn-lg">Redeemer Sign Up</button></a>
-            <a href="/redeemers" class="right"><button class="btn btn-default btn-lg">Redeemer</button></a>
-            <a href="/transactions" class="right"><button class="btn btn-default btn-lg">Recycler</button></a>
-            <a href="/admins" class="right"><button class="btn btn-default btn-lg" ng-click="closeProfileWorks()">Admin</button></a>
+            <span class="col-xs-12">
+                <a href="#" class="right"><button ng-click="toggleRedeemerSignUp()"class="btn btn-default btn-lg right">Redeemer Sign Up</button></a>
+            </span>
+          </span>
+          <span ng-show="isAdmin">
+            <span class="col-xs-12">
+              <a href="/admins" class="right"><button class="btn btn-default btn-lg right" ng-click="closeProfileWorks()">Admin</button></a>
+            </span>
+          </span>
+          <span ng-show="isAdmin">
+            <span class="col-xs-12">
+              <a href="/redeemers" class="right"><button class="btn btn-default btn-lg right">Redeemer</button></a>
+            </span>
+          </span>
+            <span ng-show="isAdmin">
+              <span class="col-xs-12">
+                <a href="/transactions" class="right"><button class="btn btn-default btn-lg right">Recycler</button></a>
+            </span>
+          </span>
+          <span>
+            <span class="col-xs-12">
+              <a href="#" class="right"><button class="btn btn-default btn-lg right" ng-click="toggleHowItWorks()">How it Works</button></a>
+            </span>
+          </span>
+          <span ng-show="isAdmin || isRedeemer || isRecycler">
+            <span class="col-xs-12">
+              <a href="#" class="right"><button class="btn btn-default btn-lg right" ng-click="toggleUserProfile()">Profile</button></a>
+            </span>
+          </span>
+          <span ng-show="isAdmin || isRedeemer || isRecycler">
+            <span class="col-xs-12">
+              <a href="/logout" class="right"><button class="btn btn-default btn-lg right">Logout</button></a>
+            </span>
           </span>
           <input type="hidden" id="current_user_function" value="<%= current_user.function %>" />
           <input type="hidden" id="current_user_group_id" value="<%= current_user.group_id %>" />
@@ -42,7 +72,7 @@
 
       <!-- Banner -->
       <div class="row" ng-hide="hideBanner">
-        <div class="col-sm-offset-3 col-sm-9 "><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
+        <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9"><img id="hi5_banner" src="/assets/hi5_banner.png" class="img-responsive" style="width: 60%;"alt="HI5 Banner"></div>
       </div><!--end row -->
       <!-- end Banner -->
 
@@ -57,54 +87,89 @@
       </div><!--end row -->
 
       <!-- How It Works -->
-      <div class="jumbotron" ng-show="howItWorks">
-        <h2 class="heading_for_jumbotron">How it Works</h2>
-        <div class="row">
-          <h2 class="text-center">Recycler</h2>
-          <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules"><p>{{rule}}</p></li>
-          <!-- <h2 class="text-center">Redeemer</h2>
-          <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li> -->
+      <div class="row" ng-show="howItWorks">
+        <div class="landing_background col-sm-offset-1 col-sm-10">
           <div class="row">
-            <% if current_user %>
-            <button class="btn btn-default btn-lg right" ng-click="closeJumboTronSignedIn()">Close</button>
-            <% end %>
-            <% if !current_user %>
-            <button class="btn btn-default btn-lg right" ng-click="closeJumboTron()">Close</button>
-            <% end %>
-          </div>
-        </div><!--end row -->
+              <div class="col-sm-offset-9 col-sm-3">
+                <% if current_user %>
+                  <button class="btn btn-default btn-md right" ng-click="closeJumboTronSignedIn()">Close</button>
+                <% end %>
+                <% if !current_user %>
+                    <button class="btn btn-default btn-md right" ng-click="closeJumboTron()">Close</button>
+                <% end %>
+              </div>
+            </div>
+          <h2 class="heading_for_jumbotron">How it Works</h2>
+          <div class="row">
+            <h2 class="text-center">Recycler</h2>
+            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><p>{{rule}}</p></li>
+            <!-- <h2 class="text-center">Redeemer</h2>
+            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li> -->
+          </div><!--end row -->
+        </div>
       </div><!--end howItWorks -->
       <!-- end How It Works -->
 
-
       <% if current_user %>
       <!-- Edit User Profile users_controller -->
-        <div class="jumbotron" ng-show="userProfile">
-          <div class="row">
+        <div class="row" ng-show="userProfile">
+          <div class="landing_background col-sm-offset-1 col-sm-10">
+            <div class="row">
+              <div class="col-sm-offset-9 col-sm-3">
+                <button class="btn btn-default btn-md right" ng-click="closeProfile()">Close</button>
+              </div>
+            </div>
             <h2 class="heading_for_jumbotron">Edit <%= current_user.function.capitalize %> Profile</h2>
             <input type="hidden" id="current_user_id" value="<%=current_user.id%>"/>
             <form ng-submit="updateUser()">
               <div class="row">
                 <h2 class="text-center">Profile Information</h2>
-                <div class="col-sm-offset-2 col-sm-3 text-right">First Name:</div>
-                <div class="col-sm-7"><input type="text" ng-value="user.first_name" ng-model="user.first_name" required></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">Last Name:</div>
-                <div class="col-sm-7"><input type="text" ng-value="user.last_name" ng-model="user.last_name" required></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">Email:</div>
-                <div class="col-sm-7"><input type="email" ng-value="user.email" ng-model="user.email" required ></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">Phone:</div>
-                <div class="col-sm-7"><input type="tel" ng-value="user.phone" ng-model="user.phone" ></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">Address:</div>
-                <div class="col-sm-7"><input type="text" ng-value="user.address" ng-model="user.address" required></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">City:</div>
-                <div class="col-sm-7"><input type="text" ng-value="user.city" ng-model="user.city" required></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">State:</div>
-                <div class="col-sm-7"><input type="text" ng-value="user.state" ng-model="user.state" required></div>
-                <div class="col-sm-offset-2 col-sm-3 text-right">Zipcode:</div>
-                <div class="col-sm-7"><input type="text" ng-value="user.zipcode" ng-model="user.zipcode" required></div>
+                <!-- First Name -->
+                  <div class="row">
+                    <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">First Name:</span>
+                  <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.first_name" ng-model="user.first_name" required></span>
+                </div>
+                <!-- Last Name -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Last Name:</span>
+                  <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.last_name" ng-model="user.last_name" required></span>
+                </div>
+                <!-- Email -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Email:</span>
+                <span class="col-xs-4 col-sm-7"><input type="email" ng-value="user.email" ng-model="user.email" required ></span>
+                </div>
+                <!-- Phone -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Phone:</span>
+                <span class="col-xs-4 col-sm-7"><input type="tel" ng-value="user.phone" ng-model="user.phone" ></span>
+                </div>
+                <!-- Address -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Address:</span>
+                <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.address" ng-model="user.address" required></span>
+                </div>
+                <!-- City -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">City:</span>
+                <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.city" ng-model="user.city" required></span>
+                </div>
+                <!-- State -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">State:</span>
+                <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.state" ng-model="user.state" required></span>
+                </div>
+                <!-- Zipcode -->
+                <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Zipcode:</span>
+                <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.zipcode" ng-model="user.zipcode" required></span>
+                </div>
+
                 <div ng-if="user.function === 'redeemer' || user.function === 'admin' || user.function ==='super_admin'">
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Radius (miles):</div>
-                    <div class="col-sm-7"><input type="text" ng-value="user.radius" ng-model="user.radius" required></div>
+                  <div class="row">
+                  <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Radius (miles):</span>
+                    <span class="col-xs-4 col-sm-7"><input type="text" ng-value="user.radius" ng-model="user.radius" required></span>
+                    </div>
                 </div>
                 <p></p>
                 <div class="col-sm-offset-5 col-sm-1">
@@ -112,72 +177,100 @@
                 </div>
               </div><!-- end row -->
             </form>
-            <button class="btn btn-default btn-lg right" ng-click="closeProfile()">Close</button>
           </div><!-- end row -->
         </div><!-- end jumbotron userProfile-->
       <!-- End User Profile -->
 
       <!-- Redeemer Sign UP  by Admin - users_controller -->
       <div ng-show="redeemerSignUp">
-        <div class="row">
-          <div class="col-sm-offset-2 col-sm-8 ">
-            <div class="jumbotron">
-              <h2 class="heading_for_jumbotron">Redeemer Sign up</h2>
-              <h2 class="sub_heading_for_jumbotron">Exchange Recyclables for Cash!</h2>
-              <form ng-submit="addRedeemer()">
-                <div class="row">
-                  <div class="col-sm-offset-3 col-sm-9 ">
-                    <h2>Login Information</h2>
-                  </div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Username:</div>
-                  <div class="col-sm-7">
-                    <input type="text" placeholder="username" ng-model="newUser.username" required>
-                  </div>
-                  <div class="col-sm-offset-3 col-sm-9"><p>{{pwdLength}}</p></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Password:</div>
-                  <div class="col-sm-7"><input type="password" placeholder="password" ng-model="newUser.password" required></div>
-                  <div class="col-sm-offset-0 col-sm-5 text-right">Password Confirmation:</div>
-                  <div class="col-sm-7"><input type="password" placeholder="password confirmation" ng-model="newUser.password_confirmation" required></div>
-                  <div class="col-sm-offset-3 col-sm-9 ">
-                    <h2>Profile Information</h2>
-                  </div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">First Name:</div>
-                  <div class="col-sm-7"><input type="text" placeholder="first name" ng-model="newUser.first_name" required></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Last Name:</div>
-                  <div class="col-sm-7"><input type="text" placeholder="last name" ng-model="newUser.last_name" required></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Email:</div>
-                  <div class="col-sm-7"><input type="email" placeholder="email" ng-model="newUser.email" required ></div>
-                  <div class="col-sm-offset-3 col-sm-9"><p>{{textAndEmail}}</p></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Phone:</div>
-                  <div class="col-sm-7"><input type="tel" placeholder="phone" ng-model="newUser.phone" ></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Address:</div>
-                  <div class="col-sm-7"><input type="text" placeholder="address" ng-model="newUser.address" required></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">City:</div>
-                  <div class="col-sm-7"><input type="text" placeholder="city" ng-model="newUser.city" required></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">State:</div>
-                  <div class="col-sm-7"><input type="text" placeholder="state" ng-model="newUser.state" required></div>
-                  <div class="col-sm-offset-2 col-sm-3 text-right">Zipcode:</div>
-                  <div class="col-sm-7"><input type="text" placeholder="zipcode" ng-model="newUser.zipcode" required></div>
-                  <!-- Hidden Inputs  -->
-                  <input type="hidden" id="admin_group_id" value="<%= current_user.group_id %>">
-                  <input type="hidden" id="user_function"  value="redeemer" >
-                  </br>
-                  <div class="col-sm-offset-3 col-sm-9"><textarea class="terms" readonly="readonly">{{terms}}</textarea></div>
-                  </br>
-                  <div class="col-sm-offset-3 col-sm-9"><input type="checkbox" required> {{conditions}}</div>
-                  <p></p>
-                  <div class="col-sm-offset-5 col-sm-1">
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                  </div>
-                </div><!-- end row -->
-              </form>
-              <div class="row">
-                  <div class="col-sm-offset-9 col-sm-2">
-                  <a href="#" class="right"><button class="btn btn-default btn-lg" ng-click="toggleRedeemerSignUp()">Close</button></a>
-                  </div>
+        <div class="landing_background col-sm-offset-1 col-sm-10">
+          <div class="row">
+              <div class="col-sm-offset-9 col-sm-3">
+              <a href="#" class="right"><button class="btn btn-default btn-md" ng-click="toggleRedeemerSignUp()">Close</button></a>
               </div>
-            </div><!--end jumbotron - redeemerSignUp -->
-          </div><!-- end col -->
+          </div>
+          <h2 class="heading_for_jumbotron">Redeemer Sign up</h2>
+          <h2 class="sub_heading_for_jumbotron">Exchange Recyclables for Cash!</h2>
+          <form ng-submit="addRedeemer()">
+            <div class="row">
+              <div class="col-sm-offset-3 col-sm-9 ">
+                <h2 class="text-center">Login Information</h2>
+              </div>
+              <!-- Username -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Username:</span>
+                <span class="col-xs-4 col-sm-7"><input type="text" placeholder="username" ng-model="newUser.username" required></span>
+              </div>
+              <div class="col-sm-offset-3 col-sm-9"><p>{{pwdLength}}</p></div>
+              <!-- Password -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Password:</span>
+                <span class="col-xs-3 col-sm-7"><input type="password" placeholder="password" ng-model="newUser.password" required></span>
+              </div>
+              <!-- Password Confirmation -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Confirmation:</span>
+                <span class="col-xs-3 col-sm-7"><input type="password" placeholder="password confirmation" ng-model="newUser.password_confirmation" required></span>
+              </div>
+
+              <div class="col-sm-offset-3 col-sm-9 ">
+                <h2 class="text-center">Profile Information</h2>
+              </div>
+              <!-- First Name -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">First Name:</span>
+                <span class="col-xs-3 col-sm-7"><input type="text" placeholder="first name" ng-model="newUser.first_name" required></span>
+              </div>
+              <!-- Last Name -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Last Name:</span>
+                <span class="col-xs-3 col-sm-7"><input type="text" placeholder="last name" ng-model="newUser.last_name" required></span>
+              </div>
+              <!-- Email -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Email:</span>
+              <span class="col-xs-3 col-sm-7"><input type="email" placeholder="email" ng-model="newUser.email" required ></span>
+            </div>
+              <div class="col-sm-offset-3 col-sm-9"><p>{{textAndEmail}}</p></div>
+              <!-- Phone -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Phone:</span>
+                <span class="col-xs-3 col-sm-7"><input type="tel" placeholder="phone" ng-model="newUser.phone" ></span>
+              </div>
+              <!-- Address -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Address:</span>
+                <span class="col-xs-3 col-sm-7"><input type="text" placeholder="address" ng-model="newUser.address" required></span>
+              </div>
+              <!-- City -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">City:</span>
+                <span class="col-xs-3 col-sm-7"><input type="text" placeholder="city" ng-model="newUser.city" required></span>
+              </div>
+              <!-- State -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">State:</span>
+                <span class="col-xs-3 col-sm-7"><input type="text" placeholder="state" ng-model="newUser.state" required></span>
+              </div>
+              <!-- Zipcode -->
+              <div class="row">
+                <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Zipcode:</span>
+                <span class="col-xs-3 col-sm-7"><input type="text" placeholder="zipcode" ng-model="newUser.zipcode" required></span>
+              </div>
+
+              <!-- Hidden Inputs  -->
+              <input type="hidden" id="admin_group_id" value="<%= current_user.group_id %>">
+              <input type="hidden" id="user_function"  value="redeemer" >
+              </br>
+              <div class="col-sm-offset-3 col-sm-9"><textarea class="terms" readonly="readonly">{{terms}}</textarea></div>
+              </br>
+              <div class="col-sm-offset-3 col-sm-9"><input type="checkbox" required> {{conditions}}</div>
+              <p></p>
+              <div class="col-sm-offset-5 col-sm-1">
+                <input type="submit" value="Submit" class="btn btn-primary">
+              </div>
+            </div><!-- end row -->
+          </form>
         </div><!-- end row -->
       </div><!-- end redeemerSignUp -->
       <!-- end Redeemer Sign UP -->
@@ -196,86 +289,143 @@
         <!-- end Landing Page -->
       <% end %><!--end !current_user -->
 
-      <!-- Recycler Sign UP users_controller -->
-      <div class="jumbotron" ng-show="recyclerSignUp">
+    <!-- Recycler Sign UP users_controller -->
+    <div class="row" ng-show="recyclerSignUp">
+      <div class="landing_background col-sm-offset-1 col-sm-10">
+        <div class="row">
+          <span class="col-sm-offset-9 col-sm-3">
+            <button class="btn btn-default btn-md right" ng-click="closeJumboTron()">Close</button>
+          </span>
+        </div>
         <h2 class="heading_for_jumbotron">Recycler Sign up</h2>
         <h2 class="sub_heading_for_jumbotron">Recyclables picked up for Free!</h2>
         <form ng-submit="addRecycler()">
           <div class="row">
-            <div class="col-sm-offset-3 col-sm-9 ">
-              <h2>Login Information</h2>
+            <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9 ">
+              <h2 class="text-center">Login Information</h2>
             </div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Username:</div>
-            <div class="col-sm-7">
+          </div>
+          <!-- username -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Username:</span>
+            <span class="col-xs-3 col-sm-7">
               <input type="text" placeholder="username" ng-model="newUser.username" required>
+            </span>
+          </div>
+          <div class="row">
+            <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9">{{pwdLength}}</div>
+          </div>
+          <!-- password -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Password:</span>
+            <span class="col-xs-3 col-sm-7"><input type="password" placeholder="password" ng-model="newUser.password" required></span>
+          </div>
+          <!-- password confirmation -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Confirmation:</span>
+            <span class="col-xs-3 col-sm-7"><input type="password" placeholder="password confirmation" ng-model="newUser.password_confirmation" required></span>
+          </div>
+          <!-- PROFILE INFORMATION -->
+          <div class="row">
+            <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9 ">
+              <h2 class="text-center">Profile Information</h2>
             </div>
-            <div class="col-sm-offset-3 col-sm-9"><p>{{pwdLength}}</p></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Password:</div>
-            <div class="col-sm-7"><input type="password" placeholder="password" ng-model="newUser.password" required></div>
-            <div class="col-sm-offset-0 col-sm-5 text-right">Password Confirmation:</div>
-            <div class="col-sm-7"><input type="password" placeholder="password confirmation" ng-model="newUser.password_confirmation" required></div>
-            <div class="col-sm-offset-3 col-sm-9 ">
-              <h2>Profile Information</h2>
-            </div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">First Name:</div>
-            <div class="col-sm-7"><input type="text" placeholder="first name" ng-model="newUser.first_name" required></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Last Name:</div>
-            <div class="col-sm-7"><input type="text" placeholder="last name" ng-model="newUser.last_name" required></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Email:</div>
-            <div class="col-sm-7"><input type="email" placeholder="email" ng-model="newUser.email" required ></div>
+          </div>
+          <!-- First Name -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">First Name:</span>
+            <span class="col-xs-3 col-sm-7"><input type="text" placeholder="first name" ng-model="newUser.first_name" required></span>
+          </div>
+          <!-- Last Name -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Last Name:</span>
+            <span class="col-xs-3 col-sm-7"><input type="text" placeholder="last name" ng-model="newUser.last_name" required></span>
+          </div>
+          <!-- Email -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Email:</span>
+            <span class="col-xs-3 col-sm-7"><input type="email" placeholder="email" ng-model="newUser.email" required ></span>
+          </div>
             <div class="col-sm-offset-3 col-sm-9"><p>{{textAndEmail}}</p></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Phone:</div>
-            <div class="col-sm-7"><input type="tel" placeholder="phone" ng-model="newUser.phone" ></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Address:</div>
-            <div class="col-sm-7"><input type="text" placeholder="address" ng-model="newUser.address" required></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">City:</div>
-            <div class="col-sm-7"><input type="text" placeholder="city" ng-model="newUser.city" required></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">State:</div>
-            <div class="col-sm-7"><input type="text" placeholder="state" ng-model="newUser.state" required></div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Zipcode:</div>
-            <div class="col-sm-7"><input type="text" placeholder="zipcode" ng-model="newUser.zipcode" required></div>
-            <div ng-if="recyclerSignUp">
-              <div class="col-sm-offset-3 col-sm-9"><p>{{selectRedeemerGroup}}</p></div>
-            </div>
-            <div class="col-sm-offset-2 col-sm-3 text-right">Group:</div>
-            <div class="col-sm-7">
-            <select ng-model="newUser.group_id"
-                    ng-options="group.value as group.name for group in data.groupOptions">
-            </select></div>
-            <div class="row"></br></div>
-            <input type="hidden" id="user_function"  value="recycler" >
-            </br>
-
-            <div class="col-sm-offset-3 col-sm-9"><textarea class="terms" readonly="readonly">{{terms}}</textarea></div>
-            </br>
-            <div class="col-sm-offset-3 col-sm-9"><input type="checkbox" required> {{conditions}}</div>
-            <p></p>
-            <div class="col-sm-offset-5 col-sm-1">
-              <input type="submit" value="Submit" class="btn btn-primary">
-            </div>
-          </div><!-- end row -->
+          <!-- Phone -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Phone:</span>
+            <span class="col-xs-3 col-sm-7"><input type="tel" placeholder="phone" ng-model="newUser.phone" ></span>
+          </div>
+          <!-- Address -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Address:</span>
+            <span class="col-xs-3 col-sm-7"><input type="text" placeholder="address" ng-model="newUser.address" required></span>
+          </div>
+          <!-- City -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">City:</span>
+          <span class="col-xs-3 col-sm-7"><input type="text" placeholder="city" ng-model="newUser.city" required></span>
+          </div>
+          <!-- State -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">State:</span>
+          <span class="col-xs-3 col-sm-7"><input type="text" placeholder="state" ng-model="newUser.state" required></span>
+          </div>
+          <!-- Zipcode -->
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Zipcode:</span>
+            <span class="col-xs-3 col-sm-7"><input type="text" placeholder="zipcode" ng-model="newUser.zipcode" required></span>
+          </div>
+          <!-- Group -->
+          <div ng-if="recyclerSignUp">
+            <div class="col-sm-offset-3 col-sm-9"><p>{{selectRedeemerGroup}}</p></div>
+          </div>
+          <div class="row">
+            <span class="col-xs-offset-5 col-xs-4 col-sm-offset-2 col-sm-3 text-right">Group:</span>
+            <span class="col-xs-3 col-sm-7">
+              <select ng-model="newUser.group_id"
+                  ng-options="group.value as group.name for group in data.groupOptions">
+              </select>
+            </span>
+          </div>
+          <div class="row"></br></div>
+          <input type="hidden" id="user_function"  value="recycler" >
+          </br>
+          <!-- Terms -->
+          <div class="col-sm-offset-3 col-sm-9"><textarea class="terms" readonly="readonly">{{terms}}</textarea></div>
+          </br>
+          <div class="col-sm-offset-3 col-sm-9"><input type="checkbox" required> {{conditions}}</div>
+          <p></p>
+          <!-- Submit Button -->
+          <div class="col-sm-offset-5 col-sm-1">
+            <input type="submit" value="Submit" class="btn btn-primary">
+          </div>
         </form>
-        <div class="row">
-          <button class="btn btn-default btn-lg right" ng-click="closeJumboTron()">Close</button>
-        </div>
-      </div><!--end jumbotron - redeemerSignUp -->
-      <!-- end User Sign UP -->
+      </div>
+    </div><!-- end row -->
+  </div><!--end jumbotron - redeemerSignUp -->
+  <!-- end User Sign UP -->
 
       <!-- Sign In sessions_controller -->
-      <div class="jumbotron" ng-show="signIn">
-        <h2 class="heading_for_jumbotron">Hi5 Exchange Login</h2>
-        <form action="/sessions" method="post">
+      <div class="row" ng-show="signIn">
+        <div class="landing_background col-sm-offset-3 col-sm-6">
           <div class="row">
-            <div class="col-sm-offset-3 col-sm-2 text-right">Username:</div>
-            <div class="col-sm-4"><input type="text" placeholder="username" name="username"  required></div>
-            <div class="col-sm-offset-3 col-sm-2 text-right">Password: </div>
-            <div class="col-sm-4"><input type="password" placeholder="password" name="password" required ></div>
-            <div class="col-sm-offset-5 col-sm-7"><input class="btn btn-primary btn-md" type="submit" ></div>
-          </div><!-- end row -->
-        </form>
-        <div class="row">
-          <button class="btn btn-default btn-lg right" ng-click="closeJumboTron()">Close</button>
+            <span class="col-sm-offset-9 col-sm-3">
+              <button class="btn btn-default btn-md right" ng-click="closeJumboTron()">Close</button>
+            </span>
+          </div>
+          <h2 class="heading_for_jumbotron">Hi5 Exchange Login</h2>
+          <form action="/sessions" method="post">
+            <div class="row">
+              <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Username:</span>
+              <span class="col-xs-5 col-sm-7"><input type="text" placeholder="username" name="username"  required></span>
+            </div>
+            <div class="row">
+              <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Password: </span>
+              <span class="col-xs-5 col-sm-7"><input type="password" placeholder="password" name="password" required ></span>
+            </div>
+            <div class="row">
+              <span class="col-xs-offset-5 col-xs-7 col-sm-offset-5 col-sm-7"><input class="btn btn-primary btn-md" type="submit" ></span>
+            </div>
+          </form>
         </div>
+        </div><!-- end row -->
       </div><!-- end jumbotron signIn -->
       <!-- End Sign In -->
 

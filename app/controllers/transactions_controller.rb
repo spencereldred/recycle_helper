@@ -6,7 +6,6 @@ class TransactionsController < ApplicationController
     if current_user.function == 'super_admin'
       trans = Transaction.all
     else
-      binding.pry
       trans = Transaction.where(group_id: current_user.group_id)
                          .near([current_user.latitude, current_user.longitude], current_user.radius)
       trans += Transaction.where(group_id: "2")

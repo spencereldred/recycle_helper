@@ -17,6 +17,24 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
         current_user_function === "super_admin"
       )) {
       $rootScope.isAdmin = true;
+      $rootScope.isRecycler = false;
+      $rootScope.isRedeemer = false;
+    }
+
+    if (current_user_function && (
+        current_user_function === "recycler"
+      )) {
+      $rootScope.isAdmin = false;
+      $rootScope.isRecycler = true;
+      $rootScope.isRedeemer = false;
+    }
+
+    if (current_user_function && (
+        current_user_function === "redeemer"
+      )) {
+      $rootScope.isAdmin = false;
+      $rootScope.isRecycler = false;
+      $rootScope.isRedeemer = true;
     }
 
     if (!current_user_function) {
