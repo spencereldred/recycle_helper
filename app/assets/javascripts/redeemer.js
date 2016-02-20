@@ -6,25 +6,25 @@
 app.directive("redeemable", [function() {
   return {
     restrict: "E",
-    template: "<h1>Available Redeemable Transactions</h1>"
+    template: "Available for Pick Up"
   }
 }]);
 app.directive("samaritan", [function() {
   return {
     restrict: "E",
-    template: "<h1>Available Good Samaritan Transactions</h1>"
+    template: "Available Good Samaritan Transactions"
   }
 }]);
 app.directive("redeemableselected", [function() {
   return {
     restrict: "E",
-    template: "<h1>Redeemable Transactions Selected</h1>"
+    template: "Selected for Pick Up"
   }
 }]);
 app.directive("samaritanselected", [function() {
   return {
     restrict: "E",
-    template: "<h1>Good Samaritan Transactions Selected</h1>"
+    template: "Selected Good Samaritan Transactions"
   }
 }]);
 

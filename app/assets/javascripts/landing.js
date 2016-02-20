@@ -38,14 +38,23 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
     }
 
     if (!current_user_function) {
-      $scope.hideBanner = true;
+      $scope.hideBanner = false;
     } else {
       $scope.hideBanner = false;
     }
 
+    $scope.landingPageBullets = [
+      "Register with a group of your choice as a recycler",
+      "Your donation will help your group raise money for their programs",
+      "Log in any time to request a pickup",
+      "Your group will be notified of your request",
+      "You’ll receive email and text notification once they've selected your job"
+    ];
+
     $scope.recyclerRules = [
-      "Register as a recycler, then log in anytime to request a redeemer to pick up your recycling.",
-      "Only registered redeemers will be able to see this information and claim the job.",
+      "Register with a group of your choice.",
+      "Log in anytime to request a redeemer from your group to pick up your recycling.",
+      "Only redeemers from your group will be able to see this information and claim the job.",
       "Once a redeemer has claimed your pickup, you’ll be notified by text message and email.",
       "They’ll have 24 hours to remove your bags.",
       "Don’t forget to take your bags of redeemables outside!",
@@ -122,9 +131,6 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
                                           name: group.name,
                                           value: group.id
                                         });
-          }
-          if (group.name === "Maui Civil Air Patrol") {
-            $scope.data.selectedGroupOption = {name: group.name, value: group.id};
           }
       }
     };
@@ -213,7 +219,7 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
       $scope.signIn = $scope.howItWorks =
       $scope.recyclerSignUp = $scope.redeemerSignUp =
       $scope.userProfile = false;
-      $scope.hideBanner = true;
+      $scope.hideBanner = false;
     };
 
     $scope.closeJumboTronSignedIn = function () {
