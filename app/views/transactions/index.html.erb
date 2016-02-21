@@ -1,15 +1,19 @@
 <div ng-hide="howItWorks || userProfile || redeemerSignUp">
   <div ng-controller="RecyclerController">
+    <!-- <div class="row">
+      <div class="col-sm-offset-2 col-sm-10">
+        <h2 class="heading-redeemer">Aloha <%#= current_user[:first_name] %> <%#= current_user[:last_name] %>, <new></new></h2>
+      </div>
+    </div> -->
+    <!-- end row -->
     <div class="row">
       <div class="col-sm-offset-2 col-sm-10">
-        <h2>Aloha <%= current_user[:first_name] %> <%= current_user[:last_name] %>, enter a new Redeemable.</h2>
+        <h2 class="heading-redeemer">
+          <new></new>
+        </h2>
       </div>
-    </div><!-- end row -->
-    <div class="row">
-      <div class="col-sm-offset-2 col-sm-10">
-        <h2><new></new></h2>
-      </div>
-    </div><!-- end row -->
+    </div>
+    <!-- end row -->
     <div class="row">
       <div class="bs-example col-sm-offset-2 col-sm-8">
         <table class="table table-hover" id="recycler-input-table">
@@ -66,7 +70,7 @@
     </div><!-- end row -->
     <div class="row">
         <div class="col-sm-offset-2 col-sm-10">
-          <h2><outred></outred></h2>
+          <h2 class="heading-redeemer"><outred></outred></h2>
         </div><!-- end col set -->
     </div><!-- end row -->
     <div class="row">

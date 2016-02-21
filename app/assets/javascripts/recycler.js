@@ -6,7 +6,7 @@
 app.directive("new", [function() {
   return {
     restrict: "E",
-    template: "Enter Redeemable Transaction:"
+    template: "Enter for Pick Up:"
   }
 }]);
 app.directive("sam", [function() {
@@ -18,7 +18,7 @@ app.directive("sam", [function() {
 app.directive("outred", [function() {
   return {
     restrict: "E",
-    template: "Open Redeemable Transactions"
+    template: "Available for Pick Up:"
   }
 }]);
 app.directive("outsam", [function() {
