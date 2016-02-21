@@ -45,7 +45,7 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
 
     $scope.landingPageBullets = [
       "Register with a group of your choice as a recycler",
-      "Your donation will help your group raise money for their programs",
+      "Your participation will help your group raise money for their programs",
       "Log in any time to request a pickup",
       "Your group will be notified of your request",
       "You’ll receive email and text notification once they've selected your job"
@@ -58,7 +58,7 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
       "Once a redeemer has claimed your pickup, you’ll be notified by text message and email.",
       "They’ll have 24 hours to remove your bags.",
       "Don’t forget to take your bags of redeemables outside!",
-      "Please be courteous - put the bags somewhere visible on your property and make sure it’s obvious for your redeemer."
+      "Please be courteous - put the bags somewhere visible to make sure it’s obvious for your redeemer."
     ];
     $scope.redeemerRules = [
       "Register as a redeemer, then log in anytime to see if there are any redeemables you’d like to pick up for cash.",

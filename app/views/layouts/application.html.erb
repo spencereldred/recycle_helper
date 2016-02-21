@@ -84,18 +84,23 @@
 
       <!-- How It Works -->
       <div class="row" ng-show="howItWorks">
-        <div class="landing_background col-sm-offset-1 col-sm-10">
+        <div class="landing_background col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10">
           <div class="row">
-              <div class="col-sm-offset-9 col-sm-3">
-                  <button class="btn btn-default btn-md right" ng-click="closeJumboTron()">Close</button>
-              </div>
+            <div class="col-sm-offset-11 col-sm-1 hidden-xs">
+              <span class="glyphicon glyphicon-remove-sign close-button" ng-click="closeJumboTron()"></span>
             </div>
-          <h2 class="heading_for_jumbotron">How it Works</h2>
+            <div class="visible-xs-* hidden-sm hidden-md hidden-lg close-button">
+              <span class="glyphicon glyphicon-remove-sign" ng-click="closeJumboTron()"></span>
+            </div>
+          </div>
+          <h2 class="heading_for_jumbotron hidden-xs">How it Works</h2>
+          <h3 class="heading-phone visible-xs-* hidden-sm hidden-md hidden-lg">How it Works</h3>
           <div class="row">
             <h2 class="sub_heading_for_jumbotron">As a Recycler</h2>
-            <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><p>{{rule}}</p></li>
+            <!-- <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><p>{{rule}}</p></li> -->
             <!-- <h2 class="text-center">Redeemer</h2>
             <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li> -->
+            <p class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><span class="glyphicon glyphicon-leaf"></span> {{rule}}</p>
           </div><!--end row -->
         </div>
       </div><!--end howItWorks -->
@@ -104,17 +109,22 @@
       <% if current_user %>
       <!-- Edit User Profile users_controller -->
         <div class="row" ng-show="userProfile">
-          <div class="landing_background col-sm-offset-1 col-sm-10">
+          <div class="landing_background col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10">
             <div class="row">
-              <div class="col-sm-offset-9 col-sm-3">
-                <button class="btn btn-default btn-md right" ng-click="closeProfile()">Close</button>
+              <div class="col-sm-offset-11 col-sm-1 hidden-xs">
+                <span class="glyphicon glyphicon-remove-sign close-button" ng-click="closeProfile()"></span>
+              </div>
+              <div class="visible-xs-* hidden-sm hidden-md hidden-lg close-button">
+                  <span class="glyphicon glyphicon-remove-sign" ng-click="closeProfile()"></span>
               </div>
             </div>
-            <h2 class="heading_for_jumbotron">Edit <%= current_user.function.capitalize %> Profile</h2>
+            <h2 class="heading_for_jumbotron hidden-xs">Edit <%= current_user.function.capitalize %> Profile</h2>
+            <h3 class="heading-phone visible-xs-* hidden-sm hidden-md hidden-lg">Edit <%= current_user.function.capitalize %> Profile</h3>
             <input type="hidden" id="current_user_id" value="<%=current_user.id%>"/>
             <form ng-submit="updateUser()">
               <div class="row">
-                <h2 class="text-center">Profile Information</h2>
+                <h2 class="text-center hidden-xs">Profile Information</h2>
+                <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Profile Information</h3>
                 <!-- First Name -->
                   <div class="row">
                     <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">First Name:</span>
@@ -163,9 +173,8 @@
                     </div>
                 </div>
                 <p></p>
-                <div class="col-sm-offset-5 col-sm-1">
-                  <input type="submit" value="Update Profile" class="btn btn-primary">
-                </div>
+                <div class="col-sm-offset-5 col-sm-7 hidden-xs"><input class="btn btn-primary btn-md" type="submit" value="Update Profile"></div>
+                <div style="margin-left: 30%;" class="visible-xs-* hidden-sm hidden-md hidden-lg"><input class="btn btn-primary btn-md" type="submit"value="Update Profile" ></div>
               </div><!-- end row -->
             </form>
           </div><!-- end row -->
@@ -174,18 +183,23 @@
 
       <!-- Redeemer Sign UP  by Admin - users_controller -->
       <div ng-show="redeemerSignUp">
-        <div class="landing_background col-sm-offset-1 col-sm-10">
+        <div class="landing_background col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10">
           <div class="row">
-              <div class="col-sm-offset-9 col-sm-3">
-              <a href="#" class="right"><button class="btn btn-default btn-md" ng-click="toggleRedeemerSignUp()">Close</button></a>
-              </div>
+            <div class="col-sm-offset-11 col-sm-1 hidden-xs">
+              <span class="glyphicon glyphicon-remove-sign close-button" ng-click="toggleRedeemerSignUp()"></span>
+            </div>
+            <div class="visible-xs-* hidden-sm hidden-md hidden-lg close-button">
+              <span class="glyphicon glyphicon-remove-sign" ng-click="toggleRedeemerSignUp()"></span>
+            </div>
           </div>
-          <h2 class="heading_for_jumbotron">Redeemer Sign up</h2>
+          <h2 class="heading_for_jumbotron hidden-xs">Redeemer Sign up</h2>
+          <h3 class="heading-phone visible-xs-* hidden-sm hidden-md hidden-lg">Redeemer Sign up</h3>
           <h2 class="sub_heading_for_jumbotron">Exchange Recyclables for Cash!</h2>
           <form ng-submit="addRedeemer()">
             <div class="row">
-              <div class="col-sm-offset-3 col-sm-9 ">
-                <h2 class="text-center">Login Information</h2>
+              <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
+                <h2 class="text-center hidden-xs">Login Information</h2>
+                <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Login Information</h3>
               </div>
               <!-- Username -->
               <div class="row">
@@ -204,8 +218,9 @@
                 <span class="col-xs-3 col-sm-7"><input type="password" placeholder="password confirmation" ng-model="newUser.password_confirmation" required></span>
               </div>
 
-              <div class="col-sm-offset-3 col-sm-9 ">
-                <h2 class="text-center">Profile Information</h2>
+              <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
+                <h2 class="text-center hidden-xs">Profile Information</h2>
+                <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Profile Information</h3>
               </div>
               <!-- First Name -->
               <div class="row">
@@ -272,12 +287,13 @@
       <% if !current_user %>
         <!-- Landing Page -->
         <div class="nav-space" ng-hide="howItWorks || signIn ||  recyclerSignUp || userProfile">
-          <div class="landing_background col-sm-offset-1 col-sm-10">
+          <div class="col-sm-offset-1 col-sm-10">
             <div class="row">
               <h2 class="heading-welcome">Would you like your recycling to be picked up for free?</h2>
-              <li class="col-sm-offset-1 col-sm-11" ng-repeat="bullet in landingPageBullets" style="font-size: 1.15em;">
+              <p class="col-sm-offset-1 col-sm-11" ng-repeat="bullet in landingPageBullets" style="font-size: 1.15em;"><span class="glyphicon glyphicon-leaf"></span> {{bullet}}</p>
+              <!-- <li class="col-sm-offset-1 col-sm-11" ng-repeat="bullet in landingPageBullets" style="font-size: 1.15em;">
                 <p style="">{{bullet}}</p>
-              </li>
+              </li> -->
               <h2 class="sub-heading-welcome">Helping Hawaii Recycle</h2>
             </div>
           </div>
@@ -287,18 +303,23 @@
 
     <!-- Recycler Sign UP users_controller -->
     <div class="row" ng-show="recyclerSignUp">
-      <div class="landing_background col-sm-offset-1 col-sm-10">
+      <div class="landing_background col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10">
         <div class="row">
-          <span class="col-sm-offset-9 col-sm-3">
-            <button class="btn btn-default btn-md right" ng-click="closeJumboTron()">Close</button>
-          </span>
+          <div class="col-sm-offset-11 col-sm-1 hidden-xs">
+            <span class="glyphicon glyphicon-remove-sign close-button" ng-click="closeJumboTron()"></span>
+          </div>
+          <div class="visible-xs-* hidden-sm hidden-md hidden-lg close-button">
+            <span class="glyphicon glyphicon-remove-sign" ng-click="closeJumboTron()"></span>
+          </div>
         </div>
-        <h2 class="heading_for_jumbotron">Recycler Sign up</h2>
+        <h2 class="heading_for_jumbotron hidden-xs">Recycler Sign up</h2>
+        <h3 class="heading-phone visible-xs-* hidden-sm hidden-md hidden-lg">Recycler Sign up</h3>
         <h2 class="sub_heading_for_jumbotron">Recyclables picked up for Free!</h2>
         <form ng-submit="addRecycler()">
           <div class="row">
-            <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9 ">
-              <h2 class="text-center">Login Information</h2>
+            <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
+              <h2 class="text-center hidden-xs">Login Information</h2>
+              <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Login Information</h3>
             </div>
           </div>
           <!-- username -->
@@ -323,8 +344,9 @@
           </div>
           <!-- PROFILE INFORMATION -->
           <div class="row">
-            <div class="col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9 ">
-              <h2 class="text-center">Profile Information</h2>
+            <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
+              <h2 class="text-center hidden-xs">Profile Information</h2>
+              <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Profile Information</h3>
             </div>
           </div>
           <!-- First Name -->
@@ -400,16 +422,21 @@
 
       <!-- Sign In sessions_controller -->
       <div class="row" ng-show="signIn">
-        <div class="landing_background col-sm-offset-3 col-sm-6">
+        <div class="landing_background col-xs-offset-0 col-xs-12 col-sm-offset-1 col-sm-10">
           <div class="row">
-            <span class="col-sm-offset-9 col-sm-3">
-              <button class="btn btn-default btn-md right" ng-click="closeJumboTron()">Close</button>
-            </span>
-          </div>
-          <h2 class="heading_for_jumbotron">Hi5 Exchange Login</h2>
+            <div class="col-sm-offset-11 col-sm-1 hidden-xs">
+                  <span class="glyphicon glyphicon-remove-sign close-button" ng-click="closeJumboTron()"></span>
+              </div>
+              <div class="visible-xs-* hidden-sm hidden-md hidden-lg close-button">
+                  <span class="glyphicon glyphicon-remove-sign" ng-click="closeJumboTron()"></span>
+              </div>
+            </div>
+          <h2 class="heading_for_jumbotron hidden-xs">Hi5 Exchange Login</h2>
+          <h3 class="heading-phone visible-xs-* hidden-sm hidden-md hidden-lg">Hi5 Exchange Login</h3>
+
           <form action="/sessions" method="post">
             <div class="row">
-              <span class="col-xs-offset-5 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Username:</span>
+              <span class="col-xs-offset-2 col-xs-3 col-sm-offset-2 col-sm-3 text-right">Username:</span>
               <span class="col-xs-5 col-sm-7"><input type="text" placeholder="username" name="username"  required></span>
             </div>
             <div class="row">
@@ -417,7 +444,8 @@
               <span class="col-xs-5 col-sm-7"><input type="password" placeholder="password" name="password" required ></span>
             </div>
             <div class="row">
-              <span class="col-xs-offset-5 col-xs-7 col-sm-offset-5 col-sm-7"><input class="btn btn-primary btn-md" type="submit" ></span>
+              <div class="col-sm-offset-5 col-sm-7 hidden-xs"><input class="btn btn-primary btn-md" type="submit" ></div>
+              <div style="margin-left: 35%;" class="visible-xs-* hidden-sm hidden-md hidden-lg"><input class="btn btn-primary btn-md" type="submit" ></div>
             </div>
           </form>
         </div>
