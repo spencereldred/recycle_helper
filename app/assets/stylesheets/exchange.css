@@ -78,7 +78,8 @@ textarea.terms {
 }
 
 .heading-phone {
- color: rgba(19, 80, 248, 0.80);
+ /*color: rgba(19, 80, 248, 0.  80);*/
+ color: #808080;
  font-style: italic;
  font-size: 30px;
  text-align: center;
@@ -116,6 +117,13 @@ textarea.terms {
  color: #808080;
  font-style: italic;
  font-size: 1.75em;
+ text-align: center;
+}
+
+.sub-heading-phone {
+ color: #808080;
+ font-style: italic;
+ font-size: 1.25em;
  text-align: center;
 }
 
