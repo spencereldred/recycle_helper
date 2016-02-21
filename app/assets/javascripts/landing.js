@@ -44,30 +44,35 @@ app.controller('landingPageController', ['$scope', '$rootScope', '$resource', 'U
     }
 
     $scope.landingPageBullets = [
-      "Register with a group of your choice as a recycler",
-      "Your participation will help your group raise money for their programs",
+      "Register as a recycler with the nonprofit group of your choice",
+      "Your participation will help your chosen group raise money for their programs",
       "Log in any time to request a pickup",
       "Your group will be notified of your request",
-      "You’ll receive email and text notification once they've selected your job"
+      "You’ll receive email and text notification once they've selected your job",
+      "You have just helped a local nonprofit and contributed to local sustainability efforts!",
+      "Congratulations!"
     ];
 
     $scope.recyclerRules = [
       "Register with a group of your choice.",
       "Log in anytime to request a redeemer from your group to pick up your recycling.",
       "Only redeemers from your group will be able to see this information and claim the job.",
-      "Once a redeemer has claimed your pickup, you’ll be notified by text message and email.",
+      "Once a redeemer has claimed your pickup, you’ll be notified by email and text.",
       "They’ll have 24 hours to remove your bags.",
       "Don’t forget to take your bags of redeemables outside!",
-      "Please be courteous - put the bags somewhere visible to make sure it’s obvious for your redeemer."
+      "Please be courteous - put the bags somewhere visible to make sure it’s obvious for your redeemer.",
+      "When your redeemer has completed your pickup, you’ll be notified by email and text.",
+
     ];
     $scope.redeemerRules = [
       "Register as a redeemer, then log in anytime to see if there are any redeemables you’d like to pick up for cash.",
-      "Once you’ve claimed a job by clicking the box next to the listing, you are responsible for that pickup. " +
-      "You’ll have 24 hours to remove that user’s recycling. Please be courteous - " +
-      "do not claim a job unless you intend to pick it up within that time frame!",
-      "The listing will disappear so that another redeemer cannot claim the same job.",
-      "To remove the bubble from your map you must check the “complete” box for each job. " +
-      "This will trigger a text to the recycler to let them know the transaction is complete."
+      "You will be notified by email and text when a job is available for pickup in your area.",
+      "Once you’ve selected a job for pick up, it is your responsibility to complete it!",
+      "(The listing will no longer be visible to other redeemers.)",
+      "You’ll have 24 hours to pick up the redeemables.",
+      "Please be courteous - do not claim a job unless you intend to pick it up within that time frame!",
+      "Check the “complete” box after you have completed the pickup.",
+      "(This will trigger a text to the recycler to let them know the transaction is complete.)"
     ];
 
     $scope.welcomeComments = [

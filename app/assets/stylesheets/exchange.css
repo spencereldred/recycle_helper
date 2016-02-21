@@ -70,7 +70,8 @@ textarea.terms {
 
 .heading_for_jumbotron {
 /*color: #1350f8;*/
- color: rgba(19, 80, 248, 0.80);
+ /*color: rgba(19, 80, 248, 0.80);*/
+ color: #808080;
  font-style: italic;
  font-size: 50px;
  text-align: center;
@@ -84,14 +85,16 @@ textarea.terms {
 }
 
 .heading-redeemer {
-  color: rgba(19, 80, 248, 0.80);
+ /*color: rgba(19, 80, 248, 0.80);*/
+ color: #808080;
  font-style: italic;
  font-size: 2em;
  text-align: left;
 }
 
 .heading-welcome {
- color: rgba(19, 80, 248, 0.80);
+ /*color: rgba(19, 80, 248, 0.80);*/
+ color: #808080;
  font-style: italic;
  font-size: 1.75em;
  text-left: center;

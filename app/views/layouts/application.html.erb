@@ -98,9 +98,14 @@
           <div class="row">
             <h2 class="sub_heading_for_jumbotron">As a Recycler</h2>
             <!-- <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><p>{{rule}}</p></li> -->
+            <p class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><span class="glyphicon glyphicon-leaf"></span> {{rule}}</p>
+            <!-- <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><p>{{rule}}</p></li> -->
+          </div><!--end row -->
+          <div class="row">
+            <h2 class="sub_heading_for_jumbotron">As a Redeemer</h2>
+            <p class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" style="font-size: 1.15em;"><span class="glyphicon glyphicon-leaf"></span> {{rule}}</p>
             <!-- <h2 class="text-center">Redeemer</h2>
             <li class="col-sm-offset-1 col-sm-11" ng-repeat="rule in redeemerRules" ><p>{{rule}}</p></li> -->
-            <p class="col-sm-offset-1 col-sm-11" ng-repeat="rule in recyclerRules" style="font-size: 1.15em;"><span class="glyphicon glyphicon-leaf"></span> {{rule}}</p>
           </div><!--end row -->
         </div>
       </div><!--end howItWorks -->
@@ -198,7 +203,7 @@
           <form ng-submit="addRedeemer()">
             <div class="row">
               <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
-                <h2 class="text-center hidden-xs">Login Information</h2>
+                <h2 class="hidden-xs">Login Information</h2>
                 <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Login Information</h3>
               </div>
               <!-- Username -->
@@ -219,7 +224,7 @@
               </div>
 
               <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
-                <h2 class="text-center hidden-xs">Profile Information</h2>
+                <h2 class="hidden-xs">Profile Information</h2>
                 <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Profile Information</h3>
               </div>
               <!-- First Name -->
@@ -289,7 +294,7 @@
         <div class="nav-space" ng-hide="howItWorks || signIn ||  recyclerSignUp || userProfile">
           <div class="col-sm-offset-1 col-sm-10">
             <div class="row">
-              <h2 class="heading-welcome">Would you like your recycling to be picked up for free?</h2>
+              <h2 class="sub-heading-welcome" style="padding-bottom: 10px;">Would you like your recycling to be picked up for free?</h2>
               <p class="col-sm-offset-1 col-sm-11" ng-repeat="bullet in landingPageBullets" style="font-size: 1.15em;"><span class="glyphicon glyphicon-leaf"></span> {{bullet}}</p>
               <!-- <li class="col-sm-offset-1 col-sm-11" ng-repeat="bullet in landingPageBullets" style="font-size: 1.15em;">
                 <p style="">{{bullet}}</p>
@@ -318,7 +323,7 @@
         <form ng-submit="addRecycler()">
           <div class="row">
             <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
-              <h2 class="text-center hidden-xs">Login Information</h2>
+              <h2 class="hidden-xs">Login Information</h2>
               <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Login Information</h3>
             </div>
           </div>
@@ -345,7 +350,7 @@
           <!-- PROFILE INFORMATION -->
           <div class="row">
             <div class="col-xs-offset-3 col-xs-9 col-sm-offset-3 col-sm-9 ">
-              <h2 class="text-center hidden-xs">Profile Information</h2>
+              <h2 class="hidden-xs">Profile Information</h2>
               <h3 class="text-center visible-xs-* hidden-sm hidden-md hidden-lg">Profile Information</h3>
             </div>
           </div>
